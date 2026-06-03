@@ -3,8 +3,9 @@ import twilio from "twilio";
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { sid: string } }
+  { params }: { params: Promise<{ sid: string }> }
 ) {
+  const { sid } = await params;
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const workspaceSid = process.env.TWILIO_WORKSPACE_SID;
@@ -17,7 +18,7 @@ export async function DELETE(
     const client = twilio(accountSid, authToken);
     await client.taskrouter.v1
       .workspaces(workspaceSid)
-      .tasks(params.sid)
+      .tasks(sid)
       .update({ assignmentStatus: "canceled" });
 
     return NextResponse.json({ ok: true });
