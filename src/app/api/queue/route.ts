@@ -23,7 +23,10 @@ export async function GET() {
         limit: 20,
       });
 
-    const queue = tasks.map((task) => {
+    // Filter system/agent-leg tasks (prio 0, zonder klant-attributes) uit de wachtrij
+    const queue = tasks
+      .filter((task) => task.priority > 0)
+      .map((task) => {
       const attrs = JSON.parse(task.attributes);
       return {
         id: task.sid,
