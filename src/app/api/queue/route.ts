@@ -10,7 +10,7 @@ export async function GET() {
   const tasks = await client.taskrouter.v1
     .workspaces(process.env.TWILIO_WORKSPACE_SID!)
     .tasks.list({
-      assignmentStatus: "pending",
+      assignmentStatus: ["pending"],
       limit: 20,
     });
 
