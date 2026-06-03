@@ -37,6 +37,7 @@ export async function GET() {
         waitSeconds: task.age,
         reason: attrs.reason ?? "Onbekend",
         priority: task.priority,
+        tag: attrs.tag ?? null,
       };
     });
 

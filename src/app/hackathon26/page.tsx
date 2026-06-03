@@ -15,6 +15,7 @@ interface Caller {
   waitSeconds: number;
   reason: string;
   priority: number;
+  tag: string | null;
 }
 
 const SEGMENT_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
@@ -237,7 +238,20 @@ export default function Hackathon26() {
                     {caller.customerValueScore}
                   </div>
                   <div className="caller-info">
-                    <div className="caller-name">{caller.name}</div>
+                    <div className="caller-name">
+                      {caller.name}
+                      {caller.tag === "High Value Customer" && (
+                        <span style={{
+                          fontSize: 10, fontWeight: 600,
+                          background: "#000", color: "#00d780",
+                          padding: "2px 7px", borderRadius: 6,
+                          marginLeft: 6, verticalAlign: "middle",
+                          letterSpacing: "0.05em"
+                        }}>
+                          HVC
+                        </span>
+                      )}
+                    </div>
                     <div className="caller-meta">
                       <span className="seg-dot" style={{ background: sc2.dot }} />
                       {caller.segment} · {caller.phone}
