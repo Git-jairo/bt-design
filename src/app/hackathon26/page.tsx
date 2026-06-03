@@ -1,10 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
-const LOGO_SVG = `<svg width="69" height="48" viewBox="0 0 92 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M89.332 39.309H2.668C1.1945 39.309 0 40.5012 0 41.9719V61.3372C0 62.8078 1.1945 64 2.668 64H89.332C90.8055 64 92 62.8078 92 61.3372V41.9719C92 40.5012 90.8055 39.309 89.332 39.309Z" fill="black"/><path d="M1.9504 11.9552L44.3624 0.220373C45.4296 -0.0734577 46.5612 -0.0734577 47.6376 0.220373L90.0496 11.9828C91.1996 12.3042 92 13.3509 92 14.5446V33.2121C92 34.6812 90.804 35.8749 89.332 35.8749L2.668 35.8473C1.196 35.8473 0 34.6628 0 33.1937V14.5263C0 13.3326 0.8004 12.2766 1.9504 11.9644V11.9552Z" fill="black"/><path d="M18.8968 58.6651V47.3251H14.7108V44.6531H26.542V47.3251H22.3376V58.6651H18.8968Z" fill="white"/><path d="M40.7836 44.6531V58.6651H37.3428V52.7242H32.1724V58.6651H28.7316V44.6531H32.1724V50.1532H37.3428V44.6531H40.7836Z" fill="white"/><path d="M49.772 58.9498C48.8336 58.9498 47.9872 58.8121 47.2236 58.5366C46.4692 58.2611 45.8252 57.8663 45.2916 57.3429C44.758 56.8195 44.3624 56.1951 44.0864 55.4605C43.8104 54.726 43.6724 53.8904 43.6724 52.9722V44.6623H47.1132V53.0732C47.1132 54.1016 47.3524 54.8912 47.8308 55.4422C48.3092 55.9931 48.944 56.2686 49.7536 56.2686C50.5632 56.2686 51.244 55.9931 51.7224 55.433C52.2008 54.8729 52.4492 54.0924 52.4492 53.0732V44.6623H55.89V52.9722C55.89 54.2026 55.6416 55.2677 55.1448 56.1584C54.648 57.0491 53.9488 57.7377 53.0472 58.2244C52.1456 58.711 51.0508 58.959 49.7812 58.959H49.772V58.9498Z" fill="white"/><path d="M58.7696 58.6651V44.6531H62.2104V58.6651H58.7696Z" fill="white"/><path d="M76.0012 53.0273C75.7712 52.5865 75.4676 52.21 75.0996 51.907C74.7224 51.5948 74.2992 51.3286 73.83 51.099C73.3608 50.8694 72.8824 50.6766 72.3856 50.5022C71.8888 50.3277 71.4104 50.1808 70.9412 50.043C70.472 49.9053 70.0488 49.7584 69.6624 49.6023C69.276 49.4462 68.9816 49.2626 68.7608 49.0422C68.54 48.8218 68.4296 48.5647 68.4296 48.2709C68.4296 47.977 68.5032 47.8026 68.6412 47.6189C68.7792 47.4353 68.9908 47.2976 69.2668 47.1966C69.5428 47.0956 69.8832 47.0496 70.2788 47.0496C70.6744 47.0496 71.2448 47.1415 71.5944 47.3251C71.9532 47.5088 72.2292 47.7659 72.4408 48.1056C72.588 48.3535 72.6708 48.629 72.6984 48.9412L76.1024 48.4912C76.0196 47.7842 75.7804 47.1506 75.3848 46.5905C74.8972 45.8927 74.2164 45.3509 73.3424 44.9653C72.4684 44.5796 71.4564 44.3868 70.3064 44.3868C69.1564 44.3868 68.7516 44.4786 68.0984 44.6806C67.4452 44.8735 66.8932 45.1581 66.4424 45.5346C65.9824 45.911 65.6328 46.3518 65.3844 46.866C65.136 47.3802 65.0164 47.9495 65.0164 48.5831C65.0164 49.2166 65.1268 49.7308 65.3384 50.1808C65.55 50.6307 65.8536 51.0072 66.24 51.3286C66.6264 51.6407 67.0588 51.907 67.5188 52.1366C67.9788 52.357 68.4664 52.5498 68.9632 52.7059C69.4692 52.8712 69.9476 53.0181 70.426 53.1558C70.8952 53.2935 71.3184 53.4405 71.6956 53.5874C72.0728 53.7343 72.3672 53.9179 72.588 54.1291C72.8088 54.3403 72.9192 54.5974 72.9192 54.8912C72.9192 55.1851 72.8364 55.3963 72.6616 55.6166C72.4868 55.8278 72.2384 56.0023 71.9164 56.1217C71.5944 56.241 71.1896 56.3053 70.7112 56.3053C70.2328 56.3053 69.5888 56.1859 69.1472 55.9564C68.7056 55.7268 68.3744 55.3963 68.1444 54.9739C67.9604 54.6525 67.85 54.2852 67.7948 53.872L64.5472 54.4505C64.63 54.9923 64.7772 55.4973 65.0072 55.9656C65.3108 56.5991 65.7248 57.1317 66.2676 57.5816C66.8012 58.0316 67.4544 58.3713 68.2088 58.6192C68.9632 58.8671 69.8096 58.9773 70.7388 58.9773C71.668 58.9773 72.8272 58.8029 73.6736 58.4539C74.52 58.105 75.1824 57.6092 75.6516 56.9664C76.1208 56.3237 76.3692 55.5524 76.3692 54.6525C76.3692 53.7527 76.2588 53.4864 76.0288 53.0456L76.0012 53.0273Z" fill="white"/></svg>`;
+type Segment =
+  | "Premium"
+  | "Zakelijk"
+  | "Standaard"
+  | "Nieuw"
+  | "Risico op churn"
+  | string;
 
-type Segment = "Premium" | "Zakelijk" | "Standaard" | "Nieuw" | "Risico op churn" | string;
+interface Action {
+  type: string;
+  label: string;
+}
 
 interface Caller {
   id: string;
@@ -16,25 +25,21 @@ interface Caller {
   reason: string;
   priority: number;
   tag: string | null;
-}
-
-const SEGMENT_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
-  "Premium":           { bg: "#e0f5f0", text: "#004f3a", dot: "#029b77" },
-  "Zakelijk":          { bg: "#e6f8ff", text: "#003a66", dot: "#0098d9" },
-  "Standaard":         { bg: "#efefef", text: "#242424", dot: "#6c6c6c" },
-  "Nieuw":             { bg: "#e6fff2", text: "#00522c", dot: "#00d780" },
-  "Risico op churn":   { bg: "#ffe9e9", text: "#7a1c15", dot: "#f04444" },
-};
-
-function segColor(seg: string) {
-  return SEGMENT_COLORS[seg] ?? { bg: "#efefef", text: "#242424", dot: "#9f9f9f" };
-}
-
-function scoreColor(score: number): string {
-  if (score >= 80) return "#029b77";
-  if (score >= 60) return "#0098d9";
-  if (score >= 40) return "#ff6c43";
-  return "#9f9f9f";
+  // Verrijkte velden uit customers.json
+  customerId: string | null;
+  customerNumber: string | null;
+  email: string | null;
+  churnRiskScore: number;
+  churnSegment: string | null;
+  propensityScore: number;
+  propensitySegment: string | null;
+  products: { energy: boolean; mobile: boolean; internet: boolean } | null;
+  numProducts: number;
+  isMultiUtility: boolean;
+  tariffType: string | null;
+  tenureMonths: number;
+  contractEnding90d: boolean;
+  actions: Action[];
 }
 
 function fmtWait(s: number): string {
@@ -42,12 +47,145 @@ function fmtWait(s: number): string {
   return `${Math.floor(s / 60)}m ${s % 60}s`;
 }
 
+function isHighValue(c: Caller): boolean {
+  return c.tag === "High Value Customer" || c.customerValueScore >= 90;
+}
+
+function valueDescription(score: number): string {
+  if (score >= 90) return "Uitzonderlijk hoge waarde. Focus op retentie en high-end services.";
+  if (score >= 70) return "Hoge klantwaarde. Persoonlijke behandeling loont.";
+  if (score >= 40) return "Gemiddelde klantwaarde. Volg het standaardproces met oog voor een upgrade.";
+  return "Lagere klantwaarde. Efficiënt en vriendelijk afhandelen.";
+}
+
+function waitDescription(seconds: number): string {
+  if (seconds > 300) return "Klant heeft ongebruikelijk lang gewacht. Bied excuses aan bij start gesprek.";
+  if (seconds > 120) return "Wacht al even. Verontschuldig je kort voor de wachttijd.";
+  return "Korte wachttijd, klant net binnengekomen.";
+}
+
+// ─── Verrijkings-helpers (gebruiken echte Caller-velden) ─────────────────
+
+interface UpsellOffer {
+  title: string;
+  desc: string;
+  tips: string[];
+  cta: string;
+  icon: string;
+}
+
+const ACTION_UPSELL: Record<string, UpsellOffer> = {
+  crosssell_mobile: {
+    title: "Cross-sell: Mobiel",
+    desc: "Klant heeft nog geen mobiel abonnement. Combineer met energie voor bundelkorting.",
+    tips: ["Benadruk gemak van één factuur", "Eerste maand korting"],
+    cta: "Bied mobiel aan",
+    icon: "smartphone",
+  },
+  crosssell_internet: {
+    title: "Cross-sell: Internet",
+    desc: "Klant heeft nog geen internetabonnement. Bundelen bespaart direct.",
+    tips: ["Benadruk bundelbesparing", "Gratis installatie actie"],
+    cta: "Bied internet aan",
+    icon: "wifi",
+  },
+  bundle: {
+    title: "Bundelkans",
+    desc: "Klant heeft één product. Multi-utility korting beschikbaar bij een tweede product.",
+    tips: ["Benadruk multi-utility voordeel", "Toon concrete besparing"],
+    cta: "Presenteer bundel",
+    icon: "add_shopping_cart",
+  },
+  upsell: {
+    title: "Upgrade kans",
+    desc: "Hoge upsell-propensity — klant staat open voor een hoger pakket.",
+    tips: ["Benadruk premium voordelen", "Eerste maand korting"],
+    cta: "Bied upgrade aan",
+    icon: "arrow_upward",
+  },
+};
+
+function buildUpsellOffers(c: Caller): UpsellOffer[] {
+  const offers: UpsellOffer[] = [];
+  for (const action of c.actions) {
+    if (action.type === "crosssell" && action.label.toLowerCase().includes("mobiel"))
+      offers.push(ACTION_UPSELL.crosssell_mobile);
+    else if (action.type === "crosssell" && action.label.toLowerCase().includes("internet"))
+      offers.push(ACTION_UPSELL.crosssell_internet);
+    else if (action.type === "bundle") offers.push(ACTION_UPSELL.bundle);
+    else if (action.type === "upsell") offers.push(ACTION_UPSELL.upsell);
+  }
+  return offers;
+}
+
+function subscriptionLabel(c: Caller): string {
+  if (c.products?.energy && c.products?.mobile && c.products?.internet) return "Energie + Mobiel + Internet";
+  if (c.products?.energy && c.products?.mobile) return "Energie + Mobiel";
+  if (c.products?.energy && c.products?.internet) return "Energie + Internet";
+  if (c.products?.mobile && c.products?.internet) return "Mobiel + Internet";
+  if (c.products?.energy) return "Energie";
+  if (c.products?.mobile) return "Mobiel";
+  if (c.products?.internet) return "Internet";
+  return c.segment;
+}
+
+interface ApproachBullet {
+  text: string;
+  highlight?: boolean;
+  icon: string;
+}
+
+function approachBullets(c: Caller): ApproachBullet[] {
+  // Gebruik de afgeleide actions uit customers.json als ze er zijn,
+  // anders val terug op segment-gebaseerde generieke bullets.
+  if (c.actions.length > 0) {
+    const out: ApproachBullet[] = [];
+    if (c.waitSeconds > 120)
+      out.push({ icon: "check_circle", text: `Excuses aanbieden voor de wachttijd (${fmtWait(c.waitSeconds)}) voordat het gesprek begint.` });
+    for (const action of c.actions) {
+      const highlight = action.type === "retentie" || action.type === "upsell";
+      out.push({ icon: highlight ? "trending_up" : "check_circle", highlight, text: action.label });
+    }
+    return out;
+  }
+  // Fallback voor klanten zonder verrijkte actions (onbekende bellers)
+  const out: ApproachBullet[] = [];
+  if (c.segment === "Risico op churn")
+    out.push({ icon: "check_circle", text: "Retentiescript actief. Bied bij passende gelegenheid een retentiekorting aan. Escaleer niet zonder akkoord leidinggevende." });
+  else if (c.segment === "Premium")
+    out.push({ icon: "check_circle", text: `Premiumklant (${c.customerValueScore}/100). Direct en persoonlijk behandelen zonder scripts.` });
+  else
+    out.push({ icon: "check_circle", text: "Standaardafhandeling. Volg het reguliere gesprekscript en let op upgrade-kansen." });
+  if (c.waitSeconds > 120)
+    out.push({ icon: "check_circle", text: `Excuses aanbieden voor de wachttijd (${fmtWait(c.waitSeconds)}) voordat het gesprek begint.` });
+  if (isHighValue(c))
+    out.push({ icon: "trending_up", highlight: true, text: `Transitie: gebruik de hoge klantwaarde om over te stappen naar een hoger pakket.` });
+  return out;
+}
+// ─────────────────────────────────────────────────────────────────────────
+
+function Icon({ name, className = "", fill = false }: { name: string; className?: string; fill?: boolean }) {
+  return (
+    <span
+      className={`material-symbols-outlined ${className}`}
+      style={fill ? { fontVariationSettings: "'FILL' 1" } : undefined}
+    >
+      {name}
+    </span>
+  );
+}
+
 export default function Hackathon26() {
   const [callers, setCallers] = useState<Caller[]>([]);
   const [localSeconds, setLocalSeconds] = useState<Record<string, number>>({});
   const [selected, setSelected] = useState<Caller | null>(null);
+  const [activeCall, setActiveCall] = useState<Caller | null>(null);
+  const [callSeconds, setCallSeconds] = useState(0);
   const [lastSync, setLastSync] = useState<Date>(new Date());
   const [usingLive, setUsingLive] = useState(false);
+
+  const activeCallRef = useRef<Caller | null>(null);
+  activeCallRef.current = activeCall;
 
   // Poll Twilio API every 10 seconds
   const fetchQueue = useCallback(async () => {
@@ -55,7 +193,6 @@ export default function Hackathon26() {
       const res = await fetch("/api/queue");
       if (!res.ok) return;
       const data: Caller[] = await res.json();
-      // Seed local seconds from API values on first fetch
       setLocalSeconds((prev) => {
         const next = { ...prev };
         data.forEach((c) => {
@@ -66,10 +203,16 @@ export default function Hackathon26() {
       setCallers(data);
       setLastSync(new Date());
       setUsingLive(true);
-      // Keep selected in sync
-      setSelected((prev) => data.find((c) => c.id === prev?.id) ?? data[0] ?? null);
+      // Selectie stabiel houden: blijf op huidige als die nog in de wachtrij
+      // staat of de actieve call is; anders eerste, anders niets.
+      setSelected((prev) => {
+        if (!prev) return data[0] ?? null;
+        if (data.some((c) => c.id === prev.id)) return prev;
+        if (activeCallRef.current?.id === prev.id) return prev;
+        return data[0] ?? null;
+      });
     } catch {
-      // Silently fall back to dummy data
+      // Stil falen — wachtrij blijft leeg / ongewijzigd.
     }
   }, []);
 
@@ -79,7 +222,7 @@ export default function Hackathon26() {
     return () => clearInterval(poll);
   }, [fetchQueue]);
 
-  // Tick local seconds every second (no API call)
+  // Wachttijd-timers lokaal laten tikken (zonder API-call)
   useEffect(() => {
     const tick = setInterval(() => {
       setLocalSeconds((prev) => {
@@ -93,275 +236,444 @@ export default function Hackathon26() {
     return () => clearInterval(tick);
   }, [callers]);
 
+  // Gespreksduur-timer voor de actieve call (reset bij nieuwe call)
+  useEffect(() => {
+    if (!activeCall) return;
+    setCallSeconds(0);
+    const t = setInterval(() => setCallSeconds((s) => s + 1), 1000);
+    return () => clearInterval(t);
+  }, [activeCall?.id]);
+
   const withLiveSeconds = callers.map((c) => ({
     ...c,
     waitSeconds: localSeconds[c.id] ?? c.waitSeconds,
   }));
 
-  const sorted = [...withLiveSeconds].sort((a, b) => b.priority - a.priority);
-  const liveSelected = selected
-    ? withLiveSeconds.find((c) => c.id === selected.id) ?? selected
+  // Wachtrij = alles behalve de actieve call, gesorteerd op prioriteit
+  const sorted = withLiveSeconds
+    .filter((c) => c.id !== activeCall?.id)
+    .sort((a, b) => b.priority - a.priority);
+
+  const liveSelected: Caller | null = selected
+    ? withLiveSeconds.find((c) => c.id === selected.id) ??
+      (activeCall && activeCall.id === selected.id ? activeCall : selected)
     : null;
-  const sc = liveSelected ? segColor(liveSelected.segment) : null;
+
+  const isActiveSelected = !!(activeCall && liveSelected && activeCall.id === liveSelected.id);
+
+  const startCall = (c: Caller) => {
+    setActiveCall(c);
+    setSelected(c);
+  };
+
+  const endCall = async () => {
+    const id = activeCall?.id;
+    setActiveCall(null);
+    if (id) {
+      try {
+        await fetch(`/api/queue/${id}`, { method: "DELETE" });
+      } catch {
+        /* negeren — poll ruimt de rest op */
+      }
+      fetchQueue();
+    }
+  };
+
+  const upsellOffers = liveSelected ? buildUpsellOffers(liveSelected) : [];
+  const subscription = liveSelected ? subscriptionLabel(liveSelected) : "";
+  const bullets = liveSelected ? approachBullets(liveSelected) : [];
+
+  const syncLabel = `${lastSync.getHours().toString().padStart(2, "0")}:${lastSync
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}:${lastSync.getSeconds().toString().padStart(2, "0")}`;
 
   return (
-    <>
+    <div className="font-display bg-surface text-on-surface min-h-screen">
+      {/* Fonts + icon-styles */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+      />
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { height: 100%; }
-        body { background: #fafafa; font-family: 'Inter', sans-serif; }
-        .topbar {
-          background: #000;
-          padding: 0 32px;
-          height: 56px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+        .material-symbols-outlined {
+          font-family: 'Material Symbols Outlined';
+          font-weight: normal; font-style: normal; line-height: 1;
+          letter-spacing: normal; text-transform: none; display: inline-block;
+          white-space: nowrap; word-wrap: normal; direction: ltr;
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .topbar-right { display: flex; align-items: center; gap: 16px; }
-        .live-dot {
-          width: 8px; height: 8px; border-radius: 50%;
-          background: #00d780;
-          animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-        .live-label { color: #00d780; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; }
-        .sync-label { color: #6c6c6c; font-size: 11px; }
-        .agent-chip { background: #242424; color: #c7c7c7; font-size: 12px; padding: 4px 12px; border-radius: 8px; }
-        .layout {
-          display: grid;
-          grid-template-columns: 360px 1fr;
-          height: calc(100vh - 56px);
-        }
-        .queue-panel {
-          background: #fff;
-          border-right: 1px solid #efefef;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-        }
-        .queue-header { padding: 20px 24px 12px; border-bottom: 1px solid #efefef; }
-        .queue-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #6c6c6c; text-transform: uppercase; margin-bottom: 4px; }
-        .queue-count { font-size: 22px; font-weight: 600; color: #000; }
-        .queue-count span { font-size: 13px; font-weight: 400; color: #9f9f9f; margin-left: 6px; }
-        .queue-list { flex: 1; overflow-y: auto; }
-        .queue-empty { padding: 32px 24px; font-size: 13px; color: #9f9f9f; text-align: center; }
-        .detail-empty {
-          display: flex; align-items: center; justify-content: center;
-          height: 100%; font-size: 14px; color: #9f9f9f;
-        }
-        .queue-item {
-          display: flex; align-items: center; gap: 14px;
-          padding: 14px 24px; cursor: pointer;
-          border-bottom: 1px solid #fafafa;
-          border-left: 3px solid transparent;
-          transition: background 0.12s;
-        }
-        .queue-item:hover { background: #fafafa; }
-        .queue-item.active { background: #e0f5f0; border-left-color: #029b77; }
-        .order-num { font-size: 11px; font-weight: 600; color: #9f9f9f; min-width: 16px; text-align: right; }
-        .score-circle {
-          width: 40px; height: 40px; border-radius: 50%; border: 2px solid;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 13px; font-weight: 600; flex-shrink: 0;
-        }
-        .caller-info { flex: 1; min-width: 0; }
-        .caller-name { font-size: 14px; font-weight: 500; color: #242424; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .caller-meta { font-size: 12px; color: #6c6c6c; margin-top: 2px; }
-        .caller-right { text-align: right; flex-shrink: 0; }
-        .wait-time { font-size: 12px; color: #6c6c6c; font-variant-numeric: tabular-nums; }
-        .wait-long { color: #d92d20; font-weight: 500; }
-        .seg-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
-        .detail-panel { padding: 32px; overflow-y: auto; background: #fafafa; }
-        .detail-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
-        .detail-name { font-size: 24px; font-weight: 600; color: #000; margin-bottom: 6px; }
-        .seg-badge { display: inline-flex; align-items: center; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 8px; margin-right: 8px; }
-        .prio-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 8px; background: #000; color: #00d780; }
-        .action-btn {
-          background: #00d780; color: #000; border: none; border-radius: 8px;
-          padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
-          font-family: 'Inter', sans-serif; transition: background 0.15s; white-space: nowrap;
-        }
-        .action-btn:hover { background: #03ba70; }
-        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-        .card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgba(60,60,60,0.08); }
-        .card-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; color: #9f9f9f; text-transform: uppercase; margin-bottom: 12px; }
-        .card-value { font-size: 20px; font-weight: 600; color: #000; }
-        .card-sub { font-size: 13px; color: #6c6c6c; margin-top: 4px; }
-        .products-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-        .product-chip { background: #efefef; color: #242424; font-size: 12px; padding: 3px 10px; border-radius: 8px; }
-        .score-bar-wrap { margin-top: 8px; height: 6px; background: #efefef; border-radius: 3px; overflow: hidden; }
-        .score-bar { height: 100%; border-radius: 3px; transition: width 0.4s; }
-        .reason-tag { display: inline-block; background: #fff; border: 1px solid #d9d9d9; border-radius: 8px; font-size: 13px; color: #242424; padding: 6px 12px; margin-top: 8px; }
-        .divider { height: 1px; background: #efefef; margin: 12px 0; }
-        .source-tag { font-size: 11px; color: #9f9f9f; margin-top: 6px; }
+        .card-shadow { box-shadow: 0px 4px 20px rgba(0,0,0,0.05); }
       `}</style>
 
-      <div className="topbar">
-        <div dangerouslySetInnerHTML={{ __html: LOGO_SVG }} />
-        <div className="topbar-right">
-          <div className="live-dot" />
-          <span className="live-label">{usingLive ? "LIVE" : "DEMO"}</span>
-          <span className="sync-label">
-            Sync {lastSync.getHours().toString().padStart(2,"0")}:{lastSync.getMinutes().toString().padStart(2,"0")}:{lastSync.getSeconds().toString().padStart(2,"0")}
-          </span>
-          <span className="agent-chip">Agent dashboard — Hackathon 2026</span>
+      {/* TopAppBar */}
+      <header className="bg-on-background flex justify-between items-center w-full px-8 py-3 sticky top-0 z-50 h-12">
+        <span className="text-headline-sm font-black text-surface-container-lowest">THUIS</span>
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse" />
+            <span className="text-label-caps text-primary-fixed uppercase tracking-widest">
+              {usingLive ? "Live" : "Demo"}
+            </span>
+            <span className="text-label-caps text-surface-variant/60 ml-2">Sync {syncLabel}</span>
+          </div>
+          <div className="hidden md:block text-label-caps text-primary-fixed-dim">
+            Agent dashboard — Hackathon 2026
+          </div>
+          <div className="flex items-center gap-4 text-primary-fixed">
+            <Icon name="sensors" />
+            <button onClick={fetchQueue} className="hover:opacity-80 transition-opacity active:scale-90" title="Nu synchroniseren">
+              <Icon name="sync" />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div className="layout">
-        {/* LEFT: wachtrij */}
-        <div className="queue-panel">
-          <div className="queue-header">
-            <div className="queue-title">Wachtrij</div>
-            <div className="queue-count">
-              {sorted.length} bellers
-              <span>gesorteerd op prioriteit</span>
+      <div className="flex flex-1">
+        {/* Sidebar: actieve call + wachtrij */}
+        <aside className="fixed left-0 top-12 h-[calc(100vh-3rem)] w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col shadow-sm z-40 overflow-y-auto">
+          <div className="p-6">
+            {/* Actieve call */}
+            <div className="mb-6">
+              <h2 className="text-label-caps text-on-surface-variant uppercase mb-4">Actieve call</h2>
+              {activeCall ? (
+                <div
+                  className="bg-primary-container/10 border-l-4 border-primary p-3 flex items-center justify-between rounded-r-lg cursor-pointer hover:bg-primary-container/20 transition-colors"
+                  onClick={() => setSelected(activeCall)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full border-2 border-primary-container flex items-center justify-center bg-surface-container-lowest">
+                      <span className="text-label-caps text-on-primary-container">{activeCall.customerValueScore}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-body-md font-bold text-on-surface">{activeCall.name}</span>
+                      <span className="text-label-caps text-on-surface-variant">
+                        {activeCall.segment} • {activeCall.phone}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-body-md font-bold text-primary">{fmtWait(callSeconds)}</span>
+                    <span className="text-label-caps text-on-surface-variant">in gesprek</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-surface-container-low border-l-4 border-outline-variant p-3 rounded-r-lg text-body-md text-on-surface-variant">
+                  geen
+                </div>
+              )}
+            </div>
+
+            <div className="h-px w-full bg-outline-variant mb-6 opacity-40" />
+
+            {/* Wachtrij */}
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-label-caps text-on-surface-variant uppercase">Wachtrij</h2>
+                <h3 className="text-headline-sm text-on-surface">{sorted.length} bellers</h3>
+              </div>
+              <span className="text-label-caps text-on-surface-variant italic">gesorteerd op prioriteit</span>
+            </div>
+
+            <div className="space-y-2">
+              {sorted.length === 0 && (
+                <div className="text-body-md text-on-surface-variant py-6 text-center">Geen wachtende bellers</div>
+              )}
+              {sorted.map((caller, i) => {
+                const isSel = caller.id === selected?.id;
+                return (
+                  <div
+                    key={caller.id}
+                    onClick={() => setSelected(caller)}
+                    className={`p-3 flex items-center justify-between rounded-lg cursor-pointer transition-colors border-l-4 ${
+                      isSel
+                        ? "bg-primary-container/10 border-primary hover:bg-primary-container/20"
+                        : "border-transparent hover:bg-surface-container-low"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`text-label-caps w-4 ${isSel ? "text-primary" : "text-on-surface-variant"}`}>
+                        {i + 1}
+                      </span>
+                      <div
+                        className={`w-10 h-10 rounded-full border-2 flex items-center justify-center bg-surface-container-lowest ${
+                          isSel ? "border-primary-container" : "border-outline-variant"
+                        }`}
+                      >
+                        <span className={`text-label-caps ${isSel ? "text-on-primary-container" : "text-on-surface-variant"}`}>
+                          {caller.customerValueScore}
+                        </span>
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-body-md font-bold text-on-surface flex items-center gap-1.5">
+                          {caller.name}
+                          {isHighValue(caller) && (
+                            <span className="px-1.5 py-px bg-on-background text-primary-fixed text-[9px] font-bold rounded tracking-wider">
+                              HVC
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-label-caps text-on-surface-variant truncate">
+                          {caller.segment} • {caller.phone}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-end shrink-0">
+                      <span className={`text-body-md font-bold ${caller.waitSeconds > 120 ? "text-error" : "text-on-surface-variant"}`}>
+                        {fmtWait(caller.waitSeconds)}
+                      </span>
+                      <span className="text-label-caps text-on-surface-variant">prio {caller.priority}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <div className="queue-list">
-            {sorted.length === 0 && (
-              <div className="queue-empty">Geen wachtende bellers</div>
-            )}
-            {sorted.map((caller, i) => {
-              const color = scoreColor(caller.customerValueScore);
-              const sc2 = segColor(caller.segment);
-              return (
-                <div
-                  key={caller.id}
-                  className={`queue-item${caller.id === selected?.id ? " active" : ""}`}
-                  onClick={() => setSelected(caller)}
-                >
-                  <span className="order-num">{i + 1}</span>
-                  <div className="score-circle" style={{ borderColor: color, color }}>
-                    {caller.customerValueScore}
+
+          {/* Nav tabs */}
+          <nav className="mt-auto border-t border-outline-variant p-2 flex flex-col gap-1">
+            <div className="bg-primary-container text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg font-bold">
+              <Icon name="queue" />
+              <span className="text-label-caps">Wachtrij</span>
+            </div>
+            {[
+              { icon: "phone_in_talk", label: "Gesprekken" },
+              { icon: "group", label: "Klanten" },
+              { icon: "analytics", label: "Rapportage" },
+            ].map((t) => (
+              <div
+                key={t.label}
+                className="text-on-surface-variant hover:bg-surface-container-low flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer"
+              >
+                <Icon name={t.icon} />
+                <span className="text-label-caps">{t.label}</span>
+              </div>
+            ))}
+          </nav>
+
+          {/* Footer */}
+          <div className="p-4 border-t border-outline-variant space-y-4">
+            <button className="w-full py-3 bg-error text-on-error rounded-lg font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+              <Icon name="pause" />
+              <span className="text-label-caps">Start pauze</span>
+            </button>
+            <div className="flex justify-around py-2">
+              <button className="p-2 text-on-surface-variant hover:text-primary transition-colors">
+                <Icon name="settings" />
+              </button>
+              <button className="p-2 text-on-surface-variant hover:text-error transition-colors">
+                <Icon name="logout" />
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        {/* Main */}
+        <main className="ml-[280px] flex-1 p-8 overflow-y-auto">
+          {!liveSelected ? (
+            <div className="flex items-center justify-center h-[calc(100vh-3rem-4rem)] text-body-lg text-on-surface-variant">
+              Selecteer een beller om de details te zien
+            </div>
+          ) : (
+            <>
+              {/* Header */}
+              <div className="flex justify-between items-start mb-8 gap-4">
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <h1 className="text-display-lg text-on-surface">{liveSelected.name}</h1>
+                    <span className="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full font-bold text-label-caps flex items-center gap-2 shadow-sm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-on-primary-container" />
+                      {liveSelected.segment}
+                    </span>
+                    {isHighValue(liveSelected) && (
+                      <span className="px-3 py-1.5 bg-on-background text-primary-fixed rounded-lg text-label-caps font-bold">
+                        HVC
+                      </span>
+                    )}
+                    <span className="px-3 py-1.5 bg-on-background text-primary-fixed rounded-lg text-label-caps font-bold">
+                      Prioriteit {liveSelected.priority}
+                    </span>
                   </div>
-                  <div className="caller-info">
-                    <div className="caller-name">
-                      {caller.name}
-                      {caller.tag === "High Value Customer" && (
-                        <span style={{
-                          fontSize: 10, fontWeight: 600,
-                          background: "#000", color: "#00d780",
-                          padding: "2px 7px", borderRadius: 6,
-                          marginLeft: 6, verticalAlign: "middle",
-                          letterSpacing: "0.05em"
-                        }}>
-                          HVC
+                  <p className="text-on-surface-variant text-body-md flex items-center gap-2">
+                    <Icon name="info" className="text-[16px]" />
+                    {usingLive ? "Bron: Twilio TaskRouter (live)" : "Bron: demo-data — koppel Twilio via /api/queue"}
+                  </p>
+                </div>
+                {isActiveSelected ? (
+                  <button
+                    onClick={endCall}
+                    className="px-8 py-4 bg-error text-on-error rounded-xl font-bold text-headline-sm hover:scale-105 active:scale-95 transition-all card-shadow flex items-center gap-2 whitespace-nowrap"
+                  >
+                    <Icon name="call_end" />
+                    Beëindig gesprek
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => startCall(liveSelected)}
+                    className="px-8 py-4 bg-primary-container text-on-primary-container rounded-xl font-bold text-headline-sm hover:scale-105 active:scale-95 transition-all card-shadow flex items-center gap-2 whitespace-nowrap"
+                  >
+                    <Icon name="call" />
+                    Gesprek starten
+                  </button>
+                )}
+              </div>
+
+              {/* Bento grid */}
+              <div className="grid grid-cols-12 gap-6 mb-6">
+                {/* Klantwaarde */}
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow border-l-4 border-primary-container flex flex-col gap-4">
+                  <div className="flex justify-between items-center">
+                    <h4 className="text-label-caps text-on-surface-variant uppercase">Klantwaarde</h4>
+                    <Icon name="star" className="text-primary-container" fill={isHighValue(liveSelected)} />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-display-lg text-primary">{liveSelected.customerValueScore} / 100</span>
+                    <div className="w-full h-3 bg-secondary-container rounded-full overflow-hidden">
+                      <div className="h-full bg-primary-container transition-all" style={{ width: `${liveSelected.customerValueScore}%` }} />
+                    </div>
+                    <p className="text-on-surface-variant text-body-md">{valueDescription(liveSelected.customerValueScore)}</p>
+                  </div>
+                </div>
+
+                {/* Wachttijd / gespreksduur */}
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow flex flex-col gap-4">
+                  <h4 className="text-label-caps text-on-surface-variant uppercase">
+                    {isActiveSelected ? "Gespreksduur" : "Wachttijd"}
+                  </h4>
+                  <div className="flex flex-col gap-1">
+                    {isActiveSelected ? (
+                      <>
+                        <span className="text-display-lg text-primary">{fmtWait(callSeconds)}</span>
+                        <span className="text-body-md font-bold text-on-surface">In gesprek</span>
+                        <p className="text-on-surface-variant text-body-md">Live gesprek bezig met {liveSelected.name}.</p>
+                      </>
+                    ) : (
+                      <>
+                        <span className={`text-display-lg ${liveSelected.waitSeconds > 120 ? "text-error" : "text-on-surface"}`}>
+                          {fmtWait(liveSelected.waitSeconds)}
                         </span>
-                      )}
-                    </div>
-                    <div className="caller-meta">
-                      <span className="seg-dot" style={{ background: sc2.dot }} />
-                      {caller.segment} · {caller.phone}
-                    </div>
+                        <span className="text-body-md font-bold text-on-surface">In de wacht</span>
+                        <p className="text-on-surface-variant text-body-md">{waitDescription(liveSelected.waitSeconds)}</p>
+                      </>
+                    )}
                   </div>
-                  <div className="caller-right">
-                    <div className={`wait-time${caller.waitSeconds > 120 ? " wait-long" : ""}`}>
-                      {fmtWait(caller.waitSeconds)}
+                </div>
+
+                {/* Contactinformatie */}
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
+                  <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Contactinformatie</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-label-caps text-secondary uppercase">Telefoonnummer</p>
+                      <p className="text-data-point text-on-surface">{liveSelected.phone || "—"}</p>
                     </div>
-                    <div style={{ fontSize: 11, color: "#9f9f9f", marginTop: 2 }}>
-                      prio {caller.priority}
+                    <div>
+                      <p className="text-label-caps text-secondary uppercase">Type abonnement</p>
+                      <p className="text-body-lg font-bold text-on-surface">{subscription}</p>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* RIGHT: klantdetail */}
-        <div className="detail-panel">
-          {!liveSelected || !sc ? (
-            <div className="detail-empty">Selecteer een beller om de details te zien</div>
-          ) : (
-          <>
-          <div className="detail-header">
-            <div>
-              <div className="detail-name">{liveSelected.name}</div>
-              <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 6 }}>
-                <span className="seg-badge" style={{ background: sc.bg, color: sc.text }}>
-                  <span className="seg-dot" style={{ background: sc.dot }} />
-                  {liveSelected.segment}
-                </span>
-                <span className="prio-badge">Prioriteit {liveSelected.priority}</span>
-              </div>
-            </div>
-            <button
-  className="action-btn"
-  onClick={async () => {
-    await fetch(`/api/queue/${liveSelected.id}`, { method: "DELETE" });
-    fetchQueue();
-  }}
->
-  Sluit gesprek
-            </button>
-          </div>
+                {/* Gespreksdetails */}
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
+                  <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Gespreksdetails</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-label-caps text-secondary uppercase">Reden van bellen</p>
+                      <p className="text-data-point text-on-surface">{liveSelected.reason}</p>
+                    </div>
+                    <div>
+                      <p className="text-label-caps text-secondary uppercase">Eerdere interacties</p>
+                      <p className="text-body-lg font-bold text-on-surface">{liveSelected.tenureMonths > 0 ? `${liveSelected.tenureMonths} maanden klant` : "Nieuwe klant"}</p>
+                    </div>
+                  </div>
+                </div>
 
-          <div className="cards-grid">
-            <div className="card">
-              <div className="card-label">Klantwaarde</div>
-              <div className="card-value" style={{ color: scoreColor(liveSelected.customerValueScore) }}>
-                {liveSelected.customerValueScore} / 100
-              </div>
-              <div className="score-bar-wrap">
-                <div className="score-bar" style={{ width: `${liveSelected.customerValueScore}%`, background: scoreColor(liveSelected.customerValueScore) }} />
-              </div>
-            </div>
+                {/* Upsell kansen (demo) */}
+                <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-2 border-primary-container relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                    <Icon name="trending_up" className="text-[80px]" />
+                  </div>
+                  <div className="flex items-center gap-2 mb-6">
+                    <Icon name="rocket_launch" className="text-primary" />
+                    <h4 className="text-headline-sm text-on-surface uppercase tracking-tight">
+                      Upsell kansen voor {liveSelected.name}
+                    </h4>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {upsellOffers.map((offer: UpsellOffer) => (
+                      <div
+                        key={offer.title}
+                        className="p-4 rounded-lg bg-primary-container/5 border border-primary-container/30 flex flex-col justify-between hover:bg-primary-container/10 transition-colors"
+                      >
+                        <div>
+                          <h5 className="text-body-lg font-bold text-on-surface mb-1">{offer.title}</h5>
+                          <p className="text-body-md text-on-surface-variant mb-4">{offer.desc}</p>
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {offer.tips.map((tip: string) => (
+                              <span
+                                key={tip}
+                                className="px-2 py-1 bg-primary-container/10 text-on-primary-container text-[11px] font-bold rounded uppercase tracking-tight"
+                              >
+                                Tip: {tip}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <button className="w-full py-2 bg-primary-container text-on-primary-container rounded-lg font-bold text-label-caps flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+                          <Icon name={offer.icon} className="text-[18px]" />
+                          {offer.cta}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            <div className="card">
-              <div className="card-label">Wachttijd</div>
-              <div className="card-value" style={{ color: liveSelected.waitSeconds > 120 ? "#d92d20" : "#000", fontVariantNumeric: "tabular-nums" }}>
-                {fmtWait(liveSelected.waitSeconds)}
+                {/* Aanbevolen aanpak */}
+                <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-t-4 border-on-background">
+                  <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Aanbevolen aanpak</h4>
+                  <ul className="space-y-3">
+                    {bullets.map((b, i) => (
+                      <li key={i} className={`flex items-start gap-3 ${b.highlight ? "bg-primary-container/5 p-2 rounded" : ""}`}>
+                        <Icon name={b.icon} className="text-primary text-[20px]" />
+                        <p className={`text-body-md text-on-surface ${b.highlight ? "font-bold" : ""}`}>{b.text}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="card-sub">In de wacht</div>
-            </div>
 
-            <div className="card">
-              <div className="card-label">Telefoonnummer</div>
-              <div className="card-value" style={{ fontSize: 15 }}>{liveSelected.phone}</div>
-              <div className="card-sub">{liveSelected.segment}</div>
-            </div>
-
-            <div className="card">
-              <div className="card-label">Reden van bellen</div>
-              <div className="card-value" style={{ fontSize: 15 }}>{liveSelected.reason}</div>
-            </div>
-          </div>
-
-          <div className="card" style={{ marginBottom: 16 }}>
-            <div className="card-label">Aanbevolen aanpak</div>
-            <div className="divider" />
-            {liveSelected.segment === "Risico op churn" && (
-              <div style={{ fontSize: 13, color: "#242424", lineHeight: 1.6 }}>
-                <strong>Retentiescript actief.</strong> Deze klant overweegt op te zeggen. Bied bij passende gelegenheid een retentiekorting aan. Escaleer niet zonder akkoord leidinggevende.
+              <div className="mt-8 flex justify-center opacity-40">
+                <div className="flex items-center gap-4 text-label-caps uppercase text-secondary">
+                  <span className="h-px w-12 bg-outline-variant" />
+                  Einde van dashboard overzicht
+                  <span className="h-px w-12 bg-outline-variant" />
+                </div>
               </div>
-            )}
-            {liveSelected.segment === "Premium" && (
-              <div style={{ fontSize: 13, color: "#242424", lineHeight: 1.6 }}>
-                Premiumklant met hoge waarde. Direct en persoonlijk behandelen. Geen wachtrij-scripts, direct doorpakken.
-              </div>
-            )}
-            {liveSelected.segment === "Zakelijk" && (
-              <div style={{ fontSize: 13, color: "#242424", lineHeight: 1.6 }}>
-                Zakelijke klant. Verwijs bij technische storingen direct naar de zakelijke supportlijn of maak een callback-afspraak.
-              </div>
-            )}
-            {(liveSelected.segment === "Standaard" || liveSelected.segment === "Nieuw") && (
-              <div style={{ fontSize: 13, color: "#242424", lineHeight: 1.6 }}>
-                Standaardafhandeling. Volg het reguliere gesprekscript. Bij upgrade-kans: wijs op het Premium-pakket.
-              </div>
-            )}
-          </div>
-
-          <div className="source-tag">
-            {usingLive ? "Bron: Twilio TaskRouter (live)" : "Bron: demo-data — koppel Twilio via /api/queue"}
-          </div>
-          </>
+            </>
           )}
-        </div>
+        </main>
       </div>
-    </>
+
+      {/* Contextuele hint (demo) */}
+      {liveSelected && upsellOffers.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="bg-inverse-surface text-inverse-on-surface px-6 py-4 rounded-xl card-shadow flex items-center gap-4 border border-outline">
+            <Icon name="verified" className="text-primary-fixed" />
+            <div>
+              <p className="text-label-caps font-bold">Upsell mogelijkheid</p>
+              <p className="text-body-md">
+                {upsellOffers[0].title} is meest relevant voor {liveSelected.name}.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

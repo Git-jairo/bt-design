@@ -70,6 +70,21 @@ export async function GET() {
         reason: attrs.reason ?? "Onbekend",
         priority: task.priority,
         tag: attrs.tag ?? null,
+        // Verrijkte velden uit customers.json (via Function attributes)
+        customerId: attrs.customerId ?? null,
+        customerNumber: attrs.customerNumber ?? null,
+        email: attrs.email ?? null,
+        churnRiskScore: attrs.churnRiskScore ?? 0,
+        churnSegment: attrs.churnSegment ?? null,
+        propensityScore: attrs.propensityScore ?? 0,
+        propensitySegment: attrs.propensitySegment ?? null,
+        products: attrs.products ?? null,
+        numProducts: attrs.numProducts ?? 1,
+        isMultiUtility: attrs.isMultiUtility ?? false,
+        tariffType: attrs.tariffType ?? null,
+        tenureMonths: attrs.tenureMonths ?? 0,
+        contractEnding90d: attrs.contractEnding90d ?? false,
+        actions: attrs.actions ?? [],
       }));
 
     return NextResponse.json(queue);

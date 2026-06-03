@@ -1,0 +1,4 @@
+# Gegenereerd én mogelijke echte datasets met persoonsgegevens — niet committen.
+# De dummy-bronbestanden (identiteit.csv, product.csv) worden wél getrackt.
+customers.json
+*.real.csv
