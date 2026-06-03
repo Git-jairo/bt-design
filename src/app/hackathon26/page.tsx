@@ -17,15 +17,6 @@ interface Caller {
   priority: number;
 }
 
-// Fallback dummy data when Twilio is not yet connected
-const DUMMY: Caller[] = [
-  { id: "1", name: "Anna de Vries",  phone: "+31610000001", segment: "Premium",           customerValueScore: 95, waitSeconds: 43,  reason: "Vraag over factuur",    priority: 95 },
-  { id: "2", name: "Emma Visser",    phone: "+31610000005", segment: "Risico op churn",    customerValueScore: 70, waitSeconds: 112, reason: "Contract opzeggen",     priority: 85 },
-  { id: "3", name: "Bram Jansen",    phone: "+31610000002", segment: "Zakelijk",           customerValueScore: 80, waitSeconds: 28,  reason: "Storing internet",      priority: 80 },
-  { id: "4", name: "Carla Smit",     phone: "+31610000003", segment: "Standaard",          customerValueScore: 45, waitSeconds: 67,  reason: "Verhuizing doorgeven",  priority: 45 },
-  { id: "5", name: "Daan Bakker",    phone: "+31610000004", segment: "Nieuw",              customerValueScore: 25, waitSeconds: 189, reason: "Welkomstpakket",        priority: 25 },
-];
-
 const SEGMENT_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
   "Premium":           { bg: "#e0f5f0", text: "#004f3a", dot: "#029b77" },
   "Zakelijk":          { bg: "#e6f8ff", text: "#003a66", dot: "#0098d9" },
@@ -51,9 +42,9 @@ function fmtWait(s: number): string {
 }
 
 export default function Hackathon26() {
-  const [callers, setCallers] = useState<Caller[]>(DUMMY);
+  const [callers, setCallers] = useState<Caller[]>([]);
   const [localSeconds, setLocalSeconds] = useState<Record<string, number>>({});
-  const [selected, setSelected] = useState<Caller>(DUMMY[0]);
+  const [selected, setSelected] = useState<Caller | null>(null);
   const [lastSync, setLastSync] = useState<Date>(new Date());
   const [usingLive, setUsingLive] = useState(false);
 
@@ -63,7 +54,6 @@ export default function Hackathon26() {
       const res = await fetch("/api/queue");
       if (!res.ok) return;
       const data: Caller[] = await res.json();
-      if (data.length === 0) return;
       // Seed local seconds from API values on first fetch
       setLocalSeconds((prev) => {
         const next = { ...prev };
@@ -76,7 +66,7 @@ export default function Hackathon26() {
       setLastSync(new Date());
       setUsingLive(true);
       // Keep selected in sync
-      setSelected((prev) => data.find((c) => c.id === prev.id) ?? data[0]);
+      setSelected((prev) => data.find((c) => c.id === prev?.id) ?? data[0] ?? null);
     } catch {
       // Silently fall back to dummy data
     }
@@ -108,8 +98,10 @@ export default function Hackathon26() {
   }));
 
   const sorted = [...withLiveSeconds].sort((a, b) => b.priority - a.priority);
-  const liveSelected = withLiveSeconds.find((c) => c.id === selected.id) ?? selected;
-  const sc = segColor(liveSelected.segment);
+  const liveSelected = selected
+    ? withLiveSeconds.find((c) => c.id === selected.id) ?? selected
+    : null;
+  const sc = liveSelected ? segColor(liveSelected.segment) : null;
 
   return (
     <>
@@ -153,6 +145,11 @@ export default function Hackathon26() {
         .queue-count { font-size: 22px; font-weight: 600; color: #000; }
         .queue-count span { font-size: 13px; font-weight: 400; color: #9f9f9f; margin-left: 6px; }
         .queue-list { flex: 1; overflow-y: auto; }
+        .queue-empty { padding: 32px 24px; font-size: 13px; color: #9f9f9f; text-align: center; }
+        .detail-empty {
+          display: flex; align-items: center; justify-content: center;
+          height: 100%; font-size: 14px; color: #9f9f9f;
+        }
         .queue-item {
           display: flex; align-items: center; gap: 14px;
           padding: 14px 24px; cursor: pointer;
@@ -223,13 +220,16 @@ export default function Hackathon26() {
             </div>
           </div>
           <div className="queue-list">
+            {sorted.length === 0 && (
+              <div className="queue-empty">Geen wachtende bellers</div>
+            )}
             {sorted.map((caller, i) => {
               const color = scoreColor(caller.customerValueScore);
               const sc2 = segColor(caller.segment);
               return (
                 <div
                   key={caller.id}
-                  className={`queue-item${caller.id === selected.id ? " active" : ""}`}
+                  className={`queue-item${caller.id === selected?.id ? " active" : ""}`}
                   onClick={() => setSelected(caller)}
                 >
                   <span className="order-num">{i + 1}</span>
@@ -259,6 +259,10 @@ export default function Hackathon26() {
 
         {/* RIGHT: klantdetail */}
         <div className="detail-panel">
+          {!liveSelected || !sc ? (
+            <div className="detail-empty">Selecteer een beller om de details te zien</div>
+          ) : (
+          <>
           <div className="detail-header">
             <div>
               <div className="detail-name">{liveSelected.name}</div>
@@ -340,6 +344,8 @@ export default function Hackathon26() {
           <div className="source-tag">
             {usingLive ? "Bron: Twilio TaskRouter (live)" : "Bron: demo-data — koppel Twilio via /api/queue"}
           </div>
+          </>
+          )}
         </div>
       </div>
     </>
