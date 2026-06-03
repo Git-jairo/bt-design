@@ -270,7 +270,15 @@ export default function Hackathon26() {
                 <span className="prio-badge">Prioriteit {liveSelected.priority}</span>
               </div>
             </div>
-            <button className="action-btn">Accepteer gesprek</button>
+            <button
+  className="action-btn"
+  onClick={async () => {
+    await fetch(`/api/queue/${liveSelected.id}`, { method: "DELETE" });
+    fetchQueue();
+  }}
+>
+  Sluit gesprek
+            </button>
           </div>
 
           <div className="cards-grid">
