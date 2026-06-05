@@ -85,7 +85,7 @@ De `update-priorities` function (nog in te stellen als cron) verhoogt de priorit
 - **Framework:** Next.js 16 (App Router, TypeScript, Tailwind)
 - **Hosting:** Vercel
 - **Domein:** budgetthuis.design
-- **Repo:** github.com/Git-jairo/hackathon26
+- **Repo:** github.com/Git-jairo/bt-design
 
 ### Pagina: `/hackathon26`
 - Linkerkolom: live wachtrij gesorteerd op prioriteit
