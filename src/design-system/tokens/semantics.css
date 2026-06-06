@@ -10,7 +10,7 @@
 @theme {
   /* ── Canvas (page backgrounds) ───────────────────────────────────────── */
   --color-canvas:           var(--color-gray-50);    /* Default page bg       → bg-canvas   */
-  
+
   /* ── Surfaces (page backgrounds) ───────────────────────────────────────── */
   --color-card:             var(--color-gray-0);     /* Elevated card surface → bg-card     */
   --color-footer:           var(--color-gray-850);   /* Footer bg             → bg-footer   */
@@ -20,11 +20,11 @@
   --color-brand-dim:        var(--color-teal-500);   /* Dimmer brand surface  → bg-brand-dim */
   --color-highlight:        var(--color-yellow-400); /* Beta / highlight bg   → bg-highlight */
 
-  /* ── Foreground (text) ───────────────────────────────────────────────── */
-  --color-fg:               var(--color-gray-850);   /* Primary text          → text-fg     */
-  --color-fg-inverse:       var(--color-gray-50);    /* Text on dark bg       → text-fg-inverse */
-  --color-fg-accent:        var(--color-mint-500);   /* Accent / link text    → text-fg-accent  */
-  --color-fg-accent-dim:    var(--color-teal-500);   /* Dimmer accent text    → text-fg-accent-dim */
+  /* ── Heading (text) ───────────────────────────────────────────────── */
+  --color-heading:               var(--color-gray-850);   /* Primary text          → text-fg     */
+  --color-heading-inverse:       var(--color-gray-50);    /* Text on dark bg       → text-fg-inverse */
+  --color-heading-accent:        var(--color-mint-500);   /* Accent / link text    → text-fg-accent  */
+  --color-heading-accent-dim:    var(--color-teal-500);   /* Dimmer accent text    → text-fg-accent-dim */
 
   /* ── Interactive (CTAs) ──────────────────────────────────────────────── */
   --color-action-bg:        var(--color-mint-500);   /* CTA background        → bg-action-bg        */
@@ -48,6 +48,7 @@
   /* ── Semantic shadows ────────────────────────────────────────────────── */
   --shadow-card:            var(--shadow-md);       /* Standard card shadow  → shadow-card        */
   --shadow-card-raised:     var(--shadow-lg);       /* Elevated card shadow  → shadow-card-raised */
+  --shadow-promotion:           var(--shadow-block);       /* Subtle block shadow  -> shadow-promotion       */
 }
 
 /* ── Canvas aliases for inline styles (page.tsx section bg transitions) ── */
