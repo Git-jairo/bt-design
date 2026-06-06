@@ -9,11 +9,12 @@ import {
 } from "framer-motion";
 import { Button }       from "@/design-system/components/Button";
 import { FigmaCursors } from "@/design-system/components/FigmaCursors";
+import { Icon }         from "@/design-system/components/Icon";
 
 const HEADLINE = [
   { text: "BUDGET", color: "text-fg" },
   { text: "THUIS.", color: "text-fg" },
-  { text: "Design", color: "text-fg-accent" },
+  { text: "Design", color: "text-fg" },
 ];
 
 export function Hero() {
@@ -85,15 +86,21 @@ export function Hero() {
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.68 }}
           >
             {/* Primary CTA — beta badge is positioned relative to the Button wrapper */}
-            <Button href="/helix-slides" variant="primary" className="relative">
+            <Button
+              href="/helix-slides"
+              variant="cta"
+              className="relative"
+              trailingIcon={
+                <Icon name="basic-navigation/ChevronRight" size={24} />
+              }
+            >
               <span className="absolute -top-2 -left-6 rotate-[-15deg] rounded-full bg-highlight text-fg text-[12px] font-black px-2 py-1 leading-none shadow-md select-none z-10">
                 NOW IN BETA!
               </span>
               Helix-Slides
-              <span aria-hidden="true">→</span>
             </Button>
 
-            <Button href="/case-studies" variant="ghost">
+            <Button href="/case-studies" variant="secondary">
               Case Studies
             </Button>
           </motion.div>

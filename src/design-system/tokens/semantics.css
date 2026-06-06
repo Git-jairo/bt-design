@@ -10,6 +10,7 @@
 @theme {
   /* ── Canvas (page backgrounds) ───────────────────────────────────────── */
   --color-canvas:           var(--color-gray-50);    /* Default page bg       → bg-canvas   */
+  
   /* ── Surfaces (page backgrounds) ───────────────────────────────────────── */
   --color-card:             var(--color-gray-0);     /* Elevated card surface → bg-card     */
   --color-footer:           var(--color-gray-850);   /* Footer bg             → bg-footer   */
@@ -40,7 +41,7 @@
   --radius-card-sm:         var(--radius-lg);       /* 28px — compact card   → rounded-card-sm */
   --radius-card-md:         var(--radius-2xl);      /* 36px — default card   → rounded-card-md */
   --radius-card-lg:         var(--radius-3xl);      /* 40px — hero card      → rounded-card-lg */
-  --radius-button:          var(--radius-full);     /* Pill                  → rounded-button  */
+  --radius-button:          var(--radius-xs);       /* 8px — matches --radius-btn in components.css → rounded-button */
   --radius-badge:           var(--radius-full);     /* Pill                  → rounded-badge   */
   --radius-chip:            var(--radius-sm);       /* 12px inline chip      → rounded-chip    */
 

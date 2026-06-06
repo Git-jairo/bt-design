@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../design-system/tokens/primitives.css";
 @import "../design-system/tokens/semantics.css";
+@import "../design-system/tokens/components.css";
 @import "../design-system/tokens/hackathon26.css";
 
 /* ── Dark mode toggle ─────────────────────────────────────────────────────

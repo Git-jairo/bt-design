@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HELIX DESIGN SYSTEM — Component-specific Tokens
+   Per-component variables built on top of semantic tokens.
+   Do not reference primitives directly — go through semantics where possible.
+   Source of truth: figma.com/design/NISSWKMIeds51IXJxRj0qq — node 2:1522
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+
+  /* ══════════════════════════════════════════════════════════════════════
+     BUTTON
+     Utility-class references (Tailwind v4 @theme generates these):
+       radius   → rounded-btn
+       colors   → bg-btn-*, text-btn-*, border-btn-*
+     ════════════════════════════════════════════════════════════════════ */
+
+  /* ── Geometry ──────────────────────────────────────────────────────── */
+  --radius-btn:  var(--radius-xs);   /* 8px — spec: "rounded corners (8px)" */
+
+  /* ── CTA: filled mint — highest hierarchy call-to-action ─────────── */
+  --color-btn-cta-bg:          var(--color-mint-500);   /* #00d780 */
+  --color-btn-cta-bg-hover:    var(--color-mint-600);   /* #03ba70 */
+  --color-btn-cta-bg-active:   var(--color-mint-700);   /* #00995a */
+  --color-btn-cta-bg-disabled: #c7c7c7;
+  --color-btn-cta-fg:          var(--color-gray-850);   /* #232424 — on mint */
+
+  /* ── Primary: filled dark — standard interactive actions ─────────── */
+  --color-btn-primary-bg:           var(--color-gray-1000);  /* #000000 */
+  --color-btn-primary-bg-hover:     var(--color-gray-850);   /* #232424 */
+  --color-btn-primary-bg-active:    #6c6c6c;
+  --color-btn-primary-bg-disabled:  #6c6c6c;
+  --color-btn-primary-fg:           var(--color-gray-0);     /* #ffffff */
+  --color-btn-primary-fg-disabled:  #c7c7c7;
+
+  /* ── Secondary: outlined — lower-priority or complementary actions ── */
+  --color-btn-secondary-bg:               var(--color-gray-0);     /* #ffffff */
+  --color-btn-secondary-bg-active:        #efefef;
+  --color-btn-secondary-stroke:           var(--color-gray-1000);  /* #000000 */
+  --color-btn-secondary-stroke-hover:     var(--color-teal-700);   /* #006b50 */
+  --color-btn-secondary-stroke-active:    var(--color-teal-700);   /* #006b50 */
+  --color-btn-secondary-stroke-disabled:  #6c6c6c;
+  --color-btn-secondary-fg:              var(--color-gray-850);    /* #232424 */
+  --color-btn-secondary-fg-hover:        #3c3c3c;
+  --color-btn-secondary-fg-active:       var(--color-teal-700);    /* #006b50 */
+  --color-btn-secondary-fg-disabled:     #6c6c6c;
+}
