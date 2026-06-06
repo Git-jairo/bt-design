@@ -1,34 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
+import Link            from "next/link";
+import { motion }      from "framer-motion";
+import { Eyebrow }     from "@/design-system/components/Eyebrow";
+import { Badge }       from "@/design-system/components/Badge";
 import { DOCS_VERSION, DOCS_STATUS } from "@/lib/placeholders";
 
 const TILES = [
-  {
-    title: "Brand Tokens",
-    desc: "Color, type, spacing, and shadow primitives.",
-    href: "/docs/tokens",
-  },
-  {
-    title: "Typography",
-    desc: "Greet Narrow and Inter scale specs.",
-    href: "/docs/typography",
-  },
-  {
-    title: "Color System",
-    desc: "Mint, Teal, Ink, Screen, Gray — and when to use each.",
-    href: "/docs/colors",
-  },
-  {
-    title: "Components",
-    desc: "Card, Button, Nav, Badge, and more.",
-    href: "/docs/components",
-  },
+  { title: "Brand Tokens",  desc: "Color, type, spacing, and shadow primitives.",          href: "/docs/tokens"     },
+  { title: "Typography",    desc: "Greet Narrow and Inter scale specs.",                   href: "/docs/typography" },
+  { title: "Color System",  desc: "Mint, Teal, Ink, Screen, Gray — and when to use each.", href: "/docs/colors"     },
+  { title: "Components",    desc: "Card, Button, Nav, Badge, and more.",                    href: "/docs/components" },
 ];
 
 const PARTICLES = [
-  { top: "8%", left: "15%", size: 4, duration: 6.3, delay: 1.2 },
+  { top: "8%",  left: "15%", size: 4, duration: 6.3, delay: 1.2 },
   { top: "24%", left: "82%", size: 3, duration: 7.6, delay: 0.3 },
   { top: "62%", left: "28%", size: 2, duration: 5.1, delay: 1.9 },
   { top: "45%", left: "68%", size: 4, duration: 4.8, delay: 0.7 },
@@ -67,8 +53,7 @@ export function DocsBlock() {
         style={{
           width: 640,
           height: 640,
-          background:
-            "radial-gradient(circle, rgba(0, 203, 122, 0.26) 0%, transparent 68%)",
+          background: "radial-gradient(circle, rgba(0, 203, 122, 0.26) 0%, transparent 68%)",
           filter: "blur(72px)",
         }}
         animate={{ scale: [1, 1.18, 1], opacity: [0.6, 1, 0.6] }}
@@ -79,7 +64,7 @@ export function DocsBlock() {
       {PARTICLES.map(({ top, left, size, duration, delay }, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-mint/25 pointer-events-none"
+          className="absolute rounded-full bg-brand/25 pointer-events-none"
           style={{ top, left, width: size, height: size }}
           animate={{ y: [0, -18, 0], opacity: [0.15, 0.5, 0.15] }}
           transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
@@ -87,9 +72,10 @@ export function DocsBlock() {
       ))}
 
       <div className="relative max-w-[1152px] mx-auto">
-        <Eyebrow label="Design System" light />
+        <Eyebrow label="Design System" variant="light" />
+
         <motion.h2
-          className="font-helix-display text-4xl lg:text-6xl uppercase text-screen mt-3 mb-20 leading-tight"
+          className="font-helix-display text-4xl lg:text-6xl uppercase text-fg-inverse mt-3 mb-20 leading-tight"
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -109,7 +95,7 @@ export function DocsBlock() {
           >
             <Link
               href="/docs"
-              className="group relative flex flex-col justify-between h-full rounded-[36px] bg-white p-12 lg:p-16 min-h-[480px] overflow-hidden"
+              className="group relative flex flex-col justify-between h-full rounded-card-md bg-card p-12 lg:p-16 min-h-[480px] overflow-hidden"
               style={{ boxShadow: "var(--shadow-card)" }}
             >
               {/* Card inner glow */}
@@ -118,8 +104,7 @@ export function DocsBlock() {
                 style={{
                   width: 400,
                   height: 400,
-                  background:
-                    "radial-gradient(circle, rgba(0, 215, 129, 0.19) 0%, transparent 65%)",
+                  background: "radial-gradient(circle, rgba(0, 215, 129, 0.19) 0%, transparent 65%)",
                   filter: "blur(56px)",
                 }}
                 animate={{ scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
@@ -128,27 +113,24 @@ export function DocsBlock() {
 
               <div className="relative">
                 <div className="flex items-center gap-2 mb-12">
-                  <span className="px-3 py-1 rounded-full bg-mint text-ink text-xs font-semibold uppercase tracking-wide">
-                    v{DOCS_VERSION}
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-helix-gray text-ink text-xs font-medium">
-                    {DOCS_STATUS}
-                  </span>
+                  <Badge variant="brand">v{DOCS_VERSION}</Badge>
+                  <Badge variant="neutral">{DOCS_STATUS}</Badge>
                 </div>
                 <p
-                  className="font-helix-display uppercase text-ink leading-none mb-8"
+                  className="font-helix-display uppercase text-fg leading-none mb-8"
                   style={{ fontSize: "clamp(4.5rem, 9vw, 8rem)" }}
                 >
                   HELIX
                   <br />
                   DS
                 </p>
-                <p className="text-ink/55 text-base leading-relaxed max-w-sm font-helix-body">
+                <p className="text-fg/55 text-base leading-relaxed max-w-sm font-helix-body">
                   Brand truth, component specs, and authoring guidelines for all
                   Budget Thuis products.
                 </p>
               </div>
-              <span className="relative text-sm font-semibold text-ink mt-12 group-hover:underline underline-offset-2">
+
+              <span className="relative text-sm font-semibold text-fg mt-12 group-hover:underline underline-offset-2">
                 Open Documentation →
               </span>
             </Link>
@@ -162,21 +144,15 @@ export function DocsBlock() {
                 initial={{ opacity: 0, x: 48 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.55,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: i * 0.08,
-                }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
               >
                 <Link
                   href={href}
-                  className="group flex flex-col gap-2.5 rounded-[28px] bg-white/7 hover:bg-white/13 transition-colors p-7 h-full"
+                  className="group flex flex-col gap-2.5 rounded-card-sm bg-white/7 hover:bg-white/13 transition-colors p-7 h-full"
                 >
-                  <h3 className="font-semibold text-screen text-sm">{title}</h3>
-                  <p className="text-screen/45 text-sm leading-relaxed font-helix-body flex-1">
-                    {desc}
-                  </p>
-                  <span className="text-xs text-mint mt-2 group-hover:underline underline-offset-2">
+                  <h3 className="font-semibold text-fg-inverse text-sm">{title}</h3>
+                  <p className="text-fg-inverse/45 text-sm leading-relaxed font-helix-body flex-1">{desc}</p>
+                  <span className="text-xs text-fg-accent mt-2 group-hover:underline underline-offset-2">
                     Explore →
                   </span>
                 </Link>
@@ -186,17 +162,5 @@ export function DocsBlock() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Eyebrow({ label, light = false }: { label: string; light?: boolean }) {
-  return (
-    <p
-      className={`text-xs font-semibold uppercase tracking-[0.14em] ${
-        light ? "text-screen/35" : "text-ink/40"
-      }`}
-    >
-      {label}
-    </p>
   );
 }

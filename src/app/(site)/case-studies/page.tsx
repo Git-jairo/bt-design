@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Nav } from "@/components/Nav";
+import { Nav } from "@/design-system/components/Nav";
 
 export const metadata = { title: "Case Studies — BudgetThuis.Design" };
 

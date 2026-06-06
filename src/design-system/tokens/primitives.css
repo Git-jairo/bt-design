@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HELIX DESIGN SYSTEM — Primitives
+   Raw brand values: palette, typefaces, radius scale, shadow scale.
+   Do not reference these directly in components — use semantic tokens instead.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Typeface loading ────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Budget Greet Narrow';
+  src: url('/fonts/BudgetGreetNarrow-Bold.woff2') format('woff2'),
+       url('/fonts/BudgetGreetNarrow-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.woff2') format('woff2'),
+       url('/fonts/Inter-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.woff2') format('woff2'),
+       url('/fonts/Inter-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-SemiBold.woff2') format('woff2'),
+       url('/fonts/Inter-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Bold.woff2') format('woff2'),
+       url('/fonts/Inter-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* ── Gray scale ────────────────────────────────────────────────────── */
+  --color-gray-0: #FFFFFF;
+  --color-gray-50: #F9FBF8;
+  --color-gray-100: #EBF2E8; /* brand */
+  --color-gray-150: #D4E0D2;
+  --color-gray-200: #C1CDC2;
+  --color-gray-400: #A0ABA6;
+  --color-gray-600: #676F6C;
+  --color-gray-750: #313534;
+  --color-gray-850: #232424;
+  --color-gray-950: #141515;
+  --color-gray-1000: #000000;
+
+  /* ── Orange scale ────────────────────────────────────────────────────── */
+  --color-orange-100: #FFF1EC;
+  --color-orange-200: #FFD2C4;
+  --color-orange-300: #FFB29A;
+  --color-orange-400: #FF9170;
+  --color-orange-500: #FF6C43;
+  --color-orange-600: #E6552E;
+  --color-orange-700: #BF4324;
+  --color-orange-800: #99341B;
+  --color-orange-900: #732613;
+
+  /* ── Red scale ───────────────────────────────────────────────────────── */
+  --color-red-100: #FFE9E9;
+  --color-red-200: #FFCACA;
+  --color-red-300: #FF9E9E;
+  --color-red-400: #FF6B6B;
+  --color-red-500: #F04444;
+  --color-red-600: #D92D20;
+  --color-red-700: #B42318;
+  --color-red-800: #912018;
+  --color-red-900: #7A1C15;
+
+  /* ── Purple scale ────────────────────────────────────────────────────── */
+  --color-purple-100: #EEEFFF;
+  --color-purple-200: #D1D4FF;
+  --color-purple-300: #B4B9FF;
+  --color-purple-400: #A2A6FF;
+  --color-purple-500: #9196FF;
+  --color-purple-600: #7277DD;
+  --color-purple-700: #5559B3;
+  --color-purple-800: #3C3F8C;
+  --color-purple-900: #262766;
+
+  /* ── Blue scale ──────────────────────────────────────────────────────── */
+  --color-blue-100: #E6F8FF;
+  --color-blue-200: #B3EAFF;
+  --color-blue-300: #80DCFF;
+  --color-blue-400: #33C9FF;
+  --color-blue-500: #00B7FF;
+  --color-blue-600: #0098D9;
+  --color-blue-700: #0077B3;
+  --color-blue-800: #00588C;
+  --color-blue-900: #003A66;
+
+  /* ── Teal scale ──────────────────────────────────────────────────────── */
+  --color-teal-100: #E0F5F0;
+  --color-teal-200: #B1E4D7;
+  --color-teal-300: #79CDB8;
+  --color-teal-400: #36B595;
+  --color-teal-500: #029B77;
+  --color-teal-600: #028C6C;
+  --color-teal-700: #006B50;
+  --color-teal-800: #004F3A;
+  --color-teal-900: #043B2C;
+
+  /* ── Mint scale ──────────────────────────────────────────────────────── */
+  --color-mint-100: #E6FFF2;
+  --color-mint-200: #B3FFDF;
+  --color-mint-300: #80FFC2;
+  --color-mint-400: #44F3A1;
+  --color-mint-500: #00D780;
+  --color-mint-600: #03BA70;
+  --color-mint-700: #00995A;
+  --color-mint-800: #007347;
+  --color-mint-900: #00522C;
+
+  /* ── Green scale ─────────────────────────────────────────────────────── */
+  --color-green-100: #F0FFF0;
+  --color-green-200: #CFFFCF;
+  --color-green-300: #A8FFA5;
+  --color-green-400: #7DFA7A;
+  --color-green-500: #52F052;
+  --color-green-600: #39D939;
+  --color-green-700: #2FB52F;
+  --color-green-800: #248F24;
+  --color-green-900: #1B6B1B;
+
+  /* ── Yellow scale ────────────────────────────────────────────────────── */
+  --color-yellow-100: #FFFFE6;
+  --color-yellow-200: #FFFFB6;
+  --color-yellow-300: #FFFF7C;
+  --color-yellow-400: #F9FF00;
+  --color-yellow-500: #F2F400;
+  --color-yellow-600: #D4D700;
+  --color-yellow-700: #A3A600;
+  --color-yellow-800: #747500;
+  --color-yellow-900: #555600;
+
+  /* ── Font stacks ─────────────────────────────────────────────────────── */
+  --font-helix-display: 'Budget Greet Narrow', 'Arial Black', ui-sans-serif;
+  --font-helix-body:    'Inter', ui-sans-serif, system-ui;
+  --font-mono:          ui-monospace, monospace;
+
+  /* ── Border radius scale ─────────────────────────────────────────────── */
+  --radius-xs:    8px;
+  --radius-sm:    12px;
+  --radius-md:    20px;
+  --radius-lg:    28px;
+  --radius-xl:    32px;
+  --radius-2xl:   36px;
+  --radius-3xl:   40px;
+  --radius-full:  9999px;
+
+  /* ── Shadow scale ────────────────────────────────────────────────────── */
+  --shadow-sm:  0 2px 8px rgba(60, 60, 60, 0.06);
+  --shadow-md:  0 8px 16px rgba(60, 60, 60, 0.10);
+  --shadow-lg:  0 16px 32px rgba(60, 60, 60, 0.14);
+}

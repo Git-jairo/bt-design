@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HELIX DESIGN SYSTEM — Semantic Tokens
+   Intent-based aliases layered on top of primitives.
+   Components must reference these, not raw primitive values.
+
+   Naming convention avoids the M3/hackathon26 prefix space (surface-*, primary-*,
+   secondary-*, on-*) so both token sets can coexist in globals.css without conflict.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Canvas (page backgrounds) ───────────────────────────────────────── */
+  --color-canvas:           var(--color-gray-50);    /* Default page bg       → bg-canvas   */
+  /* ── Surfaces (page backgrounds) ───────────────────────────────────────── */
+  --color-card:             var(--color-gray-0);     /* Elevated card surface → bg-card     */
+  --color-footer:           var(--color-gray-850);   /* Footer bg             → bg-footer   */
+  --color-raised:           var(--color-gray-100);   /* Subtle raised surface → bg-raised   */
+  --color-dark:             var(--color-gray-850);   /* Dark section bg       → bg-dark     */
+  --color-brand:            var(--color-mint-500);   /* Brand accent surface  → bg-brand    */
+  --color-brand-dim:        var(--color-teal-500);   /* Dimmer brand surface  → bg-brand-dim */
+  --color-highlight:        var(--color-yellow-400); /* Beta / highlight bg   → bg-highlight */
+
+  /* ── Foreground (text) ───────────────────────────────────────────────── */
+  --color-fg:               var(--color-gray-850);   /* Primary text          → text-fg     */
+  --color-fg-inverse:       var(--color-gray-50);    /* Text on dark bg       → text-fg-inverse */
+  --color-fg-accent:        var(--color-mint-500);   /* Accent / link text    → text-fg-accent  */
+  --color-fg-accent-dim:    var(--color-teal-500);   /* Dimmer accent text    → text-fg-accent-dim */
+
+  /* ── Interactive (CTAs) ──────────────────────────────────────────────── */
+  --color-action-bg:        var(--color-mint-500);   /* CTA background        → bg-action-bg        */
+  --color-action-bg-hover:  var(--color-teal-500);   /* CTA hover state       → hover:bg-action-bg-hover */
+  --color-action-fg:        var(--color-gray-850);   /* Text on CTA           → text-action-fg      */
+
+  /* ── Borders ─────────────────────────────────────────────────────────── */
+  --color-border:           rgba(36, 36, 36, 0.07); /* Default border        → border-border  */
+  --color-border-subtle:    rgba(36, 36, 36, 0.12); /* Slightly visible      → border-border-subtle */
+  --color-border-medium:    rgba(36, 36, 36, 0.30); /* Prominent border      → border-border-medium */
+
+  /* ── Semantic radius ─────────────────────────────────────────────────── */
+  --radius-card:            var(--radius-xl);       /* 32px — standard card  → rounded-card    */
+  --radius-card-sm:         var(--radius-lg);       /* 28px — compact card   → rounded-card-sm */
+  --radius-card-md:         var(--radius-2xl);      /* 36px — default card   → rounded-card-md */
+  --radius-card-lg:         var(--radius-3xl);      /* 40px — hero card      → rounded-card-lg */
+  --radius-button:          var(--radius-full);     /* Pill                  → rounded-button  */
+  --radius-badge:           var(--radius-full);     /* Pill                  → rounded-badge   */
+  --radius-chip:            var(--radius-sm);       /* 12px inline chip      → rounded-chip    */
+
+  /* ── Semantic shadows ────────────────────────────────────────────────── */
+  --shadow-card:            var(--shadow-md);       /* Standard card shadow  → shadow-card        */
+  --shadow-card-raised:     var(--shadow-lg);       /* Elevated card shadow  → shadow-card-raised */
+}
+
+/* ── Canvas aliases for inline styles (page.tsx section bg transitions) ── */
+:root {
+  --sem-color-canvas-default:   var(--color-gray-50);
+  --sem-color-canvas-brand:     var(--color-mint-500);
+  --sem-color-canvas-brand-dim: var(--color-teal-500);
+  --sem-color-canvas-inverted:  var(--color-gray-850);
+}

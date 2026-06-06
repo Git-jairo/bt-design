@@ -1,4 +1,4 @@
-import { Nav } from "@/components/Nav";
+import { Nav } from "@/design-system/components/Nav";
 
 export const metadata = { title: "Presentations — BudgetThuis.Design" };
 

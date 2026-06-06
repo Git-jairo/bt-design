@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Nav } from "@/components/Nav";
+import { Nav } from "@/design-system/components/Nav";
 import { SKILLS, ALL_ROLES, ALL_EXPERTISE, type Skill } from "@/data/skills";
 
 function FilterChip({

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { SmoothScroll } from "@/design-system/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Budget Thuis Design",
