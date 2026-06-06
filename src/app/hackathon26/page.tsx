@@ -25,6 +25,8 @@ interface Caller {
   reason: string;
   priority: number;
   tag: string | null;
+  firstName: string | null;
+  lastName: string | null;
   // Verrijkte velden uit customers.json
   customerId: string | null;
   customerNumber: string | null;
@@ -48,7 +50,7 @@ function fmtWait(s: number): string {
 }
 
 function isHighValue(c: Caller): boolean {
-  return c.tag === "High Value Customer" || c.customerValueScore >= 90;
+  return c.tag === "High Value Customer" || c.customerValueScore >= 85;
 }
 
 function valueDescription(score: number): string {
@@ -184,10 +186,67 @@ export default function Hackathon26() {
   const [lastSync, setLastSync] = useState<Date>(new Date());
   const [usingLive, setUsingLive] = useState(false);
 
+  // Debug / demo panel
+  const [debugOpen, setDebugOpen] = useState(false);
+  const [debugQuery, setDebugQuery] = useState("");
+  const [debugResults, setDebugResults] = useState<{
+    phone: string; name: string; firstName: string; lastName: string;
+    segment: string; tag: string | null; customerValueScore: number;
+    products: { energy: boolean; mobile: boolean; internet: boolean } | null;
+  }[]>([]);
+
+  // Zoek klanten in de dataset
+  const searchCustomers = useCallback(async (q: string) => {
+    setDebugQuery(q);
+    if (q.trim().length < 2) { setDebugResults([]); return; }
+    try {
+      const res = await fetch(`/api/customers?q=${encodeURIComponent(q)}`);
+      if (res.ok) setDebugResults(await res.json());
+    } catch { /* stil falen */ }
+  }, []);
+
+  // Injecteer een gesimuleerde beller in de lokale wachtrij
+  const addSimulatedCaller = useCallback((r: typeof debugResults[number]) => {
+    const fake: Caller = {
+      id: `SIM_${Date.now()}`,
+      name: r.name,
+      firstName: r.firstName,
+      lastName: r.lastName,
+      phone: r.phone,
+      segment: r.segment,
+      tag: r.tag,
+      customerValueScore: r.customerValueScore,
+      waitSeconds: 0,
+      reason: "Gesimuleerde call",
+      priority: r.customerValueScore >= 85 ? 1000 : 0,
+      customerId: null,
+      customerNumber: null,
+      email: null,
+      churnRiskScore: 0,
+      churnSegment: null,
+      propensityScore: 0,
+      propensitySegment: null,
+      products: r.products,
+      numProducts: r.products ? Object.values(r.products).filter(Boolean).length : 0,
+      isMultiUtility: r.products ? Object.values(r.products).filter(Boolean).length > 1 : false,
+      tariffType: null,
+      tenureMonths: 0,
+      contractEnding90d: false,
+      actions: [],
+    };
+    setCallers((prev) => [...prev, fake]);
+    setLocalSeconds((prev) => ({ ...prev, [fake.id]: 0 }));
+    setDebugOpen(false);
+    setDebugQuery("");
+    setDebugResults([]);
+  }, [debugResults]);
+
   const activeCallRef = useRef<Caller | null>(null);
   activeCallRef.current = activeCall;
 
-  // Poll Twilio API every 10 seconds
+  const isSimulated = (id: string) => id.startsWith("SIM_");
+
+  // Poll Twilio API every 10 seconds — bewaart gesimuleerde callers
   const fetchQueue = useCallback(async () => {
     try {
       const res = await fetch("/api/queue");
@@ -200,14 +259,18 @@ export default function Hackathon26() {
         });
         return next;
       });
-      setCallers(data);
+      // Behoud gesimuleerde callers die niet in de actieve call zitten
+      setCallers((prev) => {
+        const sims = prev.filter(
+          (c) => isSimulated(c.id) && c.id !== activeCallRef.current?.id
+        );
+        return [...data, ...sims];
+      });
       setLastSync(new Date());
       setUsingLive(true);
-      // Selectie stabiel houden: blijf op huidige als die nog in de wachtrij
-      // staat of de actieve call is; anders eerste, anders niets.
       setSelected((prev) => {
         if (!prev) return data[0] ?? null;
-        if (data.some((c) => c.id === prev.id)) return prev;
+        if ([...data].some((c) => c.id === prev.id) || isSimulated(prev.id)) return prev;
         if (activeCallRef.current?.id === prev.id) return prev;
         return data[0] ?? null;
       });
@@ -336,7 +399,7 @@ export default function Hackathon26() {
 
       <div className="flex flex-1">
         {/* Sidebar: actieve call + wachtrij */}
-        <aside className="fixed left-0 top-12 h-[calc(100vh-3rem)] w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col shadow-sm z-40 overflow-y-auto">
+        <aside className="fixed left-0 top-12 h-[calc(100vh-3rem)] w-[360px] bg-surface-container-lowest border-r border-outline-variant flex flex-col shadow-sm z-40 overflow-y-auto">
           <div className="p-6">
             {/* Actieve call */}
             <div className="mb-6">
@@ -351,16 +414,13 @@ export default function Hackathon26() {
                       <span className="text-label-caps text-on-primary-container">{activeCall.customerValueScore}</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-body-md font-bold text-on-surface">{activeCall.name}</span>
+                      <span className="text-body-md font-bold text-on-surface">{activeCall.firstName || activeCall.name}</span>
                       <span className="text-label-caps text-on-surface-variant">
-                        {activeCall.segment} • {activeCall.phone}
+                        {activeCall.phone}
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end">
-                    <span className="text-body-md font-bold text-primary">{fmtWait(callSeconds)}</span>
-                    <span className="text-label-caps text-on-surface-variant">in gesprek</span>
-                  </div>
+                  <span className="text-label-caps text-on-surface-variant">in gesprek</span>
                 </div>
               ) : (
                 <div className="bg-surface-container-low border-l-4 border-outline-variant p-3 rounded-r-lg text-body-md text-on-surface-variant">
@@ -377,7 +437,6 @@ export default function Hackathon26() {
                 <h2 className="text-label-caps text-on-surface-variant uppercase">Wachtrij</h2>
                 <h3 className="text-headline-sm text-on-surface">{sorted.length} bellers</h3>
               </div>
-              <span className="text-label-caps text-on-surface-variant italic">gesorteerd op prioriteit</span>
             </div>
 
             <div className="space-y-2">
@@ -411,7 +470,7 @@ export default function Hackathon26() {
                       </div>
                       <div className="flex flex-col min-w-0">
                         <span className="text-body-md font-bold text-on-surface flex items-center gap-1.5">
-                          {caller.name}
+                          {caller.firstName || caller.name}
                           {isHighValue(caller) && (
                             <span className="px-1.5 py-px bg-on-background text-primary-fixed text-[9px] font-bold rounded tracking-wider">
                               HVC
@@ -457,12 +516,34 @@ export default function Hackathon26() {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-outline-variant space-y-4">
+          <div className="p-4 border-t border-outline-variant space-y-2">
             <button className="w-full py-3 bg-error text-on-error rounded-lg font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
               <Icon name="pause" />
               <span className="text-label-caps">Start pauze</span>
             </button>
-            <div className="flex justify-around py-2">
+            {/* Demo-knoppen */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => { setDebugOpen(true); setDebugQuery(""); setDebugResults([]); }}
+                className="flex-1 py-2 bg-inverse-surface text-inverse-on-surface rounded-lg text-label-caps font-bold flex items-center justify-center gap-1.5 hover:opacity-80 transition-opacity"
+              >
+                <Icon name="bug_report" className="text-[15px]" />
+                Demo
+              </button>
+              {callers.some((c) => isSimulated(c.id)) && (
+                <button
+                  onClick={() => {
+                    setCallers((prev) => prev.filter((c) => !isSimulated(c.id)));
+                    setSelected((prev) => (prev && isSimulated(prev.id) ? null : prev));
+                  }}
+                  className="flex-1 py-2 bg-error-container text-on-error-container rounded-lg text-label-caps font-bold flex items-center justify-center gap-1.5 hover:opacity-80 transition-opacity"
+                >
+                  <Icon name="clear_all" className="text-[15px]" />
+                  Wis demo
+                </button>
+              )}
+            </div>
+            <div className="flex justify-around py-1">
               <button className="p-2 text-on-surface-variant hover:text-primary transition-colors">
                 <Icon name="settings" />
               </button>
@@ -474,7 +555,7 @@ export default function Hackathon26() {
         </aside>
 
         {/* Main */}
-        <main className="ml-[280px] flex-1 p-8 overflow-y-auto">
+        <main className="ml-[360px] flex-1 p-8 overflow-y-auto">
           {!liveSelected ? (
             <div className="flex items-center justify-center h-[calc(100vh-3rem-4rem)] text-body-lg text-on-surface-variant">
               Selecteer een beller om de details te zien
@@ -485,19 +566,12 @@ export default function Hackathon26() {
               <div className="flex justify-between items-start mb-8 gap-4">
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-4 flex-wrap">
-                    <h1 className="text-display-lg text-on-surface">{liveSelected.name}</h1>
-                    <span className="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full font-bold text-label-caps flex items-center gap-2 shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-on-primary-container" />
-                      {liveSelected.segment}
-                    </span>
+                    <h1 className="text-display-lg text-on-surface">{liveSelected.firstName || liveSelected.name}</h1>
                     {isHighValue(liveSelected) && (
                       <span className="px-3 py-1.5 bg-on-background text-primary-fixed rounded-lg text-label-caps font-bold">
                         HVC
                       </span>
                     )}
-                    <span className="px-3 py-1.5 bg-on-background text-primary-fixed rounded-lg text-label-caps font-bold">
-                      Prioriteit {liveSelected.priority}
-                    </span>
                   </div>
                   <p className="text-on-surface-variant text-body-md flex items-center gap-2">
                     <Icon name="info" className="text-[16px]" />
@@ -661,6 +735,77 @@ export default function Hackathon26() {
       </div>
 
       {/* Contextuele hint (demo) */}
+      {debugOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setDebugOpen(false)}>
+          <div className="bg-surface-container-lowest rounded-2xl card-shadow w-[420px] max-h-[80vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="flex items-center justify-between p-5 border-b border-outline-variant">
+              <div>
+                <p className="text-headline-sm text-on-surface font-bold">Simuleer beller</p>
+                <p className="text-body-md text-on-surface-variant mt-0.5">Voeg een klant toe aan de wachtrij</p>
+              </div>
+              <button onClick={() => setDebugOpen(false)} className="p-2 text-on-surface-variant hover:text-on-surface transition-colors">
+                <Icon name="close" />
+              </button>
+            </div>
+
+            {/* Zoek */}
+            <div className="p-4 border-b border-outline-variant">
+              <div className="flex items-center gap-2 bg-surface-container-low rounded-lg px-3 py-2">
+                <Icon name="search" className="text-on-surface-variant text-[18px]" />
+                <input
+                  autoFocus
+                  type="text"
+                  placeholder="Zoek op naam of nummer..."
+                  value={debugQuery}
+                  onChange={(e) => searchCustomers(e.target.value)}
+                  className="flex-1 bg-transparent text-body-md text-on-surface outline-none placeholder:text-on-surface-variant"
+                />
+                {debugQuery && (
+                  <button onClick={() => { setDebugQuery(""); setDebugResults([]); }} className="text-on-surface-variant hover:text-on-surface">
+                    <Icon name="close" className="text-[16px]" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Resultaten */}
+            <div className="overflow-y-auto flex-1">
+              {debugQuery.length < 2 && (
+                <p className="text-body-md text-on-surface-variant text-center py-10">Typ minimaal 2 tekens om te zoeken</p>
+              )}
+              {debugQuery.length >= 2 && debugResults.length === 0 && (
+                <p className="text-body-md text-on-surface-variant text-center py-10">Geen resultaten gevonden</p>
+              )}
+              {debugResults.map((r) => (
+                <div key={r.phone} className="flex items-center justify-between px-5 py-3 hover:bg-surface-container-low transition-colors border-b border-outline-variant/30">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-9 h-9 rounded-full border-2 flex items-center justify-center text-[11px] font-bold shrink-0 ${r.customerValueScore >= 90 ? "border-primary-container text-on-primary-container" : "border-outline-variant text-on-surface-variant"}`}>
+                      {r.customerValueScore}
+                    </div>
+                    <div>
+                      <p className="text-body-md font-bold text-on-surface flex items-center gap-1.5">
+                        {r.firstName || r.name}
+                        {r.tag === "High Value Customer" && (
+                          <span className="px-1.5 py-px bg-on-background text-primary-fixed text-[9px] font-bold rounded tracking-wider">HVC</span>
+                        )}
+                      </p>
+                      <p className="text-label-caps text-on-surface-variant">{r.segment} · {r.phone}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => addSimulatedCaller(r)}
+                    className="px-3 py-1.5 bg-primary-container text-on-primary-container rounded-lg text-label-caps font-bold hover:brightness-110 active:scale-95 transition-all shrink-0"
+                  >
+                    Toevoegen
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {liveSelected && upsellOffers.length > 0 && (
         <div className="fixed bottom-6 right-6 z-50">
           <div className="bg-inverse-surface text-inverse-on-surface px-6 py-4 rounded-xl card-shadow flex items-center gap-4 border border-outline">

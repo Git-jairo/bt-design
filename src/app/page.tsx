@@ -1,65 +1,67 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useState } from "react";
+import { Nav } from "@/components/Nav";
+import { Hero } from "@/components/Hero";
+import { AssetGrid } from "@/components/AssetGrid";
+import { StatsSection } from "@/components/StatsSection";
+import { DocsBlock } from "@/components/DocsBlock";
+import { CaseStudies } from "@/components/CaseStudies";
+import { GrowthSection } from "@/components/GrowthSection";
+
+// ─── Background colour timing ──────────────────────────────────────────────
+// Two levers to control the colour-change feel:
+//
+//  1. WHEN it fires  →  rootMargin below (line ~35)
+//     "-45% 0px -45% 0px" means the section must occupy the middle 10% of
+//     the viewport before the colour switches. Increase both percentages
+//     (e.g. "-48% 0px -48% 0px") to fire later; decrease for earlier.
+//
+//  2. HOW LONG it takes  →  duration-700 on the wrapper div (line ~47)
+//     Replace with duration-300 (faster) or duration-1000 (slower).
+// ───────────────────────────────────────────────────────────────────────────
+const SECTION_CANVAS: Record<string, string> = {
+  hero: "#fafafa",
+  assets: "#fafafa",
+  stats: "#fafafa",
+  docs: "#242424",
+  "case-studies": "#fafafa",
+  growth: "#00d780",
+};
+
+export default function HomePage() {
+  const [canvasBg, setCanvasBg] = useState("#fafafa");
+
+  useEffect(() => {
+    const ids = Object.keys(SECTION_CANVAS);
+    const observers = ids.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setCanvasBg(SECTION_CANVAS[id]);
+        },
+        // Trigger when section reaches the middle of the viewport
+        { rootMargin: "-35% 0px -35% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div
+      className="font-helix-body transition-colors duration-700 overflow-x-hidden"
+      style={{ backgroundColor: canvasBg }}
+    >
+      <Nav />
+      <Hero />
+      <AssetGrid />
+      <StatsSection />
+      <DocsBlock />
+      <CaseStudies />
+      <GrowthSection />
     </div>
   );
 }

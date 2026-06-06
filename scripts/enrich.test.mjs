@@ -69,14 +69,11 @@ test("computeValueScore: HVC-grens", () => {
   assert.equal(computeValueScore(rich), 100);
 });
 
-test("computePriority: normaal = value, HVC = 1000", () => {
-  assert.equal(computePriority(20, dummyProduct), 20);
+test("computePriority: niet-HVC = 0, HVC (>=85) = 1000", () => {
+  assert.equal(computePriority(20, dummyProduct), 0);
+  assert.equal(computePriority(84, dummyProduct), 0);
+  assert.equal(computePriority(85, dummyProduct), 1000);
   assert.equal(computePriority(95, dummyProduct), 1000);
-});
-
-test("computePriority: churn high + aflopend contract verhogen prioriteit", () => {
-  const urgent = { ...dummyProduct, churn_segment: "high", churn_risk_score: "40", any_contract_ending_90d: "WAAR" };
-  assert.equal(computePriority(30, urgent), 30 + 40 + 50);
 });
 
 test("deriveSegment: nieuwe klant zonder tenure = Nieuw", () => {

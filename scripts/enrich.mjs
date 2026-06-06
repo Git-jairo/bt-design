@@ -123,18 +123,17 @@ export function computeValueScore(p) {
 // HVC (>=90) staat altijd bovenaan (1000); de rest blijft onder 1000 zodat
 // de wachttijdbonus (update-priorities) ruimte houdt.
 export function computePriority(valueScore, p) {
-  if (valueScore >= 90) return 1000;
-  let pr = valueScore;
-  if (String(p.churn_segment).toLowerCase() === "high") pr += toNumber(p.churn_risk_score);
-  if (parseBool(p.any_contract_ending_90d)) pr += 50;
-  return Math.round(clamp(pr, 0, 999));
+  if (valueScore >= 85) return 1000; // HVC → altijd bovenaan
+  // Niet-HVC: prioriteit op basis van wachttijd (update-priorities vult dit aan).
+  // Hier zetten we een basisprioritaire van 0 zodat de cron de wachttijd kan optellen.
+  return 0;
 }
 
 // Display-segment voor de agent (afgeleid; de brondata heeft geen segment).
 export function deriveSegment(valueScore, p) {
   if (String(p.churn_segment).toLowerCase() === "high") return "Risico op churn";
   if (toNumber(p.tenure_months) === 0) return "Nieuw";
-  if (valueScore >= 90) return "Premium";
+  if (valueScore >= 85) return "Premium";
   return "Standaard";
 }
 
@@ -174,7 +173,7 @@ export function enrichCustomer(identity, product) {
   const valueScore = computeValueScore(product);
   const segment = deriveSegment(valueScore, product);
   const priority = computePriority(valueScore, product);
-  const tag = valueScore >= 90 ? "High Value Customer" : null;
+  const tag = valueScore >= 85 ? "High Value Customer" : null;
 
   return {
     customerId: identity.customer_id,

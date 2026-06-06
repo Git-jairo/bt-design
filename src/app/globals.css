@@ -105,3 +105,28 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ─── Helix Design System tokens (BudgetThuis.Design hub) ─────────────────
+   Additive — does not override any hackathon26 tokens above.
+   Named --font-helix-* to avoid conflict with existing --font-display.     */
+@theme {
+  /* Palette */
+  --color-mint: #00d780;
+  --color-teal: #029b77;
+  --color-ink: #242424;
+  --color-beta: #f9ff00;
+  --color-screen: #fafafa;
+  --color-helix-gray: #efefef;
+
+  /* Fonts
+     TODO: License Greet Narrow Bold from its type foundry and replace
+     the Arial Black fallback with the real font file + @font-face rule. */
+  --font-helix-display: 'Arial Black', 'Impact', ui-sans-serif;
+  --font-helix-body: 'Inter', ui-sans-serif, system-ui;
+}
+
+/* Helix geometry + shadow (not Tailwind utilities — raw CSS vars) */
+:root {
+  --shadow-card: 0 8px 16px rgba(60, 60, 60, 0.10);
+  --radius-card: 32px;
+}

@@ -131,7 +131,7 @@ TWILIO_WORKSPACE_SID=WS8921519e182aa5f5bcc858245adf35bd
 ## Lokaal draaien
 
 ```bash
-cd hackathon26
+cd bt-design
 npm run dev
 # → http://localhost:3000/hackathon26
 ```

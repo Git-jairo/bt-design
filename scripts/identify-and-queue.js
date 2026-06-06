@@ -81,6 +81,8 @@ exports.handler = async function (context, event, callback) {
         from: event.From,
         call_sid: event.CallSid,
         customerName: c.name,
+        firstName: c.firstName ?? null,
+        lastName: c.lastName ?? null,
         segment: c.segment,
         tag: c.tag,
         customerValueScore: c.customerValueScore,

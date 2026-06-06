@@ -70,6 +70,8 @@ export async function GET() {
         reason: attrs.reason ?? "Onbekend",
         priority: task.priority,
         tag: attrs.tag ?? null,
+        firstName: attrs.firstName ?? null,
+        lastName: attrs.lastName ?? null,
         // Verrijkte velden uit customers.json (via Function attributes)
         customerId: attrs.customerId ?? null,
         customerNumber: attrs.customerNumber ?? null,
