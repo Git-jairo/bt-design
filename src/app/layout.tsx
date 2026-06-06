@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Budget Thuis Design",
@@ -20,7 +19,6 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
-        <Footer />
       </body>
     </html>
   );
