@@ -23,7 +23,7 @@ export function CaseStudies() {
         <Eyebrow label="Case Studies" />
         <div className="flex items-end justify-between mt-3 mb-16 gap-4">
           <h2 className="font-helix-display text-4xl lg:text-6xl uppercase text-ink leading-tight">
-            The Work
+            Our Work
           </h2>
           <div className="hidden md:flex items-center gap-8 pb-1 shrink-0">
             <Link

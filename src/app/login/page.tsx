@@ -41,6 +41,7 @@ export default function LoginPage() {
           width={120}
           height={80}
           priority
+          style={{ width: "auto", height: "auto" }}
         />
 
         <form onSubmit={handleSubmit} className="flex items-center gap-2">

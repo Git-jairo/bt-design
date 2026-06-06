@@ -1,5 +1,47 @@
 @import "tailwindcss";
 
+/* ─── Local font faces ─────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Budget Greet Narrow';
+  src: url('/fonts/BudgetGreetNarrow-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -8,8 +50,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Inter', ui-sans-serif, system-ui;
+  --font-mono: ui-monospace, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -103,7 +145,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', ui-sans-serif, system-ui;
 }
 
 /* ─── Helix Design System tokens (BudgetThuis.Design hub) ─────────────────
@@ -118,10 +160,8 @@ body {
   --color-screen: #fafafa;
   --color-helix-gray: #efefef;
 
-  /* Fonts
-     TODO: License Greet Narrow Bold from its type foundry and replace
-     the Arial Black fallback with the real font file + @font-face rule. */
-  --font-helix-display: 'Arial Black', 'Impact', ui-sans-serif;
+  /* Fonts */
+  --font-helix-display: 'Budget Greet Narrow', 'Arial Black', ui-sans-serif;
   --font-helix-body: 'Inter', ui-sans-serif, system-ui;
 }
 

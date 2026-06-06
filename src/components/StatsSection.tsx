@@ -108,7 +108,7 @@ export function StatsSection() {
       ref={sectionRef}
       id="stats"
       aria-label="Asset library overview"
-      style={{ minHeight: "200vh" }}
+      style={{ minHeight: "120vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-20">
         <div className="px-6 lg:px-10 max-w-[1152px] mx-auto w-full mb-8">

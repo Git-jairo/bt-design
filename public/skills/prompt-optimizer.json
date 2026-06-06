@@ -1,0 +1,7 @@
+{
+  "title": "Prompt Optimizer",
+  "description": "Takes a rough or vague prompt and turns it into a sharp, ready-to-use Claude prompt using the RTCCF format.",
+  "longDescription": "Prompt Optimizer is a Claude Code skill that critiques a draft prompt and rewrites it using the RTC(C)F framework: Role, Task, Context, Constraints (only when needed), and Format. It helps anyone at Budget Thuis get better, more consistent results from Claude — without needing to understand prompt engineering.\n\nThe skill is advisory only: it never executes the task itself, only returns an improved prompt you can copy and run. Works for everything from writing copy to summarising documents to generating code.",
+  "roles": ["Designer", "Product Manager", "Marketer", "Developer", "Analyst"],
+  "expertise": ["Automation", "Strategy"]
+}

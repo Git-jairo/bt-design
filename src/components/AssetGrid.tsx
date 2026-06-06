@@ -53,9 +53,9 @@ export function AssetGrid() {
   return (
     <section id="assets" aria-label="Design assets" className="px-6 py-36 lg:px-10 lg:py-52">
       <div className="max-w-[1152px] mx-auto">
-        <Eyebrow label="Design Assets" />
+        <Eyebrow label="Claude Skills" />
         <h2 className="font-helix-display text-4xl lg:text-6xl uppercase text-ink mt-3 mb-16 leading-tight">
-          SKILLS - The Library
+          The Skill Library
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

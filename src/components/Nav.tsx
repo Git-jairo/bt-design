@@ -6,12 +6,12 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { label: "Icons", href: "/icons" },
-  { label: "Illustrations", href: "/illustrations" },
-  { label: "Images", href: "/images" },
-  { label: "Docs", href: "/docs" },
+  { label: "Home", href: "/" },
+  { label: "Helix DS", href: "/helix" },
+  { label: "Assets", href: "/assets" },
+  { label: "Skills", href: "/skills" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "HLX26", href: "/hackathon26" },
+  { label: "Experiments", href: "/experiments" },
 ];
 
 export function Nav() {
@@ -70,6 +70,7 @@ export function Nav() {
                 alt="Figma"
                 width={32}
                 height={32}
+                loading="eager"
                 className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-150"
               />
               <Image
@@ -77,6 +78,7 @@ export function Nav() {
                 alt=""
                 width={32}
                 height={32}
+                loading="eager"
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
               />
             </span>
@@ -92,10 +94,11 @@ export function Nav() {
           >
             <span className="relative w-8 h-8 block">
               <Image
-                src="/logos/Budget Thuis.svg"
+                src="/logos/Budget-Thuis.svg"
                 alt="Budget Thuis"
                 width={32}
                 height={32}
+                priority
                 className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-150"
               />
               <Image
@@ -103,6 +106,7 @@ export function Nav() {
                 alt=""
                 width={32}
                 height={32}
+                loading="eager"
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
               />
             </span>

@@ -1,27 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "BudgetThuis.Design",
-  description: "The design system hub for Budget Thuis — components, icons, illustrations, and case studies.",
+  title: "Budget Thuis Design",
+  description: "Lets design better products, together.",
+  icons: {
+    icon: "/logos/Budget-Thuis.svg",
+  },
 };
 
 export default function RootLayout({
@@ -30,12 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
+        <Footer />
       </body>
     </html>
   );

@@ -87,7 +87,7 @@ export function DocsBlock() {
       ))}
 
       <div className="relative max-w-[1152px] mx-auto">
-        <Eyebrow label="HELIX — Design System" light />
+        <Eyebrow label="Design System" light />
         <motion.h2
           className="font-helix-display text-4xl lg:text-6xl uppercase text-screen mt-3 mb-20 leading-tight"
           initial={{ opacity: 0, y: 32 }}
@@ -95,7 +95,7 @@ export function DocsBlock() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          The System
+          The single source of truth
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -139,7 +139,7 @@ export function DocsBlock() {
                   className="font-helix-display uppercase text-ink leading-none mb-8"
                   style={{ fontSize: "clamp(4.5rem, 9vw, 8rem)" }}
                 >
-                  HLX
+                  HELIX
                   <br />
                   DS
                 </p>
