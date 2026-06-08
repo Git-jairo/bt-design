@@ -164,6 +164,7 @@ export default function Hackathon26() {
   const [callSeconds, setCallSeconds] = useState(0);
   const [lastSync, setLastSync] = useState<Date>(new Date());
   const [usingLive, setUsingLive] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Spoofing verification — tracks which caller IDs have been verified
   const [verifiedIds, setVerifiedIds] = useState<Set<string>>(new Set());
@@ -288,6 +289,10 @@ export default function Hackathon26() {
   }, []);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     fetchQueue();
     const poll = setInterval(fetchQueue, 10000);
     return () => clearInterval(poll);
@@ -373,10 +378,12 @@ export default function Hackathon26() {
   const subscription = liveSelected ? subscriptionLabel(liveSelected) : "";
   const bullets = liveSelected ? approachBullets(liveSelected) : [];
 
-  const syncLabel = `${lastSync.getHours().toString().padStart(2, "0")}:${lastSync
-    .getMinutes()
-    .toString()
-    .padStart(2, "0")}:${lastSync.getSeconds().toString().padStart(2, "0")}`;
+  const syncLabel = mounted
+    ? `${lastSync.getHours().toString().padStart(2, "0")}:${lastSync
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}:${lastSync.getSeconds().toString().padStart(2, "0")}`
+    : "—";
 
   return (
     <div className="font-display bg-surface text-on-surface min-h-screen">
