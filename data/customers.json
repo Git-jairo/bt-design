@@ -1,0 +1,2774 @@
+{
+  "generatedAt": "2026-06-08T16:10:34.147Z",
+  "count": 34,
+  "byPhone": {
+    "+31620250568": {
+      "customerId": "CID-JURY001",
+      "customerNumber": "9001",
+      "phone": "+31620250568",
+      "name": "Maarten Boom",
+      "firstName": "Maarten",
+      "lastName": "Boom",
+      "email": "maarten.boom@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 95,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31643909291": {
+      "customerId": "CID-JURY002",
+      "customerNumber": "9002",
+      "phone": "+31643909291",
+      "name": "Floris de Haes",
+      "firstName": "Floris",
+      "lastName": "de Haes",
+      "email": "floris.dehaes@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 95,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31640087321": {
+      "customerId": "CID-JURY003",
+      "customerNumber": "9003",
+      "phone": "+31640087321",
+      "name": "Ella Tupan",
+      "firstName": "Ella",
+      "lastName": "Tupan",
+      "email": "ella.tupan@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 95,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31641609244": {
+      "customerId": "CID-JURY004",
+      "customerNumber": "9004",
+      "phone": "+31641609244",
+      "name": "Sven Pronk",
+      "firstName": "Sven",
+      "lastName": "Pronk",
+      "email": "sven.pronk@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 100,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        }
+      ]
+    },
+    "+31651197847": {
+      "customerId": "CID-JURY005",
+      "customerNumber": "9005",
+      "phone": "+31651197847",
+      "name": "Sjef Peeraer",
+      "firstName": "Sjef",
+      "lastName": "Peeraer",
+      "email": "sjef.peeraer@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 100,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        }
+      ]
+    },
+    "+31620091818": {
+      "customerId": "CID-COLL001",
+      "customerNumber": "9101",
+      "phone": "+31620091818",
+      "name": "Ralph Thoen",
+      "firstName": "Ralph",
+      "lastName": "Thoen",
+      "email": "ralph.thoen@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 45,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 23,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31624809069": {
+      "customerId": "CID-COLL002",
+      "customerNumber": "9102",
+      "phone": "+31624809069",
+      "name": "Mark Zaal",
+      "firstName": "Mark",
+      "lastName": "Zaal",
+      "email": "mark.zaal@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 59,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 47,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 4,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31657804251": {
+      "customerId": "CID-COLL003",
+      "customerNumber": "9103",
+      "phone": "+31657804251",
+      "name": "James Chowen",
+      "firstName": "James",
+      "lastName": "Chowen",
+      "email": "james.chowen@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 86,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 50,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 45,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Tevreden klant — ideaal moment voor een zachte upsell.",
+          "guidance": "Begin met een compliment voor hun loyaliteit voordat je het aanbod introduceert."
+        }
+      ]
+    },
+    "+31610487300": {
+      "customerId": "CID-COLL004",
+      "customerNumber": "9104",
+      "phone": "+31610487300",
+      "name": "Jairo in der Beeck",
+      "firstName": "Jairo",
+      "lastName": "in der Beeck",
+      "email": "jairo.inderbeeck@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 77,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 53,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 26,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000010": {
+      "customerId": "CID-COLL005",
+      "customerNumber": "9105",
+      "phone": "+31610000010",
+      "name": "Jaco Viljoen",
+      "firstName": "Jaco",
+      "lastName": "Viljoen",
+      "email": "jaco.viljoen@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 56,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 7,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        }
+      ]
+    },
+    "+31610000011": {
+      "customerId": "CID-COLL006",
+      "customerNumber": "9106",
+      "phone": "+31610000011",
+      "name": "Riaan Vorster",
+      "firstName": "Riaan",
+      "lastName": "Vorster",
+      "email": "riaan.vorster@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 90,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 59,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000012": {
+      "customerId": "CID-COLL007",
+      "customerNumber": "9107",
+      "phone": "+31610000012",
+      "name": "Kyle Herring",
+      "firstName": "Kyle",
+      "lastName": "Herring",
+      "email": "kyle.herring@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 81,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 62,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 29,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000013": {
+      "customerId": "CID-COLL008",
+      "customerNumber": "9108",
+      "phone": "+31610000013",
+      "name": "Myrna Welling",
+      "firstName": "Myrna",
+      "lastName": "Welling",
+      "email": "myrna.welling@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 66,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 65,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 10,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000014": {
+      "customerId": "CID-COLL009",
+      "customerNumber": "9109",
+      "phone": "+31610000014",
+      "name": "Lucas Vilela Afonso Oliveira",
+      "firstName": "Lucas",
+      "lastName": "Vilela Afonso Oliveira",
+      "email": "lucas.vilelaafonsooliveira@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 87,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 68,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 51,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000015": {
+      "customerId": "CID-COLL010",
+      "customerNumber": "9110",
+      "phone": "+31610000015",
+      "name": "Krista Jansen",
+      "firstName": "Krista",
+      "lastName": "Jansen",
+      "email": "krista.jansen@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 45,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 23,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000016": {
+      "customerId": "CID-COLL011",
+      "customerNumber": "9111",
+      "phone": "+31610000016",
+      "name": "Annike Vorster",
+      "firstName": "Annike",
+      "lastName": "Vorster",
+      "email": "annike.vorster@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 59,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 47,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 4,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000017": {
+      "customerId": "CID-COLL012",
+      "customerNumber": "9112",
+      "phone": "+31610000017",
+      "name": "Joost van Uem",
+      "firstName": "Joost",
+      "lastName": "van Uem",
+      "email": "joost.vanuem@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 86,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 50,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 45,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Tevreden klant — ideaal moment voor een zachte upsell.",
+          "guidance": "Begin met een compliment voor hun loyaliteit voordat je het aanbod introduceert."
+        }
+      ]
+    },
+    "+31610000018": {
+      "customerId": "CID-COLL013",
+      "customerNumber": "9113",
+      "phone": "+31610000018",
+      "name": "Maksym Martynenko",
+      "firstName": "Maksym",
+      "lastName": "Martynenko",
+      "email": "maksym.martynenko@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 77,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 53,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 26,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000019": {
+      "customerId": "CID-COLL014",
+      "customerNumber": "9114",
+      "phone": "+31610000019",
+      "name": "Miguel Perez Lorenzo",
+      "firstName": "Miguel",
+      "lastName": "Perez Lorenzo",
+      "email": "miguel.perezlorenzo@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 56,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 7,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        }
+      ]
+    },
+    "+31610000020": {
+      "customerId": "CID-COLL015",
+      "customerNumber": "9115",
+      "phone": "+31610000020",
+      "name": "April te Spenke",
+      "firstName": "April",
+      "lastName": "te Spenke",
+      "email": "april.tespenke@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 90,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 59,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000021": {
+      "customerId": "CID-COLL016",
+      "customerNumber": "9116",
+      "phone": "+31610000021",
+      "name": "Bram ter Laak",
+      "firstName": "Bram",
+      "lastName": "ter Laak",
+      "email": "bram.terlaak@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 81,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 62,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 29,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000022": {
+      "customerId": "CID-COLL017",
+      "customerNumber": "9117",
+      "phone": "+31610000022",
+      "name": "Floris van der Velde",
+      "firstName": "Floris",
+      "lastName": "van der Velde",
+      "email": "floris.vandervelde@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 66,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 65,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 10,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000023": {
+      "customerId": "CID-COLL018",
+      "customerNumber": "9118",
+      "phone": "+31610000023",
+      "name": "Kirsty Donkers",
+      "firstName": "Kirsty",
+      "lastName": "Donkers",
+      "email": "kirsty.donkers@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 87,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 68,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 51,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000024": {
+      "customerId": "CID-COLL019",
+      "customerNumber": "9119",
+      "phone": "+31610000024",
+      "name": "Bram Vos",
+      "firstName": "Bram",
+      "lastName": "Vos",
+      "email": "bram.vos@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 79,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 71,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 32,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000025": {
+      "customerId": "CID-COLL020",
+      "customerNumber": "9120",
+      "phone": "+31610000025",
+      "name": "Patrick Hoette",
+      "firstName": "Patrick",
+      "lastName": "Hoette",
+      "email": "patrick.hoette@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 59,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 47,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 4,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000026": {
+      "customerId": "CID-COLL021",
+      "customerNumber": "9121",
+      "phone": "+31610000026",
+      "name": "Demi de Bruin",
+      "firstName": "Demi",
+      "lastName": "de Bruin",
+      "email": "demi.debruin@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 86,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 50,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 45,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Tevreden klant — ideaal moment voor een zachte upsell.",
+          "guidance": "Begin met een compliment voor hun loyaliteit voordat je het aanbod introduceert."
+        }
+      ]
+    },
+    "+31610000027": {
+      "customerId": "CID-COLL022",
+      "customerNumber": "9122",
+      "phone": "+31610000027",
+      "name": "Davy Vugs",
+      "firstName": "Davy",
+      "lastName": "Vugs",
+      "email": "davy.vugs@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 77,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 53,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 26,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000028": {
+      "customerId": "CID-COLL023",
+      "customerNumber": "9123",
+      "phone": "+31610000028",
+      "name": "Renze Feitsma",
+      "firstName": "Renze",
+      "lastName": "Feitsma",
+      "email": "renze.feitsma@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 56,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 7,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        }
+      ]
+    },
+    "+31610000029": {
+      "customerId": "CID-COLL024",
+      "customerNumber": "9124",
+      "phone": "+31610000029",
+      "name": "Tjeerd Bakker",
+      "firstName": "Tjeerd",
+      "lastName": "Bakker",
+      "email": "tjeerd.bakker@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 90,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 59,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000030": {
+      "customerId": "CID-COLL025",
+      "customerNumber": "9125",
+      "phone": "+31610000030",
+      "name": "James van Antwerpen",
+      "firstName": "James",
+      "lastName": "van Antwerpen",
+      "email": "james.vanantwerpen@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 81,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 62,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 29,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000031": {
+      "customerId": "CID-COLL026",
+      "customerNumber": "9126",
+      "phone": "+31610000031",
+      "name": "Marijn Langhout",
+      "firstName": "Marijn",
+      "lastName": "Langhout",
+      "email": "marijn.langhout@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 66,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 65,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 10,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000032": {
+      "customerId": "CID-COLL027",
+      "customerNumber": "9127",
+      "phone": "+31610000032",
+      "name": "Dora Ocampo Góez",
+      "firstName": "Dora",
+      "lastName": "Ocampo Góez",
+      "email": "dora.ocampogez@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 87,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 68,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 51,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    "+31610000033": {
+      "customerId": "CID-COLL028",
+      "customerNumber": "9128",
+      "phone": "+31610000033",
+      "name": "Rogier Verkoren",
+      "firstName": "Rogier",
+      "lastName": "Verkoren",
+      "email": "rogier.verkoren@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 79,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 71,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 32,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    "+31610000034": {
+      "customerId": "CID-COLL029",
+      "customerNumber": "9129",
+      "phone": "+31610000034",
+      "name": "Lisa de Bruijn",
+      "firstName": "Lisa",
+      "lastName": "de Bruijn",
+      "email": "lisa.debruijn@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 70,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 74,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 13,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    }
+  },
+  "byCustomerNumber": {
+    "9001": "+31620250568",
+    "9002": "+31643909291",
+    "9003": "+31640087321",
+    "9004": "+31641609244",
+    "9005": "+31651197847",
+    "9101": "+31620091818",
+    "9102": "+31624809069",
+    "9103": "+31657804251",
+    "9104": "+31610487300",
+    "9105": "+31610000010",
+    "9106": "+31610000011",
+    "9107": "+31610000012",
+    "9108": "+31610000013",
+    "9109": "+31610000014",
+    "9110": "+31610000015",
+    "9111": "+31610000016",
+    "9112": "+31610000017",
+    "9113": "+31610000018",
+    "9114": "+31610000019",
+    "9115": "+31610000020",
+    "9116": "+31610000021",
+    "9117": "+31610000022",
+    "9118": "+31610000023",
+    "9119": "+31610000024",
+    "9120": "+31610000025",
+    "9121": "+31610000026",
+    "9122": "+31610000027",
+    "9123": "+31610000028",
+    "9124": "+31610000029",
+    "9125": "+31610000030",
+    "9126": "+31610000031",
+    "9127": "+31610000032",
+    "9128": "+31610000033",
+    "9129": "+31610000034"
+  },
+  "records": [
+    {
+      "customerId": "CID-JURY001",
+      "customerNumber": "9001",
+      "phone": "+31620250568",
+      "name": "Maarten Boom",
+      "firstName": "Maarten",
+      "lastName": "Boom",
+      "email": "maarten.boom@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 95,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-JURY002",
+      "customerNumber": "9002",
+      "phone": "+31643909291",
+      "name": "Floris de Haes",
+      "firstName": "Floris",
+      "lastName": "de Haes",
+      "email": "floris.dehaes@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 95,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-JURY003",
+      "customerNumber": "9003",
+      "phone": "+31640087321",
+      "name": "Ella Tupan",
+      "firstName": "Ella",
+      "lastName": "Tupan",
+      "email": "ella.tupan@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 95,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-JURY004",
+      "customerNumber": "9004",
+      "phone": "+31641609244",
+      "name": "Sven Pronk",
+      "firstName": "Sven",
+      "lastName": "Pronk",
+      "email": "sven.pronk@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 100,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-JURY005",
+      "customerNumber": "9005",
+      "phone": "+31651197847",
+      "name": "Sjef Peeraer",
+      "firstName": "Sjef",
+      "lastName": "Peeraer",
+      "email": "sjef.peeraer@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 100,
+      "priority": 1000,
+      "churnRiskScore": 0,
+      "churnSegment": "low",
+      "propensityScore": 100,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 48,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL001",
+      "customerNumber": "9101",
+      "phone": "+31620091818",
+      "name": "Ralph Thoen",
+      "firstName": "Ralph",
+      "lastName": "Thoen",
+      "email": "ralph.thoen@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 45,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 23,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL002",
+      "customerNumber": "9102",
+      "phone": "+31624809069",
+      "name": "Mark Zaal",
+      "firstName": "Mark",
+      "lastName": "Zaal",
+      "email": "mark.zaal@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 59,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 47,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 4,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL003",
+      "customerNumber": "9103",
+      "phone": "+31657804251",
+      "name": "James Chowen",
+      "firstName": "James",
+      "lastName": "Chowen",
+      "email": "james.chowen@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 86,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 50,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 45,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Tevreden klant — ideaal moment voor een zachte upsell.",
+          "guidance": "Begin met een compliment voor hun loyaliteit voordat je het aanbod introduceert."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL004",
+      "customerNumber": "9104",
+      "phone": "+31610487300",
+      "name": "Jairo in der Beeck",
+      "firstName": "Jairo",
+      "lastName": "in der Beeck",
+      "email": "jairo.inderbeeck@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 77,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 53,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 26,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL005",
+      "customerNumber": "9105",
+      "phone": "+31610000010",
+      "name": "Jaco Viljoen",
+      "firstName": "Jaco",
+      "lastName": "Viljoen",
+      "email": "jaco.viljoen@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 56,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 7,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL006",
+      "customerNumber": "9106",
+      "phone": "+31610000011",
+      "name": "Riaan Vorster",
+      "firstName": "Riaan",
+      "lastName": "Vorster",
+      "email": "riaan.vorster@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 90,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 59,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL007",
+      "customerNumber": "9107",
+      "phone": "+31610000012",
+      "name": "Kyle Herring",
+      "firstName": "Kyle",
+      "lastName": "Herring",
+      "email": "kyle.herring@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 81,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 62,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 29,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL008",
+      "customerNumber": "9108",
+      "phone": "+31610000013",
+      "name": "Myrna Welling",
+      "firstName": "Myrna",
+      "lastName": "Welling",
+      "email": "myrna.welling@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 66,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 65,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 10,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL009",
+      "customerNumber": "9109",
+      "phone": "+31610000014",
+      "name": "Lucas Vilela Afonso Oliveira",
+      "firstName": "Lucas",
+      "lastName": "Vilela Afonso Oliveira",
+      "email": "lucas.vilelaafonsooliveira@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 87,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 68,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 51,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL010",
+      "customerNumber": "9110",
+      "phone": "+31610000015",
+      "name": "Krista Jansen",
+      "firstName": "Krista",
+      "lastName": "Jansen",
+      "email": "krista.jansen@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 45,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 23,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL011",
+      "customerNumber": "9111",
+      "phone": "+31610000016",
+      "name": "Annike Vorster",
+      "firstName": "Annike",
+      "lastName": "Vorster",
+      "email": "annike.vorster@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 59,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 47,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 4,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL012",
+      "customerNumber": "9112",
+      "phone": "+31610000017",
+      "name": "Joost van Uem",
+      "firstName": "Joost",
+      "lastName": "van Uem",
+      "email": "joost.vanuem@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 86,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 50,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 45,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Tevreden klant — ideaal moment voor een zachte upsell.",
+          "guidance": "Begin met een compliment voor hun loyaliteit voordat je het aanbod introduceert."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL013",
+      "customerNumber": "9113",
+      "phone": "+31610000018",
+      "name": "Maksym Martynenko",
+      "firstName": "Maksym",
+      "lastName": "Martynenko",
+      "email": "maksym.martynenko@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 77,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 53,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 26,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL014",
+      "customerNumber": "9114",
+      "phone": "+31610000019",
+      "name": "Miguel Perez Lorenzo",
+      "firstName": "Miguel",
+      "lastName": "Perez Lorenzo",
+      "email": "miguel.perezlorenzo@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 56,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 7,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL015",
+      "customerNumber": "9115",
+      "phone": "+31610000020",
+      "name": "April te Spenke",
+      "firstName": "April",
+      "lastName": "te Spenke",
+      "email": "april.tespenke@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 90,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 59,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL016",
+      "customerNumber": "9116",
+      "phone": "+31610000021",
+      "name": "Bram ter Laak",
+      "firstName": "Bram",
+      "lastName": "ter Laak",
+      "email": "bram.terlaak@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 81,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 62,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 29,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL017",
+      "customerNumber": "9117",
+      "phone": "+31610000022",
+      "name": "Floris van der Velde",
+      "firstName": "Floris",
+      "lastName": "van der Velde",
+      "email": "floris.vandervelde@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 66,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 65,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 10,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL018",
+      "customerNumber": "9118",
+      "phone": "+31610000023",
+      "name": "Kirsty Donkers",
+      "firstName": "Kirsty",
+      "lastName": "Donkers",
+      "email": "kirsty.donkers@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 87,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 68,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 51,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL019",
+      "customerNumber": "9119",
+      "phone": "+31610000024",
+      "name": "Bram Vos",
+      "firstName": "Bram",
+      "lastName": "Vos",
+      "email": "bram.vos@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 79,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 71,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 32,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL020",
+      "customerNumber": "9120",
+      "phone": "+31610000025",
+      "name": "Patrick Hoette",
+      "firstName": "Patrick",
+      "lastName": "Hoette",
+      "email": "patrick.hoette@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 59,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 47,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 4,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL021",
+      "customerNumber": "9121",
+      "phone": "+31610000026",
+      "name": "Demi de Bruin",
+      "firstName": "Demi",
+      "lastName": "de Bruin",
+      "email": "demi.debruin@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 86,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 50,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 45,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "upsell",
+          "label": "Tevreden klant — ideaal moment voor een zachte upsell.",
+          "guidance": "Begin met een compliment voor hun loyaliteit voordat je het aanbod introduceert."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL022",
+      "customerNumber": "9122",
+      "phone": "+31610000027",
+      "name": "Davy Vugs",
+      "firstName": "Davy",
+      "lastName": "Vugs",
+      "email": "davy.vugs@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 77,
+      "priority": 0,
+      "churnRiskScore": 20,
+      "churnSegment": "low",
+      "propensityScore": 53,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 26,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL023",
+      "customerNumber": "9123",
+      "phone": "+31610000028",
+      "name": "Renze Feitsma",
+      "firstName": "Renze",
+      "lastName": "Feitsma",
+      "email": "renze.feitsma@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 68,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 56,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 7,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL024",
+      "customerNumber": "9124",
+      "phone": "+31610000029",
+      "name": "Tjeerd Bakker",
+      "firstName": "Tjeerd",
+      "lastName": "Bakker",
+      "email": "tjeerd.bakker@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 90,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 59,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 48,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL025",
+      "customerNumber": "9125",
+      "phone": "+31610000030",
+      "name": "James van Antwerpen",
+      "firstName": "James",
+      "lastName": "van Antwerpen",
+      "email": "james.vanantwerpen@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 81,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 62,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": true
+      },
+      "productsStr": "energy,mobile,internet",
+      "numProducts": 3,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 29,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL026",
+      "customerNumber": "9126",
+      "phone": "+31610000031",
+      "name": "Marijn Langhout",
+      "firstName": "Marijn",
+      "lastName": "Langhout",
+      "email": "marijn.langhout@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 66,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 65,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 10,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL027",
+      "customerNumber": "9127",
+      "phone": "+31610000032",
+      "name": "Dora Ocampo Góez",
+      "firstName": "Dora",
+      "lastName": "Ocampo Góez",
+      "email": "dora.ocampogez@budgetthuis.nl",
+      "segment": "Premium",
+      "tag": "High Value Customer",
+      "customerValueScore": 87,
+      "priority": 1000,
+      "churnRiskScore": 46,
+      "churnSegment": "medium",
+      "propensityScore": 68,
+      "propensitySegment": "medium",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 51,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        },
+        {
+          "type": "tarief",
+          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
+          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL028",
+      "customerNumber": "9128",
+      "phone": "+31610000033",
+      "name": "Rogier Verkoren",
+      "firstName": "Rogier",
+      "lastName": "Verkoren",
+      "email": "rogier.verkoren@budgetthuis.nl",
+      "segment": "Standaard",
+      "tag": null,
+      "customerValueScore": 79,
+      "priority": 0,
+      "churnRiskScore": 19,
+      "churnSegment": "low",
+      "propensityScore": 71,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "Fixed",
+      "tenureMonths": 32,
+      "contractEnding90d": true,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
+          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
+        },
+        {
+          "type": "upsell",
+          "label": "Hoge upsell-kans — bied een opwaardering aan.",
+          "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    },
+    {
+      "customerId": "CID-COLL029",
+      "customerNumber": "9129",
+      "phone": "+31610000034",
+      "name": "Lisa de Bruijn",
+      "firstName": "Lisa",
+      "lastName": "de Bruijn",
+      "email": "lisa.debruijn@budgetthuis.nl",
+      "segment": "Risico op churn",
+      "tag": null,
+      "customerValueScore": 70,
+      "priority": 0,
+      "churnRiskScore": 73,
+      "churnSegment": "high",
+      "propensityScore": 74,
+      "propensitySegment": "high",
+      "products": {
+        "energy": true,
+        "mobile": true,
+        "internet": false
+      },
+      "productsStr": "energy,mobile",
+      "numProducts": 2,
+      "isMultiUtility": true,
+      "tariffType": "VariableByMonth",
+      "tenureMonths": 13,
+      "contractEnding90d": false,
+      "actions": [
+        {
+          "type": "retentie",
+          "label": "Hoog opzegrisico — bied direct excuses aan voor de slechte ervaring.",
+          "guidance": "Laat de klant niet wachten. Begin meteen: 'Ik ga dit nu voor u oplossen.' Door direct actie te nemen creëer je respect én acceptatie — de klant voelt dat je het meent."
+        },
+        {
+          "type": "retentie",
+          "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
+          "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
+        },
+        {
+          "type": "crosssell",
+          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
+          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
+        }
+      ]
+    }
+  ]
+}
