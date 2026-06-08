@@ -49,6 +49,18 @@ function fmtWait(s: number): string {
   return `${Math.floor(s / 60)}m ${s % 60}s`;
 }
 
+// Mask a phone number for display (privacy): keep the country prefix and the
+// last 4 digits, replace the middle with **** — e.g. +31624809069 → +316****9069.
+function maskPhone(phone: string | null | undefined): string {
+  if (!phone) return "—";
+  const prefix = phone.startsWith("+316") ? "+316" : phone.slice(0, 4);
+  const last4 = phone.slice(-4);
+  // If the number is too short to have a distinct prefix + last 4, just mask
+  // everything but the final 4 digits.
+  if (phone.length <= prefix.length + 4) return "****" + last4;
+  return `${prefix}****${last4}`;
+}
+
 function isHighValue(c: Caller): boolean {
   return c.tag === "High Value Customer" || c.customerValueScore >= 85;
 }
@@ -76,25 +88,26 @@ interface UpsellOffer {
   icon: string;
 }
 
-const ACTION_META: Record<string, { title: string; icon: string; cta: string }> = {
-  crosssell:  { title: "Cross-sell kans",     icon: "add_shopping_cart", cta: "Bied product aan" },
-  upsell:     { title: "Upgrade kans",         icon: "arrow_upward",      cta: "Bied upgrade aan" },
-  bundle:     { title: "Bundelkans",           icon: "inventory_2",       cta: "Presenteer bundel" },
-  retentie:   { title: "Retentie actie",       icon: "favorite",          cta: "Retentie starten" },
-  tarief:     { title: "Tariefgesprek",        icon: "receipt_long",      cta: "Bespreek tarief" },
-  onboarding: { title: "Onboarding",           icon: "waving_hand",       cta: "Start onboarding" },
+const ACTION_META: Record<string, { title: string; cta: string }> = {
+  crosssell:  { title: "Cross-sell kans",     cta: "Bied product aan" },
+  upsell:     { title: "Upgrade kans",         cta: "Bied upgrade aan" },
+  bundle:     { title: "Bundelkans",           cta: "Presenteer bundel" },
+  retentie:   { title: "Retentie actie",       cta: "Retentie starten" },
+  tarief:     { title: "Tariefgesprek",        cta: "Bespreek tarief" },
+  onboarding: { title: "Onboarding",           cta: "Start onboarding" },
 };
 
 function buildUpsellOffers(c: Caller): UpsellOffer[] {
   return c.actions.map((action) => {
-    const meta = ACTION_META[action.type] ?? { title: action.type, icon: "info", cta: "Actie uitvoeren" };
+    const meta = ACTION_META[action.type] ?? { title: action.type, cta: "Actie uitvoeren" };
     const guidance = (action as Action & { guidance?: string }).guidance;
     return {
       title: meta.title,
       desc: action.label,
       tips: guidance ? [guidance] : [],
       cta: meta.cta,
-      icon: meta.icon,
+      // Every offer CTA uses the plus icon by default.
+      icon: "plus",
     };
   });
 }
@@ -122,37 +135,91 @@ function approachBullets(c: Caller): ApproachBullet[] {
   if (c.actions.length > 0) {
     const out: ApproachBullet[] = [];
     if (c.waitSeconds > 120)
-      out.push({ icon: "check_circle", text: `Excuses aanbieden voor de wachttijd (${fmtWait(c.waitSeconds)}) voordat het gesprek begint.` });
+      out.push({ icon: "bullet_check", text: `Excuses aanbieden voor de wachttijd (${fmtWait(c.waitSeconds)}) voordat het gesprek begint.` });
     for (const action of c.actions) {
       const highlight = action.type === "retentie" || action.type === "upsell";
-      out.push({ icon: highlight ? "trending_up" : "check_circle", highlight, text: action.label });
+      out.push({ icon: highlight ? "bullet_warning" : "bullet_check", highlight, text: action.label });
     }
     return out;
   }
   // Fallback voor klanten zonder verrijkte actions (onbekende bellers)
   const out: ApproachBullet[] = [];
   if (c.segment === "Risico op churn")
-    out.push({ icon: "check_circle", text: "Retentiescript actief. Bied bij passende gelegenheid een retentiekorting aan. Escaleer niet zonder akkoord leidinggevende." });
+    out.push({ icon: "bullet_check", text: "Retentiescript actief. Bied bij passende gelegenheid een retentiekorting aan. Escaleer niet zonder akkoord leidinggevende." });
   else if (c.segment === "Premium")
-    out.push({ icon: "check_circle", text: `Premiumklant (${c.customerValueScore}/100). Direct en persoonlijk behandelen zonder scripts.` });
+    out.push({ icon: "bullet_check", text: `Premiumklant (${c.customerValueScore}/100). Direct en persoonlijk behandelen zonder scripts.` });
   else
-    out.push({ icon: "check_circle", text: "Standaardafhandeling. Volg het reguliere gesprekscript en let op upgrade-kansen." });
+    out.push({ icon: "bullet_check", text: "Standaardafhandeling. Volg het reguliere gesprekscript en let op upgrade-kansen." });
   if (c.waitSeconds > 120)
-    out.push({ icon: "check_circle", text: `Excuses aanbieden voor de wachttijd (${fmtWait(c.waitSeconds)}) voordat het gesprek begint.` });
+    out.push({ icon: "bullet_check", text: `Excuses aanbieden voor de wachttijd (${fmtWait(c.waitSeconds)}) voordat het gesprek begint.` });
   if (isHighValue(c))
-    out.push({ icon: "trending_up", highlight: true, text: `Transitie: gebruik de hoge klantwaarde om over te stappen naar een hoger pakket.` });
+    out.push({ icon: "bullet_warning", highlight: true, text: `Transitie: gebruik de hoge klantwaarde om over te stappen naar een hoger pakket.` });
   return out;
 }
 // ─────────────────────────────────────────────────────────────────────────
 
-function Icon({ name, className = "", fill = false }: { name: string; className?: string; fill?: boolean }) {
+// ─── Helix icon library ──────────────────────────────────────────────────
+// The dashboard refers to icons by short tokens; each maps to a real Helix
+// SVG under /public/icons/<category>/<Name>.svg. Icons are rendered as a CSS
+// mask so the existing `text-*` colour classes and `text-[Npx]` sizes keep
+// working (the source SVGs ship with a single flat fill).
+const HELIX_ICON: Record<string, string> = {
+  sensors:          "internet/internetSettings",
+  sync:             "iconographic-navigation/Refresh",
+  clear_all:        "iconographic-navigation/Refresh",
+  queue:            "chat/BubbleDots",
+  pause:            "iconographic-navigation/Stop",
+  bug_report:       "general/Tools",
+  settings:         "iconographic-navigation/Settings",
+  logout:           "iconographic-navigation/Exit",
+  info:             "iconographic-navigation/Info",
+  call:             "mobile/Phone",
+  cellular:         "mobile/Cullular",
+  phone_in_talk:    "mobile/Phone",
+  call_end:         "mobile/PhoneChatBubble",
+  star:             "feedback/Star",
+  trending_up:      "graph/Dynamic",
+  rocket_launch:    "general/Rocket",
+  tips_and_updates: "general/Sparks",
+  sms:              "mobile/PhoneChatBubble",
+  close:            "basic-navigation/Close",
+  search:           "iconographic-navigation/Search",
+  verified:         "shield/Check",
+  check_circle:     "feedback/CheckCircle",
+  add_shopping_cart:"general/Cart",
+  arrow_upward:     "general/Arrow",
+  favorite:         "feedback/ThumbsUpCheck",
+  plus:             "basic-navigation/Plus",
+  group:            "general/Group",
+  receipt_long:     "file/FileEuro",
+  inventory_2:      "general/Cart",
+  shopping_cart:    "general/Cart",
+  waving_hand:      "social-sustainability/HandShake",
+  analytics:        "graph/Pie",
+  // Aanbevolen-aanpak bullets use the indicator set (check / warning).
+  bullet_check:     "indicator/CheckMark",
+  bullet_warning:   "indicator/ExclemationMark",
+};
+
+function Icon({ name, className = "" }: { name: string; className?: string }) {
+  const path = HELIX_ICON[name] ?? "iconographic-navigation/Info";
+  const url = `url("/icons/${path}.svg")`;
   return (
     <span
-      className={`material-symbols-outlined ${className}`}
-      style={fill ? { fontVariationSettings: "'FILL' 1" } : undefined}
-    >
-      {name}
-    </span>
+      role="img"
+      aria-hidden
+      className={`helix-icon ${className}`}
+      style={{
+        WebkitMaskImage: url,
+        maskImage: url,
+        WebkitMaskRepeat: "no-repeat",
+        maskRepeat: "no-repeat",
+        WebkitMaskPosition: "center",
+        maskPosition: "center",
+        WebkitMaskSize: "contain",
+        maskSize: "contain",
+      }}
+    />
   );
 }
 
@@ -253,6 +320,11 @@ export default function Hackathon26() {
   const activeCallRef = useRef<Caller | null>(null);
   activeCallRef.current = activeCall;
 
+  // Auto-select the top caller only on the very first poll. After the agent has
+  // engaged (e.g. ending a call clears the panel), a null selection stays null
+  // so the screen stays on the empty state until they pick someone.
+  const hasAutoSelectedRef = useRef(false);
+
   const isSimulated = (id: string) => id.startsWith("SIM_");
 
   // Poll Twilio API every 10 seconds — bewaart gesimuleerde callers
@@ -278,7 +350,13 @@ export default function Hackathon26() {
       setLastSync(new Date());
       setUsingLive(true);
       setSelected((prev) => {
-        if (!prev) return data[0] ?? null;
+        if (!prev) {
+          // Only auto-pick a caller on the first load; afterwards an empty
+          // panel (e.g. after ending a call) is left empty on purpose.
+          if (hasAutoSelectedRef.current) return null;
+          hasAutoSelectedRef.current = true;
+          return data[0] ?? null;
+        }
         if ([...data].some((c) => c.id === prev.id) || isSimulated(prev.id)) return prev;
         if (activeCallRef.current?.id === prev.id) return prev;
         return data[0] ?? null;
@@ -368,6 +446,9 @@ export default function Hackathon26() {
   const endCall = async () => {
     const id = activeCall?.id;
     setActiveCall(null);
+    // Clear the detail panel back to the empty state when the ended call was
+    // the one being shown (keep any other caller the agent had selected).
+    setSelected((prev) => (prev && prev.id === id ? null : prev));
     if (id) {
       await cancelTask(id);
       fetchQueue();
@@ -386,24 +467,18 @@ export default function Hackathon26() {
     : "—";
 
   return (
-    <div className="font-display bg-surface text-on-surface min-h-screen">
-      {/* Fonts + icon-styles */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&display=swap"
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-      />
+    <div className="hackathon26-root font-display bg-surface text-on-surface min-h-screen">
+      {/* Helix icons render as a recolourable CSS mask (brand SVG silhouettes).
+          Default to a 1em square that follows the surrounding text colour, so
+          existing `text-*` and `text-[Npx]` utilities keep controlling it. */}
       <style>{`
-        .material-symbols-outlined {
-          font-family: 'Material Symbols Outlined';
-          font-weight: normal; font-style: normal; line-height: 1;
-          letter-spacing: normal; text-transform: none; display: inline-block;
-          white-space: nowrap; word-wrap: normal; direction: ltr;
-          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        .helix-icon {
+          display: inline-block;
+          width: 1em; height: 1em;
+          font-size: 24px;          /* default glyph size; text-[Npx] overrides */
+          flex: none;
+          background-color: currentColor;
+          vertical-align: -0.15em;
         }
         .card-shadow { box-shadow: 0px 4px 20px rgba(0,0,0,0.05); }
       `}</style>
@@ -450,7 +525,7 @@ export default function Hackathon26() {
                     <div className="flex flex-col">
                       <span className="text-body-md font-bold text-on-surface">{activeCall.firstName || activeCall.name}</span>
                       <span className="text-label-caps text-on-surface-variant">
-                        {activeCall.phone}
+                        {maskPhone(activeCall.phone)}
                       </span>
                     </div>
                   </div>
@@ -512,7 +587,7 @@ export default function Hackathon26() {
                           )}
                         </span>
                         <span className="text-label-caps text-on-surface-variant truncate">
-                          {caller.segment} • {caller.phone}
+                          {caller.segment} • {maskPhone(caller.phone)}
                         </span>
                       </div>
                     </div>
@@ -520,7 +595,6 @@ export default function Hackathon26() {
                       <span className={`text-body-md font-bold ${caller.waitSeconds > 120 ? "text-error" : "text-on-surface-variant"}`}>
                         {fmtWait(caller.waitSeconds)}
                       </span>
-                      <span className="text-label-caps text-on-surface-variant">prio {caller.priority}</span>
                     </div>
                   </div>
                 );
@@ -615,7 +689,7 @@ export default function Hackathon26() {
                 {isActiveSelected ? (
                   <button
                     onClick={endCall}
-                    className="px-8 py-4 bg-error text-on-error rounded-xl font-bold text-headline-sm hover:scale-105 active:scale-95 transition-all card-shadow flex items-center gap-2 whitespace-nowrap"
+                    className="px-8 py-4 bg-error text-on-error rounded-lg font-bold text-headline-sm hover:scale-105 active:scale-95 transition-all card-shadow flex items-center gap-2 whitespace-nowrap"
                   >
                     <Icon name="call_end" />
                     Beëindig gesprek
@@ -623,9 +697,9 @@ export default function Hackathon26() {
                 ) : (
                   <button
                     onClick={() => startCall(liveSelected)}
-                    className="px-8 py-4 bg-primary-container text-on-primary-container rounded-xl font-bold text-headline-sm hover:scale-105 active:scale-95 transition-all card-shadow flex items-center gap-2 whitespace-nowrap"
+                    className="px-8 py-4 bg-primary-container text-on-primary-container rounded-lg font-bold text-headline-sm hover:scale-105 active:scale-95 transition-all card-shadow flex items-center gap-2 whitespace-nowrap"
                   >
-                    <Icon name="call" />
+                    <Icon name="cellular" />
                     Gesprek starten
                   </button>
                 )}
@@ -634,10 +708,10 @@ export default function Hackathon26() {
               {/* Bento grid */}
               <div className="grid grid-cols-12 gap-6 mb-6">
                 {/* Klantwaarde — always visible */}
-                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow border-l-4 border-primary-container flex flex-col gap-4">
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-2xl card-shadow border-l-4 border-primary-container flex flex-col gap-4">
                   <div className="flex justify-between items-center">
                     <h4 className="text-label-caps text-on-surface-variant uppercase">Klantwaarde</h4>
-                    <Icon name="star" className="text-primary-container" fill={isHighValue(liveSelected)} />
+                    <Icon name="star" className="text-primary-container" />
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="text-display-lg text-primary">{liveSelected.customerValueScore} / 100</span>
@@ -649,7 +723,7 @@ export default function Hackathon26() {
                 </div>
 
                 {/* Wachttijd / gespreksduur — always visible */}
-                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow flex flex-col gap-4">
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-2xl card-shadow flex flex-col gap-4">
                   <h4 className="text-label-caps text-on-surface-variant uppercase">
                     {isActiveSelected ? "Gespreksduur" : "Wachttijd"}
                   </h4>
@@ -678,12 +752,12 @@ export default function Hackathon26() {
                 <div className={`grid grid-cols-12 gap-6 transition-all duration-300 ${!verifiedIds.has(liveSelected.id) ? "blur-sm pointer-events-none select-none" : ""}`}>
 
                   {/* Contactinformatie */}
-                  <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
+                  <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-2xl card-shadow">
                     <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Contactinformatie</h4>
                     <div className="space-y-4">
                       <div>
                         <p className="text-label-caps text-secondary uppercase">Telefoonnummer</p>
-                        <p className="text-data-point text-on-surface">{liveSelected.phone || "—"}</p>
+                        <p className="text-data-point text-on-surface">{maskPhone(liveSelected.phone)}</p>
                       </div>
                       <div>
                         <p className="text-label-caps text-secondary uppercase">Type abonnement</p>
@@ -693,7 +767,7 @@ export default function Hackathon26() {
                   </div>
 
                   {/* Gespreksdetails */}
-                  <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
+                  <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-2xl card-shadow">
                     <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Gespreksdetails</h4>
                     <div className="space-y-4">
                       <div>
@@ -708,7 +782,7 @@ export default function Hackathon26() {
                   </div>
 
                   {/* Upsell kansen */}
-                  <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-2 border-primary-container relative overflow-hidden">
+                  <div className="col-span-12 bg-surface-container-lowest p-6 rounded-2xl card-shadow border-2 border-primary-container relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
                       <Icon name="trending_up" className="text-[80px]" />
                     </div>
@@ -719,9 +793,9 @@ export default function Hackathon26() {
                       </h4>
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
-                      {upsellOffers.map((offer: UpsellOffer) => (
+                      {upsellOffers.map((offer: UpsellOffer, i: number) => (
                         <div
-                          key={offer.title}
+                          key={`${offer.title}-${i}`}
                           className="p-4 rounded-lg bg-primary-container/5 border border-primary-container/30 flex flex-col justify-between hover:bg-primary-container/10 transition-colors"
                         >
                           <div>
@@ -748,7 +822,7 @@ export default function Hackathon26() {
                   </div>
 
                   {/* Aanbevolen aanpak */}
-                  <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-t-4 border-on-background">
+                  <div className="col-span-12 bg-surface-container-lowest p-6 rounded-2xl card-shadow border-t-4 border-on-background">
                     <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Aanbevolen aanpak</h4>
                     <ul className="space-y-3">
                       {bullets.map((b, i) => (
@@ -865,7 +939,7 @@ export default function Hackathon26() {
                           <span className="px-1.5 py-px bg-on-background text-primary-fixed text-[9px] font-bold rounded tracking-wider">HVC</span>
                         )}
                       </p>
-                      <p className="text-label-caps text-on-surface-variant">{r.segment} · {r.phone}</p>
+                      <p className="text-label-caps text-on-surface-variant">{r.segment} · {maskPhone(r.phone)}</p>
                     </div>
                   </div>
                   <button
@@ -883,7 +957,7 @@ export default function Hackathon26() {
 
       {liveSelected && upsellOffers.length > 0 && (
         <div className="fixed bottom-6 right-6 z-50">
-          <div className="bg-inverse-surface text-inverse-on-surface px-6 py-4 rounded-xl card-shadow flex items-center gap-4 border border-outline">
+          <div className="bg-inverse-surface text-inverse-on-surface px-6 py-4 rounded-2xl card-shadow flex items-center gap-4 border border-outline">
             <Icon name="verified" className="text-primary-fixed" />
             <div>
               <p className="text-label-caps font-bold">Upsell mogelijkheid</p>

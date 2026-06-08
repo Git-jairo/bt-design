@@ -1,69 +1,114 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   HELIX DESIGN SYSTEM — Hackathon 2026 Tokens
-   Material 3–inspired token set for the /experiments/hackathon26 dashboard only.
-   Intentionally isolated here so it is clear these are NOT Helix tokens.
+   HELIX / BUDGET THUIS BRAND — Hackathon 2026 Tokens
+   Token set for the /experiments/hackathon26 agent dashboard only.
+
+   Brand truth (see helix-slides → references/brand-tokens.md):
+     • Two greens carry the brand: Mint #00d780 (primary accent),
+       Teal #029b77 (deep brand bed). No gradients, flat fills only.
+     • Neutrals: Screen #fafafa, Ink #242424, Gray card #efefef, White #ffffff.
+     • Type: Budget Greet Narrow (display, UPPERCASE) + Inter (body/chrome).
+   Kept in the M3 *semantic token shape* the dashboard already consumes, but the
+   values are remapped onto the real Budget Thuis palette + typefaces.
    Do not use these tokens in any other component or section.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* ── Brand faces (genuine woff2, inlined from the helix-slides skill) ─────── */
+@font-face {
+  font-family: "Budget Greet Narrow";
+  src: url("/fonts/brand/BudgetGreetNarrow-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/brand/Inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/brand/Inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/brand/Inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/brand/Inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  /* ── M3 Surface scale ────────────────────────────────────────────────── */
-  --color-surface:                  #f9f9ff;
-  --color-surface-bright:           #f9f9ff;
-  --color-surface-dim:              #d3daea;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low:    #f0f3ff;
-  --color-surface-container:        #e7eefe;
-  --color-surface-container-high:   #e2e8f8;
-  --color-surface-container-highest:#dce2f3;
-  --color-surface-variant:          #dce2f3;
-  --color-surface-tint:             #006c48;
+  /* ── Surface scale — neutral brand canvas (Screen / White / Gray) ──────── */
+  --color-surface:                  #fafafa;  /* Screen — page canvas */
+  --color-surface-bright:           #ffffff;
+  --color-surface-dim:              #efefef;  /* Gray card */
+  --color-surface-container-lowest: #ffffff;  /* White card */
+  --color-surface-container-low:    #f4f4f4;
+  --color-surface-container:        #efefef;  /* Gray card */
+  --color-surface-container-high:   #e8e8e8;
+  --color-surface-container-highest:#e2e2e2;
+  --color-surface-variant:          #e2e2e2;
+  --color-surface-tint:             #029b77;  /* Teal */
 
-  --color-on-surface:               #151c27;
-  --color-on-surface-variant:       #3c4a41;
-  --color-on-background:            #151c27;
+  --color-on-surface:               #242424;  /* Ink — body/heading on light */
+  --color-on-surface-variant:       #5e5e5e;
+  --color-on-background:            #242424;  /* Ink surfaces (top bar / chips) */
 
-  /* ── M3 Primary ──────────────────────────────────────────────────────── */
-  --color-primary:                  #006c48;
-  --color-primary-container:        #00d18e;
+  /* ── Primary — the two brand greens ────────────────────────────────────── */
+  --color-primary:                  #029b77;  /* Teal — deep brand bed / accents */
+  --color-primary-container:        #00d780;  /* Mint — primary accent fill */
   --color-primary-fixed:            #58feb7;
   --color-primary-fixed-dim:        #2fe19c;
   --color-on-primary:               #ffffff;
-  --color-on-primary-container:     #005336;
-  --color-on-primary-fixed:         #002113;
-  --color-on-primary-fixed-variant: #005235;
+  --color-on-primary-container:     #242424;  /* black text on mint (brand rule) */
+  --color-on-primary-fixed:         #00301e;
+  --color-on-primary-fixed-variant: #007a5b;
   --color-inverse-primary:          #2fe19c;
 
-  /* ── M3 Secondary ────────────────────────────────────────────────────── */
+  /* ── Secondary — neutral ───────────────────────────────────────────────── */
   --color-secondary:                #5e5e5e;
   --color-secondary-container:      #e2e2e2;
   --color-on-secondary:             #ffffff;
   --color-on-secondary-container:   #646464;
 
-  /* ── M3 Tertiary ─────────────────────────────────────────────────────── */
+  /* ── Tertiary — neutral ────────────────────────────────────────────────── */
   --color-tertiary:                 #5c5f60;
   --color-tertiary-container:       #b6b8b9;
 
-  /* ── M3 Error ────────────────────────────────────────────────────────── */
+  /* ── Error ─────────────────────────────────────────────────────────────── */
   --color-error:                    #ba1a1a;
   --color-error-container:          #ffdad6;
   --color-on-error:                 #ffffff;
   --color-on-error-container:       #93000a;
 
-  /* ── M3 Outline ──────────────────────────────────────────────────────── */
-  --color-outline:                  #6b7b70;
-  --color-outline-variant:          #bacabf;
+  /* ── Outline ───────────────────────────────────────────────────────────── */
+  --color-outline:                  #9a9a9a;
+  --color-outline-variant:          #e2e2e2;
 
-  /* ── M3 Inverse ──────────────────────────────────────────────────────── */
-  --color-inverse-surface:          #2a313d;
-  --color-inverse-on-surface:       #ebf1ff;
+  /* ── Inverse — Ink surface ─────────────────────────────────────────────── */
+  --color-inverse-surface:          #242424;  /* Ink */
+  --color-inverse-on-surface:       #fafafa;  /* light text on ink */
 
-  /* ── M3 Typeface ─────────────────────────────────────────────────────── */
-  --font-display: "Hanken Grotesk", sans-serif;
+  /* ── Typeface — genuine brand faces ────────────────────────────────────── */
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-greet:   "Budget Greet Narrow", "Barlow Condensed", Impact, sans-serif;
 
-  /* ── M3 Type scale ───────────────────────────────────────────────────── */
+  /* ── Type scale ────────────────────────────────────────────────────────── */
   --text-display-lg:                32px;
-  --text-display-lg--line-height:   1.2;
-  --text-display-lg--letter-spacing:-0.02em;
+  --text-display-lg--line-height:   1.05;
+  --text-display-lg--letter-spacing:0.01em;
   --text-display-lg--font-weight:   700;
 
   --text-headline-md:               24px;
@@ -90,4 +135,14 @@
   --text-label-caps--line-height:   1.2;
   --text-label-caps--letter-spacing:0.08em;
   --text-label-caps--font-weight:   700;
+}
+
+/* ── Brand display face: headings + chips/labels use Greet, UPPERCASE ─────── */
+.hackathon26-root .text-display-lg,
+.hackathon26-root .text-headline-md,
+.hackathon26-root .text-headline-sm,
+.hackathon26-root .text-label-caps {
+  font-family: var(--font-greet);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
