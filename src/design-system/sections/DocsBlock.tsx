@@ -75,7 +75,7 @@ export function DocsBlock() {
         <Eyebrow label="Design System" variant="light" />
 
         <motion.h2
-          className="font-helix-display text-4xl lg:text-6xl uppercase text-fg-inverse mt-3 mb-20 leading-tight"
+          className="font-helix-display text-4xl lg:text-6xl uppercase text-heading-on-surface-inverted mt-3 mb-20 leading-tight"
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -95,7 +95,7 @@ export function DocsBlock() {
           >
             <Link
               href="/docs"
-              className="group relative flex flex-col justify-between h-full rounded-card-md bg-card p-12 lg:p-16 min-h-[480px] overflow-hidden"
+              className="group relative flex flex-col justify-between h-full rounded-card-md bg-default p-12 lg:p-16 min-h-[480px] overflow-hidden"
               style={{ boxShadow: "var(--shadow-card)" }}
             >
               {/* Card inner glow */}
@@ -117,20 +117,20 @@ export function DocsBlock() {
                   <Badge variant="neutral">{DOCS_STATUS}</Badge>
                 </div>
                 <p
-                  className="font-helix-display uppercase text-fg leading-none mb-8"
+                  className="font-helix-display uppercase text-heading-on-surface-default leading-none mb-8"
                   style={{ fontSize: "clamp(4.5rem, 9vw, 8rem)" }}
                 >
                   HELIX
                   <br />
                   DS
                 </p>
-                <p className="text-fg/55 text-base leading-relaxed max-w-sm font-helix-body">
+                <p className="text-gray-950/55 text-base leading-relaxed max-w-sm font-helix-body">
                   Brand truth, component specs, and authoring guidelines for all
                   Budget Thuis products.
                 </p>
               </div>
 
-              <span className="relative text-sm font-semibold text-fg mt-12 group-hover:underline underline-offset-2">
+              <span className="relative text-sm font-semibold text-gray-950 mt-12 group-hover:underline underline-offset-2">
                 Open Documentation →
               </span>
             </Link>
@@ -150,9 +150,9 @@ export function DocsBlock() {
                   href={href}
                   className="group flex flex-col gap-2.5 rounded-card-sm bg-white/7 hover:bg-white/13 transition-colors p-7 h-full"
                 >
-                  <h3 className="font-semibold text-fg-inverse text-sm">{title}</h3>
-                  <p className="text-fg-inverse/45 text-sm leading-relaxed font-helix-body flex-1">{desc}</p>
-                  <span className="text-xs text-fg-accent mt-2 group-hover:underline underline-offset-2">
+                  <h3 className="font-semibold text-heading-on-surface-inverted text-sm">{title}</h3>
+                  <p className="text-gray-0/45 text-sm leading-relaxed font-helix-body flex-1">{desc}</p>
+                  <span className="text-xs text-heading-on-surface-inverted-accent mt-2 group-hover:underline underline-offset-2">
                     Explore →
                   </span>
                 </Link>

@@ -24,8 +24,8 @@ const COLUMNS: {
         label:       "Icons",
         href:        "#icons",
         bg:          "bg-brand",
-        numberColor: "text-fg",
-        labelColor:  "text-fg/55",
+        numberColor: "text-body-on-surface-brand",
+        labelColor:  "text-caption-on-surface-brand",
         fontSize:    "clamp(5rem, 11vw, 14rem)",
         flex:        "flex-1",
         rotate:      -2.5,
@@ -41,9 +41,9 @@ const COLUMNS: {
         suffix:      "+",
         label:       "Images",
         href:        "#images",
-        bg:          "bg-raised",
-        numberColor: "text-fg",
-        labelColor:  "text-fg/50",
+        bg:          "bg-muted",
+        numberColor: "text-body-on-surface-default",
+        labelColor:  "text-caption-on-surface-default",
         fontSize:    "clamp(3.5rem, 10vw, 9rem)",
         flex:        "h-62",
         rotate:      2,
@@ -53,9 +53,9 @@ const COLUMNS: {
         suffix:      "+",
         label:       "Illustrations",
         href:        "#illustrations",
-        bg:          "bg-brand-dim",
-        numberColor: "text-white",
-        labelColor:  "text-white/55",
+        bg:          "bg-teal",
+        numberColor: "text-body-on-surface-teal",
+        labelColor:  "text-caption-on-surface-teal",
         fontSize:    "clamp(4rem, 12vw, 10rem)",
         flex:        "flex-1",
         rotate:      -1.5,
@@ -71,9 +71,9 @@ const COLUMNS: {
         suffix:      "",
         label:       "Logo's",
         href:        "#logos",
-        bg:          "bg-dark",
-        numberColor: "text-fg-accent",
-        labelColor:  "text-fg-inverse/45",
+        bg:          "bg-inverted",
+        numberColor: "text-heading-on-surface-inverted-accent",
+        labelColor:  "text-body-on-surface-inverted-accent",
         fontSize:    "clamp(6rem, 18vw, 16rem)",
         flex:        "flex-1",
         rotate:      3,
@@ -98,11 +98,7 @@ export function StatsSection() {
       style={{ minHeight: "120vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-20">
-        <div className="px-6 lg:px-10 max-w-[1152px] mx-auto w-full mb-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-fg/30 font-helix-body">
-            By the numbers
-          </p>
-        </div>
+        <div className="px-6 lg:px-10 max-w-[1152px] mx-auto w-full mb-8"></div>
 
         <div className="px-5 lg:px-8 w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 h-[66vh]">

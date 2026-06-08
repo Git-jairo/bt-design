@@ -3,13 +3,9 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import twilio from "twilio";
 
-let _db: { byPhone: Record<string, Record<string, unknown>> } | null = null;
-
 function getDb() {
-  if (_db) return _db;
   const p = join(process.cwd(), "data", "customers.json");
-  _db = JSON.parse(readFileSync(p, "utf8"));
-  return _db!;
+  return JSON.parse(readFileSync(p, "utf8")) as { byPhone: Record<string, Record<string, unknown>> };
 }
 
 export async function POST(req: NextRequest) {

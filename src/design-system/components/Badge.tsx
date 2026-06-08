@@ -10,9 +10,9 @@ interface BadgeProps {
 }
 
 const VARIANTS: Record<"brand" | "neutral" | "highlight", string> = {
-  brand:     "bg-brand text-action-fg",
-  neutral:   "bg-raised text-fg",
-  highlight: "bg-highlight text-fg",
+  brand:     "bg-brand text-body-on-surface-brand",
+  neutral:   "bg-muted text-body-on-surface-default",
+  highlight: "bg-promotion text-body-on-surface-promotion",
 };
 
 export function Badge({ children, variant = "neutral", className = "" }: BadgeProps) {

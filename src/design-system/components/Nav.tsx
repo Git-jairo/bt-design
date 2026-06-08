@@ -44,7 +44,7 @@ export function Nav() {
             <Link
               key={href}
               href={href}
-              className="text-sm font-medium text-fg/55 hover:text-fg transition-colors"
+              className="text-sm font-medium text-gray-950/55 hover:text-gray-950 transition-colors"
             >
               {label}
             </Link>
@@ -61,9 +61,7 @@ export function Nav() {
             className="hidden md:flex group w-8 h-8 items-center justify-center"
           >
             <span className="relative w-8 h-8 block">
-              <Image src="/logos/Figma.svg"          alt="Figma" width={32} height={32} loading="eager" className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-150" />
-              <Image src="/logos/Figma _ Hover.svg"  alt=""      width={32} height={32} loading="eager" className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
-            </span>
+              <Image src="/logos/Figma.svg" alt="Figma" width={32} height={32} loading="eager" className="absolute inset-0 opacity-100 group-hover:opacity-70 transition-opacity duration-150" />            </span>
           </a>
 
           <a
@@ -74,9 +72,7 @@ export function Nav() {
             className="hidden md:flex group w-8 h-8 items-center justify-center"
           >
             <span className="relative w-8 h-8 block">
-              <Image src="/logos/Budget-Thuis.svg"        alt="Budget Thuis" width={32} height={32} priority className="absolute inset-0 opacity-100 group-hover:opacity-0 transition-opacity duration-150" />
-              <Image src="/logos/Budget Thuis _ Hover.svg" alt=""            width={32} height={32} loading="eager" className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
-            </span>
+              <Image src="/logos/BudgetThuis.svg" alt="Budget Thuis" width={32} height={32} priority className="absolute inset-0 opacity-100 group-hover:opacity-70 transition-opacity duration-150" />            </span>
           </a>
 
           {/* Hamburger */}
@@ -86,9 +82,9 @@ export function Nav() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            <span className={`block w-5 h-px bg-fg transition-transform duration-200 origin-center ${menuOpen ? "translate-y-[6px] rotate-45" : ""}`} />
-            <span className={`block w-5 h-px bg-fg transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-5 h-px bg-fg transition-transform duration-200 origin-center ${menuOpen ? "-translate-y-[6px] -rotate-45" : ""}`} />
+            <span className={`block w-5 h-px bg-gray-950 transition-transform duration-200 origin-center ${menuOpen ? "translate-y-[6px] rotate-45" : ""}`} />
+            <span className={`block w-5 h-px bg-gray-950 transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-px bg-gray-950 transition-transform duration-200 origin-center ${menuOpen ? "-translate-y-[6px] -rotate-45" : ""}`} />
           </button>
         </div>
       </div>
@@ -109,7 +105,7 @@ export function Nav() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="block text-sm font-medium text-fg/70 hover:text-fg transition-colors py-1"
+                    className="block text-sm font-medium text-gray-950/70 hover:text-gray-950 transition-colors py-1"
                     onClick={() => setMenuOpen(false)}
                   >
                     {label}
@@ -117,8 +113,8 @@ export function Nav() {
                 </li>
               ))}
               <li className="flex gap-4 pt-2 border-t border-border">
-                <a href="https://figma.com"          target="_blank" rel="noopener noreferrer" className="text-sm text-fg/50 hover:text-fg transition-colors">Figma</a>
-                <a href="https://www.budgetthuis.nl" target="_blank" rel="noopener noreferrer" className="text-sm text-fg/50 hover:text-fg transition-colors">Budget Thuis</a>
+                <a href="https://figma.com"          target="_blank" rel="noopener noreferrer" className="text-sm text-gray-950/50 hover:text-gray-950 transition-colors">Figma</a>
+                <a href="https://www.budgetthuis.nl" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-950/50 hover:text-gray-950 transition-colors">Budget Thuis</a>
               </li>
             </ul>
           </motion.nav>

@@ -18,9 +18,9 @@ const ASSETS = [
     theme:       "brand-dim",
   },
   {
-    title:       "Images",
-    description: "Curated photography aligned to Helix brand guidelines — warm, human, Dutch.",
-    href:        "/images",
+    title:       "Interview-Coach",
+    description: "Get feedback on your interview performance from Claude using transcripts.",
+    href:        "/interview-coach",
     theme:       "inverse",
   },
 ] as const;
@@ -30,7 +30,7 @@ export function AssetGrid() {
     <section id="assets" aria-label="Design assets" className="px-6 py-36 lg:px-10 lg:py-52">
       <div className="max-w-[1152px] mx-auto">
         <Eyebrow label="Claude Skills" />
-        <h2 className="font-helix-display text-4xl lg:text-6xl uppercase text-fg mt-3 mb-16 leading-tight">
+        <h2 className="font-helix-display text-4xl lg:text-6xl uppercase text-heading-on-surface-default mt-3 mb-16 leading-tight">
           The Skill Library
         </h2>
 

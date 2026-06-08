@@ -8,7 +8,7 @@ export function Eyebrow({ label, variant = "default" }: EyebrowProps) {
   return (
     <p
       className={`text-xs font-semibold uppercase tracking-[0.14em] ${
-        variant === "light" ? "text-fg-inverse/35" : "text-fg/40"
+        variant === "light" ? "text-caption-on-surface-inverted" : "text-caption-on-surface-default"
       }`}
     >
       {label}

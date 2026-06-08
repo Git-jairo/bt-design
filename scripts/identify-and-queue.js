@@ -72,7 +72,21 @@ exports.handler = async function (context, event, callback) {
     actions: [],
   };
 
+  // Send verification SMS if caller is recognized
+  const code = String(Math.floor(1000 + Math.random() * 9000));
   const client = context.getTwilioClient();
+  if (customer) {
+    try {
+      await client.messages.create({
+        to: c.phone,
+        from: context.TWILIO_NUMBER,
+        body: `Budget Thuis: uw verificatiecode is ${code}. Geef deze door aan onze medewerker.`,
+      });
+    } catch (e) {
+      console.error("SMS verzenden mislukt:", e.message);
+    }
+  }
+
   await client.taskrouter.v1
     .workspaces(context.WORKSPACE_SID)
     .tasks.create({

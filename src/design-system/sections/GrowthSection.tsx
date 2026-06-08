@@ -34,7 +34,7 @@ export function GrowthSection() {
       particleCount: 220,
       spread: 50,
       origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
-      colors: ["#00d780", "#f9ff00", "#ffffff", "#242424", "#029b77"],
+      colors: ["#00D780", "#FFD700", "#C0C0C0", "#2F4F4F", "#008080"],
       startVelocity: 60,
       gravity: 1.5,
       scalar: 1.3,
@@ -47,7 +47,7 @@ export function GrowthSection() {
       <div className="max-w-[1152px] mx-auto" style={{ perspective: "1000px" }}>
         <motion.div
           ref={cardRef}
-          className="rounded-card-lg bg-dark px-12 py-20 lg:px-20 lg:py-32 overflow-hidden cursor-pointer select-none"
+          className="rounded-card-lg bg-inverted px-12 py-20 lg:px-20 lg:py-32 overflow-hidden cursor-pointer select-none"
           initial={{ opacity: 0, y: 64 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
@@ -59,7 +59,7 @@ export function GrowthSection() {
           onClick={handleClick}
         >
           <p
-            className="font-helix-display uppercase text-fg-inverse leading-[0.87]"
+            className="font-helix-display uppercase text-heading-on-surface-inverted leading-[0.87]"
             style={{ fontSize: "clamp(3rem, 9.5vw, 8.5rem)" }}
           >
             Lets design
@@ -68,7 +68,7 @@ export function GrowthSection() {
             <br />
             Products,
             <br />
-            <span className="text-fg-accent">Together.</span>
+            <span className="text-heading-on-surface-inverted-accent">Together.</span>
           </p>
         </motion.div>
       </div>

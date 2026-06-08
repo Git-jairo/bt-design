@@ -25,13 +25,13 @@ export default function CaseStudiesPage() {
 
       {/* Hero */}
       <section className="pt-40 pb-16 px-6 max-w-[1152px] mx-auto">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink/40 mb-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-body-on-surface-default mb-4">
           Cases
         </p>
-        <h1 className="font-helix-display text-6xl md:text-8xl uppercase text-ink leading-none mb-6">
+        <h1 className="font-helix-display text-6xl md:text-8xl uppercase text-heading-on-surface-default leading-none mb-6">
           The Work
         </h1>
-        <p className="text-ink/55 max-w-lg text-lg leading-relaxed">
+        <p className="text-body-on-surface-default max-w-lg text-lg leading-relaxed">
           Real problems, real solutions. Each case study documents what we built,
           why we built it, and what we learned.
         </p>
@@ -45,22 +45,22 @@ export default function CaseStudiesPage() {
             {/* Info card */}
             <Link
               href={cs.slug}
-              className="group flex flex-col bg-white border border-ink/[0.07] rounded-2xl p-8 hover:shadow-[0_8px_40px_rgba(36,36,36,0.1)] transition-all duration-300 hover:-translate-y-0.5 min-h-[320px]"
+              className="group flex flex-col bg-white border border-gray-950/[0.07] rounded-2xl p-8 hover:shadow-[0_8px_40px_rgba(36,36,36,0.1)] transition-all duration-300 hover:-translate-y-0.5 min-h-[320px]"
             >
               <div className="flex items-center justify-between mb-8">
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-ink/40">
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-caption-on-surface-default-muted">
                   {cs.year}
                 </span>
               </div>
 
               <div className="flex-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink/35 mb-1">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-caption-on-surface-default mb-1">
                   {cs.subtitle}
                 </p>
-                <h2 className="font-helix-display text-3xl uppercase text-ink mb-4 group-hover:text-teal transition-colors">
+                <h2 className="font-helix-display text-3xl uppercase text-heading-on-surface-default mb-4 group-hover:text-heading-on-surface-default-accent transition-colors">
                   {cs.label}
                 </h2>
-                <p className="text-ink/55 leading-relaxed text-sm">
+                <p className="text-body-on-surface-default leading-relaxed text-sm">
                   {cs.description}
                 </p>
               </div>
@@ -70,20 +70,20 @@ export default function CaseStudiesPage() {
                   {cs.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 rounded-full bg-ink/[0.05] text-ink/50 text-[11px] font-semibold uppercase tracking-wide"
+                      className="px-2.5 py-1 rounded-full bg-gray-950/[0.05] text-caption-on-surface-default text-[11px] font-semibold uppercase tracking-wide"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <span className="text-ink/30 group-hover:text-teal transition-colors text-xl leading-none">
+                <span className="text-gray-950/30 group-hover:text-teal transition-colors text-xl leading-none">
                   →
                 </span>
               </div>
             </Link>
 
             {/* Photo card */}
-            <div className="relative rounded-2xl overflow-hidden bg-ink/[0.04] border border-ink/[0.07] min-h-[320px]">
+            <div className="relative rounded-2xl overflow-hidden bg-gray-950/[0.04] border border-gray-950/[0.07] min-h-[320px]">
               <Image
                 src={cs.image}
                 alt={cs.imageAlt}
@@ -98,9 +98,9 @@ export default function CaseStudiesPage() {
         ))}
 
         {/* Coming soon placeholder */}
-        <div className="flex flex-col bg-ink/[0.02] border border-dashed border-ink/[0.1] rounded-2xl p-8 items-center justify-center gap-3 min-h-[160px]">
+        <div className="flex flex-col bg-gray-950/[0.02] border border-dashed border-gray-950/[0.1] rounded-2xl p-8 items-center justify-center gap-3 min-h-[160px]">
           <span className="text-3xl opacity-20">+</span>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink/30">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-950/30">
             More case studies being documented
           </p>
         </div>

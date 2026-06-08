@@ -43,4 +43,13 @@
   --color-btn-secondary-fg-hover:        #3c3c3c;
   --color-btn-secondary-fg-active:       var(--color-teal-700);    /* #006b50 */
   --color-btn-secondary-fg-disabled:     #6c6c6c;
+
+  /* ── Interactive (CTAs) ──────────────────────────────────────────────── */
+  --color-action-bg:        var(--color-mint-500);   /* CTA background        → bg-action-bg        */
+  --color-action-bg-hover:  var(--color-teal-500);   /* CTA hover state       → hover:bg-action-bg-hover */
+  --color-action-fg:        var(--color-gray-850);   /* Text on CTA           → text-action-fg      */
+
 }
+
+
+

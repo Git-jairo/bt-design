@@ -8,8 +8,8 @@
    Only the two raw bg/fg vars are toggled; all semantic tokens are light-mode
    only for now. Extend semantics.css when dark mode support is added.       */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #242424;
 }
 
 @media (prefers-color-scheme: dark) {

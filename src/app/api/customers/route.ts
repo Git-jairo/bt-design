@@ -17,13 +17,9 @@ interface CustomerRecord {
   actions: { type: string; label: string }[];
 }
 
-let _db: { byPhone: Record<string, CustomerRecord> } | null = null;
-
 function getDb() {
-  if (_db) return _db;
   const p = join(process.cwd(), "data", "customers.json");
-  _db = JSON.parse(readFileSync(p, "utf8"));
-  return _db!;
+  return JSON.parse(readFileSync(p, "utf8")) as { byPhone: Record<string, CustomerRecord> };
 }
 
 export async function GET(req: NextRequest) {
@@ -52,6 +48,7 @@ export async function GET(req: NextRequest) {
             tag: c.tag,
             customerValueScore: c.customerValueScore,
             products: c.products,
+            actions: c.actions,
           }));
 
     return NextResponse.json(results);

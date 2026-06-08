@@ -19,9 +19,9 @@ interface ThemeConfig {
 }
 
 const THEMES: Record<CardTheme, ThemeConfig> = {
-  "brand":     { bg: "bg-brand",     text: "text-action-fg",  dimText: "text-action-fg/60",  iconBg: "bg-action-fg/10" },
-  "brand-dim": { bg: "bg-brand-dim", text: "text-white",      dimText: "text-white/60",       iconBg: "bg-white/15"     },
-  "inverse":   { bg: "bg-dark",      text: "text-fg-inverse", dimText: "text-fg-inverse/50",  iconBg: "bg-fg-inverse/10" },
+  "brand":     { bg: "bg-brand",     text: "text-heading-on-surface-brand",     dimText: "text-caption-on-surface-brand",     iconBg: "bg-inverted" },
+  "brand-dim": { bg: "bg-teal", text: "text-heading-on-surface-teal",      dimText: "text-caption-on-surface-teal",      iconBg: "bg-inverted"     },
+  "inverse":   { bg: "bg-inverted",      text: "text-heading-on-surface-inverted",  dimText: "text-caption-on-surface-inverted",  iconBg: "bg-default" },
 };
 
 interface AssetCardProps {

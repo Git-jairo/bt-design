@@ -9,27 +9,79 @@
 
 @theme {
   /* ── Canvas (page backgrounds) ───────────────────────────────────────── */
-  --color-canvas:           var(--color-gray-50);    /* Default page bg       → bg-canvas   */
+  
+  --color-screen-default:   var(--color-gray-50);     /* Default screen bg    → bg-canvas */
+  --color-screen-inverted:  var(--color-gray-850);    /* Inverted screen bg   → bg-canvas */
+  --color-screen-brand:     var(--color-gray-850);    /* Inverted screen bg   → bg-canvas */
 
-  /* ── Surfaces (page backgrounds) ───────────────────────────────────────── */
-  --color-card:             var(--color-gray-0);     /* Elevated card surface → bg-card     */
-  --color-footer:           var(--color-gray-850);   /* Footer bg             → bg-footer   */
-  --color-raised:           var(--color-gray-100);   /* Subtle raised surface → bg-raised   */
-  --color-dark:             var(--color-gray-850);   /* Dark section bg       → bg-dark     */
-  --color-brand:            var(--color-mint-500);   /* Brand accent surface  → bg-brand    */
-  --color-brand-dim:        var(--color-teal-500);   /* Dimmer brand surface  → bg-brand-dim */
-  --color-highlight:        var(--color-yellow-400); /* Beta / highlight bg   → bg-highlight */
+  /* ── Surface (section backgrounds) ───────────────────────────────────────── */
 
-  /* ── Heading (text) ───────────────────────────────────────────────── */
-  --color-heading:               var(--color-gray-850);   /* Primary text          → text-fg     */
-  --color-heading-inverse:       var(--color-gray-50);    /* Text on dark bg       → text-fg-inverse */
-  --color-heading-accent:        var(--color-mint-500);   /* Accent / link text    → text-fg-accent  */
-  --color-heading-accent-dim:    var(--color-teal-500);   /* Dimmer accent text    → text-fg-accent-dim */
+  --color-default:          var(--color-gray-0);      /* Elevated surface → bg-default */
+  --color-muted:            var(--color-gray-100);    /* Muted surface    → bg-muted */
+  --color-brand:            var(--color-mint-500);    /* Brand surface    → bg-brand */
+  --color-teal:             var(--color-teal-500);    /* Teal surface     → bg-teal  */
+  --color-inverted:         var(--color-gray-850);    /* Inverted surface → bg-inverted */
+  --color-promotion:        var(--color-yellow-500);  /* Promotion surface → bg-promotion */
+  --color-persuasive:       var(--color-gray-100);    /* Persuasive surface → bg-persuasion */
+  --color-info:             var(--color-blue-100);    /* Informational surface → bg-info */
 
-  /* ── Interactive (CTAs) ──────────────────────────────────────────────── */
-  --color-action-bg:        var(--color-mint-500);   /* CTA background        → bg-action-bg        */
-  --color-action-bg-hover:  var(--color-teal-500);   /* CTA hover state       → hover:bg-action-bg-hover */
-  --color-action-fg:        var(--color-gray-850);   /* Text on CTA           → text-action-fg      */
+  --color-positive:         var(--color-green-300);   /* positive surface → bg-info */
+  --color-positive-muted:   var(--color-green-100);   /* positive surface → bg-info */
+  --color-warning:          var(--color-orange-400);  /* warning surface → bg-info */
+  --color-warning-muted:    var(--color-orange-100);  /* warning surface → bg-info */
+  --color-error:            var(--color-red-400);     /* error surface → bg-info */
+  --color-error-muted:      var(--color-red-100);     /* error surface → bg-info */  
+
+  /* ── Heading (on-surface) ───────────────────────────────────────────────── */
+
+  --color-heading-on-surface-default:           var(--color-gray-950);   /* Heading on default surface → text-fg-accent-dim */
+  --color-heading-on-surface-default-accent:    var(--color-teal-500);   /* Primary text          → text-fg     */
+  
+  --color-heading-on-surface-inverted:          var(--color-gray-0);     /* Text on dark surface       → text-fg-inverse */
+  --color-heading-on-surface-inverted-accent:   var(--color-mint-500);   /* Accent Heading on dark surface    → text-heading-on-surface-inverted  */
+  
+  --color-heading-on-surface-brand:             var(--color-gray-1000);   /* Heading on mint surface    → text-heading-on-surface-brand     */  
+
+  --color-heading-on-surface-teal:              var(--color-gray-1000);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  
+  --color-heading-on-surface-promotion:         var(--color-gray-0);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  
+  --color-heading-on-surface-image:             var(--color-gray-0);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  --color-heading-on-surface-image-inverted:    var(--color-gray-1000);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  --color-heading-on-surface-image-accent:      var(--color-mint-500);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+
+
+  /* ── Body (on-surface) ───────────────────────────────────────────────── */
+
+  --color-body-on-surface-default:           var(--color-gray-850);   /* Heading on default surface → text-fg-accent-dim */
+  --color-body-on-surface-default-accent:    var(--color-teal-700);   /* Primary text          → text-fg     */
+  
+  --color-body-on-surface-inverted:          var(--color-gray-50);     /* Text on dark surface       → text-fg-inverse */
+  --color-body-on-surface-inverted-accent:   var(--color-mint-500);   /* Accent Heading on dark surface    → text-heading-on-surface-inverted  */
+  
+  --color-body-on-surface-brand:             var(--color-gray-1000);   /* Heading on mint surface    → text-heading-on-surface-brand     */  
+
+  --color-body-on-surface-teal:              var(--color-gray-1000);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  
+  --color-body-on-surface-promotion:         var(--color-gray-1000);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+
+  /* ── Caption (on-surface) ───────────────────────────────────────────────── */
+
+  --color-caption-on-surface-default:           var(--color-gray-750);   /* Heading on default surface → text-fg-accent-dim */
+  --color-caption-on-surface-default-muted:     var(--color-gray-600);   /* Heading on default surface → text-fg-accent-dim */
+  --color-caption-on-surface-default-accent:    var(--color-teal-700);   /* Primary text          → text-fg     */
+  
+  --color-caption-on-surface-inverted:          var(--color-gray-200);   /* Text on dark surface       → text-fg-inverse */
+  --color-caption-on-surface-inverted-muted:    var(--color-gray-400);   /* Text on dark surface       → text-fg-inverse */
+  --color-caption-on-surface-inverted-accent:   var(--color-mint-500);   /* Accent Heading on dark surface    → text-heading-on-surface-inverted  */
+  
+  --color-caption-on-surface-brand:             var(--color-gray-850);   /* Heading on mint surface    → text-heading-on-surface-brand     */  
+  --color-caption-on-surface-brand-muted:       var(--color-gray-750);   /* Heading on mint surface    → text-heading-on-surface-brand     */  
+
+  --color-caption-on-surface-teal:              var(--color-gray-950);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  
+  --color-caption-on-surface-promotion:         var(--color-gray-750);     /* Heading on teal surface    → text-heading-on-surface-teal      */
+  --color-caption-on-surface-promotion-muted:   var(--color-gray-600);     /* Heading on teal surface    → text-heading-on-surface-teal      */
 
   /* ── Borders ─────────────────────────────────────────────────────────── */
   --color-border:           rgba(36, 36, 36, 0.07); /* Default border        → border-border  */
@@ -48,7 +100,7 @@
   /* ── Semantic shadows ────────────────────────────────────────────────── */
   --shadow-card:            var(--shadow-md);       /* Standard card shadow  → shadow-card        */
   --shadow-card-raised:     var(--shadow-lg);       /* Elevated card shadow  → shadow-card-raised */
-  --shadow-promotion:           var(--shadow-block);       /* Subtle block shadow  -> shadow-promotion       */
+  --shadow-chip-promotion:       var(--shadow-hard-sm);       /* Subtle block shadow  -> shadow-promotion       */
 }
 
 /* ── Canvas aliases for inline styles (page.tsx section bg transitions) ── */

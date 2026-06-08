@@ -33,7 +33,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-canvas flex items-center justify-center">
+    <div className="min-h-screen bg-screen flex items-center justify-center">
       <div className="flex flex-col items-center gap-10">
         <Image
           src="/logos/BudgetThuis.svg"
@@ -52,16 +52,16 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             autoFocus
-            className={`h-12 w-72 px-4 rounded-xl border text-sm text-fg outline-none transition-colors
+            className={`h-12 w-72 px-4 rounded-xl border text-sm text-gray-950 outline-none transition-colors
               ${error
                 ? "border-red-400 bg-red-50 placeholder-red-300"
-                : "border-border-subtle bg-card placeholder-fg/30 focus:border-border-medium"
+                : "border-border-subtle bg-default placeholder-gray-950/30 focus:border-border-medium"
               }`}
           />
           <button
             type="submit"
             disabled={loading || password.length === 0}
-            className="h-12 w-12 rounded-xl bg-fg text-fg-inverse flex items-center justify-center disabled:opacity-30 hover:bg-fg/80 transition-colors"
+            className="h-12 w-12 rounded-xl bg-gray-950 text-gray-0 flex items-center justify-center disabled:opacity-30 hover:bg-gray-950/80 transition-colors"
             aria-label="Submit"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

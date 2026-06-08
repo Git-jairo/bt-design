@@ -24,15 +24,15 @@ export function CaseStudies() {
         <Eyebrow label="Case Studies" />
 
         <div className="flex items-end justify-between mt-3 mb-16 gap-4">
-          <h2 className="font-helix-display text-4xl lg:text-6xl uppercase text-fg leading-tight">
+          <h2 className="font-helix-display text-4xl lg:text-6xl uppercase text-heading-on-surface-default leading-tight">
             Our Work
           </h2>
           <div className="hidden md:flex items-center gap-8 pb-1 shrink-0">
-            <Link href="/case-studies" className="text-sm font-semibold text-fg/40 hover:text-fg transition-colors">
+            <Link href="/case-studies" className="text-sm font-semibold text-gray-950/40 hover:text-gray-950 transition-colors">
               Browse catalogue →
             </Link>
-            <p className="text-sm text-fg/40 font-helix-body">
-              <span ref={csRef} className="font-semibold text-fg">{csCount}</span>{" "}published
+            <p className="text-sm text-gray-950/40 font-helix-body">
+              <span ref={csRef} className="font-semibold text-gray-950">{csCount}</span>{" "}published
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@ export function CaseStudies() {
           >
             <Link
               href="/hackathon26"
-              className="group flex flex-col justify-between h-full rounded-card-md bg-brand-dim p-12 lg:p-14 text-white min-h-[420px]"
+              className="group flex flex-col justify-between h-full rounded-card-md bg-teal p-12 lg:p-14 text-white min-h-[420px]"
             >
               <div>
                 <span className="text-xs uppercase tracking-[0.1em] text-white/45 block mb-10">
@@ -81,11 +81,11 @@ export function CaseStudies() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
               >
-                <div className="flex flex-col justify-between h-full rounded-card bg-raised p-10 min-h-[190px]">
-                  <span className="text-xs uppercase tracking-[0.1em] text-fg/40 font-helix-body">
+                <div className="flex flex-col justify-between h-full rounded-card bg-muted p-10 min-h-[190px]">
+                  <span className="text-xs uppercase tracking-[0.1em] text-gray-950/40 font-helix-body">
                     {tag}
                   </span>
-                  <h3 className="font-helix-display text-2xl uppercase text-fg leading-tight">
+                  <h3 className="font-helix-display text-2xl uppercase text-heading-on-surface-default leading-tight">
                     {title}
                   </h3>
                 </div>

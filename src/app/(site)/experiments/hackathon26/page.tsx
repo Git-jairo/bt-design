@@ -76,48 +76,27 @@ interface UpsellOffer {
   icon: string;
 }
 
-const ACTION_UPSELL: Record<string, UpsellOffer> = {
-  crosssell_mobile: {
-    title: "Cross-sell: Mobiel",
-    desc: "Klant heeft nog geen mobiel abonnement. Combineer met energie voor bundelkorting.",
-    tips: ["Benadruk gemak van één factuur", "Eerste maand korting"],
-    cta: "Bied mobiel aan",
-    icon: "smartphone",
-  },
-  crosssell_internet: {
-    title: "Cross-sell: Internet",
-    desc: "Klant heeft nog geen internetabonnement. Bundelen bespaart direct.",
-    tips: ["Benadruk bundelbesparing", "Gratis installatie actie"],
-    cta: "Bied internet aan",
-    icon: "wifi",
-  },
-  bundle: {
-    title: "Bundelkans",
-    desc: "Klant heeft één product. Multi-utility korting beschikbaar bij een tweede product.",
-    tips: ["Benadruk multi-utility voordeel", "Toon concrete besparing"],
-    cta: "Presenteer bundel",
-    icon: "add_shopping_cart",
-  },
-  upsell: {
-    title: "Upgrade kans",
-    desc: "Hoge upsell-propensity — klant staat open voor een hoger pakket.",
-    tips: ["Benadruk premium voordelen", "Eerste maand korting"],
-    cta: "Bied upgrade aan",
-    icon: "arrow_upward",
-  },
+const ACTION_META: Record<string, { title: string; icon: string; cta: string }> = {
+  crosssell:  { title: "Cross-sell kans",     icon: "add_shopping_cart", cta: "Bied product aan" },
+  upsell:     { title: "Upgrade kans",         icon: "arrow_upward",      cta: "Bied upgrade aan" },
+  bundle:     { title: "Bundelkans",           icon: "inventory_2",       cta: "Presenteer bundel" },
+  retentie:   { title: "Retentie actie",       icon: "favorite",          cta: "Retentie starten" },
+  tarief:     { title: "Tariefgesprek",        icon: "receipt_long",      cta: "Bespreek tarief" },
+  onboarding: { title: "Onboarding",           icon: "waving_hand",       cta: "Start onboarding" },
 };
 
 function buildUpsellOffers(c: Caller): UpsellOffer[] {
-  const offers: UpsellOffer[] = [];
-  for (const action of c.actions) {
-    if (action.type === "crosssell" && action.label.toLowerCase().includes("mobiel"))
-      offers.push(ACTION_UPSELL.crosssell_mobile);
-    else if (action.type === "crosssell" && action.label.toLowerCase().includes("internet"))
-      offers.push(ACTION_UPSELL.crosssell_internet);
-    else if (action.type === "bundle") offers.push(ACTION_UPSELL.bundle);
-    else if (action.type === "upsell") offers.push(ACTION_UPSELL.upsell);
-  }
-  return offers;
+  return c.actions.map((action) => {
+    const meta = ACTION_META[action.type] ?? { title: action.type, icon: "info", cta: "Actie uitvoeren" };
+    const guidance = (action as Action & { guidance?: string }).guidance;
+    return {
+      title: meta.title,
+      desc: action.label,
+      tips: guidance ? [guidance] : [],
+      cta: meta.cta,
+      icon: meta.icon,
+    };
+  });
 }
 
 function subscriptionLabel(c: Caller): string {
@@ -186,6 +165,35 @@ export default function Hackathon26() {
   const [lastSync, setLastSync] = useState<Date>(new Date());
   const [usingLive, setUsingLive] = useState(false);
 
+  // Spoofing verification — tracks which caller IDs have been verified
+  const [verifiedIds, setVerifiedIds] = useState<Set<string>>(new Set());
+  const [otpDigits, setOtpDigits] = useState<string[]>(["", "", "", ""]);
+  const otpRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const handleOtpChange = (i: number, val: string) => {
+    const digit = val.replace(/\D/g, "").slice(-1);
+    const next = [...otpDigits];
+    next[i] = digit;
+    setOtpDigits(next);
+    if (digit && i < 3) otpRefs[i + 1].current?.focus();
+    if (next.every((d) => d !== "") && liveSelected) {
+      setVerifiedIds((prev) => new Set([...prev, liveSelected.id]));
+      setOtpDigits(["", "", "", ""]);
+    }
+  };
+
+  const handleOtpKey = (i: number, e: React.KeyboardEvent) => {
+    if (e.key === "Backspace" && !otpDigits[i] && i > 0) {
+      otpRefs[i - 1].current?.focus();
+    }
+  };
+
+
   // Debug / demo panel
   const [debugOpen, setDebugOpen] = useState(false);
   const [debugQuery, setDebugQuery] = useState("");
@@ -193,6 +201,7 @@ export default function Hackathon26() {
     phone: string; name: string; firstName: string; lastName: string;
     segment: string; tag: string | null; customerValueScore: number;
     products: { energy: boolean; mobile: boolean; internet: boolean } | null;
+    actions: Action[];
   }[]>([]);
 
   // Zoek klanten in de dataset
@@ -232,7 +241,7 @@ export default function Hackathon26() {
       tariffType: null,
       tenureMonths: 0,
       contractEnding90d: false,
-      actions: [],
+      actions: r.actions ?? [],
     };
     setCallers((prev) => [...prev, fake]);
     setLocalSeconds((prev) => ({ ...prev, [fake.id]: 0 }));
@@ -324,20 +333,39 @@ export default function Hackathon26() {
 
   const isActiveSelected = !!(activeCall && liveSelected && activeCall.id === liveSelected.id);
 
-  const startCall = (c: Caller) => {
+  const cancelTask = async (id: string) => {
+    if (!isSimulated(id)) {
+      try {
+        await fetch(`/api/queue/${id}`, { method: "DELETE" });
+      } catch {
+        /* negeren — poll ruimt de rest op */
+      }
+    }
+  };
+
+  const startCall = async (c: Caller) => {
+    // End the current active call first without removing the new caller from the queue
+    if (activeCall && activeCall.id !== c.id) {
+      await cancelTask(activeCall.id);
+    }
     setActiveCall(c);
     setSelected(c);
+    // Echte Twilio-call: stop de wachtmuziek en verbind de beller door
+    if (!isSimulated(c.id)) {
+      try {
+        await fetch(`/api/queue/${c.id}/accept`, { method: "POST" });
+      } catch {
+        /* negeren — beller blijft in de wacht als dit faalt */
+      }
+    }
+    fetchQueue();
   };
 
   const endCall = async () => {
     const id = activeCall?.id;
     setActiveCall(null);
     if (id) {
-      try {
-        await fetch(`/api/queue/${id}`, { method: "DELETE" });
-      } catch {
-        /* negeren — poll ruimt de rest op */
-      }
+      await cancelTask(id);
       fetchQueue();
     }
   };
@@ -599,7 +627,7 @@ export default function Hackathon26() {
 
               {/* Bento grid */}
               <div className="grid grid-cols-12 gap-6 mb-6">
-                {/* Klantwaarde */}
+                {/* Klantwaarde — always visible */}
                 <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow border-l-4 border-primary-container flex flex-col gap-4">
                   <div className="flex justify-between items-center">
                     <h4 className="text-label-caps text-on-surface-variant uppercase">Klantwaarde</h4>
@@ -614,7 +642,7 @@ export default function Hackathon26() {
                   </div>
                 </div>
 
-                {/* Wachttijd / gespreksduur */}
+                {/* Wachttijd / gespreksduur — always visible */}
                 <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow flex flex-col gap-4">
                   <h4 className="text-label-caps text-on-surface-variant uppercase">
                     {isActiveSelected ? "Gespreksduur" : "Wachttijd"}
@@ -637,89 +665,133 @@ export default function Hackathon26() {
                     )}
                   </div>
                 </div>
+              </div>
 
-                {/* Contactinformatie */}
-                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
-                  <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Contactinformatie</h4>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-label-caps text-secondary uppercase">Telefoonnummer</p>
-                      <p className="text-data-point text-on-surface">{liveSelected.phone || "—"}</p>
-                    </div>
-                    <div>
-                      <p className="text-label-caps text-secondary uppercase">Type abonnement</p>
-                      <p className="text-body-lg font-bold text-on-surface">{subscription}</p>
-                    </div>
-                  </div>
-                </div>
+              {/* Verified section — blurred until OTP confirmed */}
+              <div className="relative mb-6">
+                <div className={`grid grid-cols-12 gap-6 transition-all duration-300 ${!verifiedIds.has(liveSelected.id) ? "blur-sm pointer-events-none select-none" : ""}`}>
 
-                {/* Gespreksdetails */}
-                <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
-                  <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Gespreksdetails</h4>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-label-caps text-secondary uppercase">Reden van bellen</p>
-                      <p className="text-data-point text-on-surface">{liveSelected.reason}</p>
-                    </div>
-                    <div>
-                      <p className="text-label-caps text-secondary uppercase">Eerdere interacties</p>
-                      <p className="text-body-lg font-bold text-on-surface">{liveSelected.tenureMonths > 0 ? `${liveSelected.tenureMonths} maanden klant` : "Nieuwe klant"}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Upsell kansen (demo) */}
-                <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-2 border-primary-container relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                    <Icon name="trending_up" className="text-[80px]" />
-                  </div>
-                  <div className="flex items-center gap-2 mb-6">
-                    <Icon name="rocket_launch" className="text-primary" />
-                    <h4 className="text-headline-sm text-on-surface uppercase tracking-tight">
-                      Upsell kansen voor {liveSelected.name}
-                    </h4>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {upsellOffers.map((offer: UpsellOffer) => (
-                      <div
-                        key={offer.title}
-                        className="p-4 rounded-lg bg-primary-container/5 border border-primary-container/30 flex flex-col justify-between hover:bg-primary-container/10 transition-colors"
-                      >
-                        <div>
-                          <h5 className="text-body-lg font-bold text-on-surface mb-1">{offer.title}</h5>
-                          <p className="text-body-md text-on-surface-variant mb-4">{offer.desc}</p>
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {offer.tips.map((tip: string) => (
-                              <span
-                                key={tip}
-                                className="px-2 py-1 bg-primary-container/10 text-on-primary-container text-[11px] font-bold rounded uppercase tracking-tight"
-                              >
-                                Tip: {tip}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        <button className="w-full py-2 bg-primary-container text-on-primary-container rounded-lg font-bold text-label-caps flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
-                          <Icon name={offer.icon} className="text-[18px]" />
-                          {offer.cta}
-                        </button>
+                  {/* Contactinformatie */}
+                  <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
+                    <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Contactinformatie</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-label-caps text-secondary uppercase">Telefoonnummer</p>
+                        <p className="text-data-point text-on-surface">{liveSelected.phone || "—"}</p>
                       </div>
-                    ))}
+                      <div>
+                        <p className="text-label-caps text-secondary uppercase">Type abonnement</p>
+                        <p className="text-body-lg font-bold text-on-surface">{subscription}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gespreksdetails */}
+                  <div className="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl card-shadow">
+                    <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Gespreksdetails</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-label-caps text-secondary uppercase">Reden van bellen</p>
+                        <p className="text-data-point text-on-surface">{liveSelected.reason}</p>
+                      </div>
+                      <div>
+                        <p className="text-label-caps text-secondary uppercase">Eerdere interacties</p>
+                        <p className="text-body-lg font-bold text-on-surface">{liveSelected.tenureMonths > 0 ? `${liveSelected.tenureMonths} maanden klant` : "Nieuwe klant"}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Upsell kansen */}
+                  <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-2 border-primary-container relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                      <Icon name="trending_up" className="text-[80px]" />
+                    </div>
+                    <div className="flex items-center gap-2 mb-6">
+                      <Icon name="rocket_launch" className="text-primary" />
+                      <h4 className="text-headline-sm text-on-surface uppercase tracking-tight">
+                        Upsell kansen voor {liveSelected.name}
+                      </h4>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {upsellOffers.map((offer: UpsellOffer) => (
+                        <div
+                          key={offer.title}
+                          className="p-4 rounded-lg bg-primary-container/5 border border-primary-container/30 flex flex-col justify-between hover:bg-primary-container/10 transition-colors"
+                        >
+                          <div>
+                            <h5 className="text-body-lg font-bold text-on-surface mb-1">{offer.title}</h5>
+                            <p className="text-body-md text-on-surface-variant mb-4">{offer.desc}</p>
+                            {offer.tips.length > 0 && (
+                              <div className="mb-4 space-y-2">
+                                {offer.tips.map((tip: string) => (
+                                  <div key={tip} className="flex items-start gap-2 bg-primary-container/10 rounded-lg px-3 py-2">
+                                    <Icon name="tips_and_updates" className="text-primary text-[16px] mt-0.5 shrink-0" />
+                                    <p className="text-body-md text-on-surface">{tip}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          <button className="w-full py-2 bg-primary-container text-on-primary-container rounded-lg font-bold text-label-caps flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+                            <Icon name={offer.icon} className="text-[18px]" />
+                            {offer.cta}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Aanbevolen aanpak */}
+                  <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-t-4 border-on-background">
+                    <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Aanbevolen aanpak</h4>
+                    <ul className="space-y-3">
+                      {bullets.map((b, i) => (
+                        <li key={i} className={`flex items-start gap-3 ${b.highlight ? "bg-primary-container/5 p-2 rounded" : ""}`}>
+                          <Icon name={b.icon} className="text-primary text-[20px]" />
+                          <p className={`text-body-md text-on-surface ${b.highlight ? "font-bold" : ""}`}>{b.text}</p>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
-                {/* Aanbevolen aanpak */}
-                <div className="col-span-12 bg-surface-container-lowest p-6 rounded-xl card-shadow border-t-4 border-on-background">
-                  <h4 className="text-label-caps text-on-surface-variant uppercase mb-4">Aanbevolen aanpak</h4>
-                  <ul className="space-y-3">
-                    {bullets.map((b, i) => (
-                      <li key={i} className={`flex items-start gap-3 ${b.highlight ? "bg-primary-container/5 p-2 rounded" : ""}`}>
-                        <Icon name={b.icon} className="text-primary text-[20px]" />
-                        <p className={`text-body-md text-on-surface ${b.highlight ? "font-bold" : ""}`}>{b.text}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* OTP overlay */}
+                {!verifiedIds.has(liveSelected.id) && (
+                  <div className="absolute inset-0 flex items-start justify-center pt-12 z-10">
+                    <div className="bg-surface-container-lowest rounded-2xl card-shadow border border-outline-variant w-[340px] p-6 flex flex-col gap-5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+                          <Icon name="sms" className="text-primary text-[20px]" />
+                        </div>
+                        <div>
+                          <p className="text-body-lg font-bold text-on-surface">Verificatie vereist</p>
+                          <p className="text-body-md text-on-surface-variant">
+                            Er is een SMS gestuurd naar {liveSelected.firstName || liveSelected.name}. Vraag de 4-cijferige code.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 justify-center">
+                        {otpDigits.map((d, i) => (
+                          <input
+                            key={i}
+                            ref={otpRefs[i]}
+                            type="text"
+                            inputMode="numeric"
+                            maxLength={1}
+                            value={d}
+                            onChange={(e) => handleOtpChange(i, e.target.value)}
+                            onKeyDown={(e) => handleOtpKey(i, e)}
+                            onFocus={(e) => e.target.select()}
+                            className="w-14 h-14 text-center text-display-sm font-bold rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface focus:border-primary focus:outline-none transition-colors"
+                          />
+                        ))}
+                      </div>
+                      <p className="text-label-caps text-on-surface-variant text-center">
+                        Voer de code in om klantgegevens te ontgrendelen
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="mt-8 flex justify-center opacity-40">
