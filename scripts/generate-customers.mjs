@@ -184,6 +184,9 @@ function buildRecord(person, isJury, customerNum) {
     });
   }
 
+  // Max 2 acties per klant — acties staan al op prioriteit (churn/retentie eerst).
+  const cappedActions = actions.slice(0, 2);
+
   const firstName = person.firstName;
   const lastName  = person.lastName;
   const fullName  = [firstName, lastName].filter(Boolean).join(" ");
@@ -212,7 +215,7 @@ function buildRecord(person, isJury, customerNum) {
     tariffType,
     tenureMonths,
     contractEnding90d,
-    actions,
+    actions: cappedActions,
   };
 }
 

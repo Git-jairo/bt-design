@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08T16:10:34.147Z",
+  "generatedAt": "2026-06-08T21:28:51.812Z",
   "count": 34,
   "byPhone": {
     "+31620250568": {
@@ -79,11 +79,6 @@
           "type": "crosssell",
           "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
           "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
-        },
-        {
-          "type": "tarief",
-          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
-          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
         }
       ]
     },
@@ -124,11 +119,6 @@
           "type": "crosssell",
           "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
           "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
-        },
-        {
-          "type": "tarief",
-          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
-          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
         }
       ]
     },
@@ -274,16 +264,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "retentie",
-          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
-          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -509,11 +489,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -629,16 +604,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "retentie",
-          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
-          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -864,11 +829,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -949,11 +909,6 @@
           "type": "upsell",
           "label": "Hoge upsell-kans — bied een opwaardering aan.",
           "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -994,16 +949,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "retentie",
-          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
-          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -1229,11 +1174,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -1314,11 +1254,6 @@
           "type": "upsell",
           "label": "Hoge upsell-kans — bied een opwaardering aan.",
           "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -1359,11 +1294,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     }
@@ -1482,11 +1412,6 @@
           "type": "crosssell",
           "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
           "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
-        },
-        {
-          "type": "tarief",
-          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
-          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
         }
       ]
     },
@@ -1527,11 +1452,6 @@
           "type": "crosssell",
           "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
           "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
-        },
-        {
-          "type": "tarief",
-          "label": "Variabel tarief — bespreek overstap naar vast tarief voor meer zekerheid.",
-          "guidance": "Gebruik actuele marktprijzen als kapstok. Vaste tarieven verkopen zichzelf als de klant onzekerheid ervaart."
         }
       ]
     },
@@ -1677,16 +1597,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "retentie",
-          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
-          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -1912,11 +1822,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2032,16 +1937,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "retentie",
-          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
-          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2267,11 +2162,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2352,11 +2242,6 @@
           "type": "upsell",
           "label": "Hoge upsell-kans — bied een opwaardering aan.",
           "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2397,16 +2282,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "retentie",
-          "label": "Contract loopt af binnen 90 dagen — bespreek verlenging.",
-          "guidance": "Stel open: 'Wat vond u het afgelopen jaar?' Luister eerst, verleng daarna pas het gesprek richting contract."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2632,11 +2507,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2717,11 +2587,6 @@
           "type": "upsell",
           "label": "Hoge upsell-kans — bied een opwaardering aan.",
           "guidance": "Koppel het aanbod aan een concreet voordeel dat past bij de producten die de klant al heeft."
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     },
@@ -2762,11 +2627,6 @@
           "type": "retentie",
           "label": "Bied een retentiedeal aan (korting of gratis maand) — goedkeuring leidinggevende niet nodig onder €25.",
           "guidance": "Noem de deal proactief, niet als reactie op dreigen. 'Ik heb iets voor u klaargezet' werkt beter dan 'Als u blijft, dan…'"
-        },
-        {
-          "type": "crosssell",
-          "label": "Cross-sell: internet — klant heeft nog geen internet bij ons.",
-          "guidance": "Bundel het gesprek: 'Veel klanten besparen €10–15 per maand door energie én internet te combineren.'"
         }
       ]
     }

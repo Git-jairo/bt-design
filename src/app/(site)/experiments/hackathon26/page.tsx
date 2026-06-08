@@ -204,10 +204,9 @@ export default function Hackathon26() {
     actions: Action[];
   }[]>([]);
 
-  // Zoek klanten in de dataset
+  // Zoek klanten in de dataset (lege query = hele lijst)
   const searchCustomers = useCallback(async (q: string) => {
     setDebugQuery(q);
-    if (q.trim().length < 2) { setDebugResults([]); return; }
     try {
       const res = await fetch(`/api/customers?q=${encodeURIComponent(q)}`);
       if (res.ok) setDebugResults(await res.json());
@@ -552,7 +551,7 @@ export default function Hackathon26() {
             {/* Demo-knoppen */}
             <div className="flex gap-2">
               <button
-                onClick={() => { setDebugOpen(true); setDebugQuery(""); setDebugResults([]); }}
+                onClick={() => { setDebugOpen(true); searchCustomers(""); }}
                 className="flex-1 py-2 bg-inverse-surface text-inverse-on-surface rounded-lg text-label-caps font-bold flex items-center justify-center gap-1.5 hover:opacity-80 transition-opacity"
               >
                 <Icon name="bug_report" className="text-[15px]" />
@@ -834,7 +833,7 @@ export default function Hackathon26() {
                   className="flex-1 bg-transparent text-body-md text-on-surface outline-none placeholder:text-on-surface-variant"
                 />
                 {debugQuery && (
-                  <button onClick={() => { setDebugQuery(""); setDebugResults([]); }} className="text-on-surface-variant hover:text-on-surface">
+                  <button onClick={() => searchCustomers("")} className="text-on-surface-variant hover:text-on-surface">
                     <Icon name="close" className="text-[16px]" />
                   </button>
                 )}
@@ -843,10 +842,7 @@ export default function Hackathon26() {
 
             {/* Resultaten */}
             <div className="overflow-y-auto flex-1">
-              {debugQuery.length < 2 && (
-                <p className="text-body-md text-on-surface-variant text-center py-10">Typ minimaal 2 tekens om te zoeken</p>
-              )}
-              {debugQuery.length >= 2 && debugResults.length === 0 && (
+              {debugResults.length === 0 && (
                 <p className="text-body-md text-on-surface-variant text-center py-10">Geen resultaten gevonden</p>
               )}
               {debugResults.map((r) => (

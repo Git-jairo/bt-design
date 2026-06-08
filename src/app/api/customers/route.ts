@@ -29,16 +29,17 @@ export async function GET(req: NextRequest) {
     const db = getDb();
     const all = Object.values(db.byPhone) as CustomerRecord[];
 
-    const results = q.length < 2
-      ? []
-      : all
-          .filter((c) =>
-            c.name.toLowerCase().includes(q) ||
-            c.firstName?.toLowerCase().includes(q) ||
-            c.lastName?.toLowerCase().includes(q) ||
-            c.phone.includes(q)
-          )
-          .slice(0, 20)
+    const filtered = q.length < 1
+      ? all
+      : all.filter((c) =>
+          c.name.toLowerCase().includes(q) ||
+          c.firstName?.toLowerCase().includes(q) ||
+          c.lastName?.toLowerCase().includes(q) ||
+          c.phone.includes(q)
+        );
+
+    const results = filtered
+          .slice(0, 100)
           .map((c) => ({
             phone: c.phone,
             name: c.name,
