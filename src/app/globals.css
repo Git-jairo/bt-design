@@ -2,7 +2,12 @@
 @import "../design-system/tokens/primitives.css";
 @import "../design-system/tokens/semantics.css";
 @import "../design-system/tokens/components.css";
-@import "../design-system/tokens/hackathon26.css";
+/* Experiment-only theme. The file lives with its experiment
+   (app/(lab)/experiments/hackathon26/) and is out of the shared design system,
+   but must be imported through the Tailwind entry so its @theme block compiles.
+   These M3-shaped tokens are namespaced separately from the site's helix tokens
+   and are consumed only by the hackathon26 dashboard. */
+@import "./(lab)/experiments/hackathon26/hackathon26.css";
 
 /* ── Dark mode toggle ─────────────────────────────────────────────────────
    Only the two raw bg/fg vars are toggled; all semantic tokens are light-mode

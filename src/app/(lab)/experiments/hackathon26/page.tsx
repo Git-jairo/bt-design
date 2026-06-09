@@ -330,7 +330,7 @@ export default function Hackathon26() {
   // Poll Twilio API every 10 seconds — bewaart gesimuleerde callers
   const fetchQueue = useCallback(async () => {
     try {
-      const res = await fetch("/api/queue");
+      const res = await fetch("/api/experiments/hackathon26/queue");
       if (!res.ok) return;
       const data: Caller[] = await res.json();
       setLocalSeconds((prev) => {
@@ -418,7 +418,7 @@ export default function Hackathon26() {
   const cancelTask = async (id: string) => {
     if (!isSimulated(id)) {
       try {
-        await fetch(`/api/queue/${id}`, { method: "DELETE" });
+        await fetch(`/api/experiments/hackathon26/queue/${id}`, { method: "DELETE" });
       } catch {
         /* negeren — poll ruimt de rest op */
       }
@@ -435,7 +435,7 @@ export default function Hackathon26() {
     // Echte Twilio-call: stop de wachtmuziek en verbind de beller door
     if (!isSimulated(c.id)) {
       try {
-        await fetch(`/api/queue/${c.id}/accept`, { method: "POST" });
+        await fetch(`/api/experiments/hackathon26/queue/${c.id}/accept`, { method: "POST" });
       } catch {
         /* negeren — beller blijft in de wacht als dit faalt */
       }
@@ -683,7 +683,7 @@ export default function Hackathon26() {
                   </div>
                   <p className="text-on-surface-variant text-body-md flex items-center gap-2">
                     <Icon name="info" className="text-[16px]" />
-                    {usingLive ? "Bron: Twilio TaskRouter (live)" : "Bron: demo-data — koppel Twilio via /api/queue"}
+                    {usingLive ? "Bron: Twilio TaskRouter (live)" : "Bron: demo-data — koppel Twilio via /api/experiments/hackathon26/queue"}
                   </p>
                 </div>
                 {isActiveSelected ? (

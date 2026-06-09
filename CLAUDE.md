@@ -1,149 +1,103 @@
 @AGENTS.md
 
-# Hackathon 2026 - Bouwsessie samenvatting
-**Datum:** 3 juni 2026  
-**Project:** IVR Priority Queue Dashboard — Budget Thuis  
-**URL:** https://www.budgetthuis.design/hackathon26
+# BudgetThuis.Design
 
----
+The stable AI playground and design hub for the Budget Thuis Design & Product
+team. A Next.js 16 + React 19 + Tailwind v4 site that showcases the Helix Design
+System, hosts the public skills gallery, and contains a separate "Lab" of
+self-contained experiments. **Not experimental itself** — keep `main` shippable.
 
-## Wat we gebouwd hebben
+## Stack
 
-Een live agent-dashboard dat inkomende bellers prioriteert op basis van klantwaarde. Agents zien in één oogopslag wie er wacht, in welke volgorde, en waarom.
+- **Next.js 16** (App Router, Turbopack). This is a newer Next than your training
+  data — per `AGENTS.md`, read the relevant guide under `node_modules/next/dist/docs/`
+  before writing routing/config/data-fetching code.
+- **React 19**, **TypeScript**, **Tailwind v4**.
+- Storybook for component development. Vitest for unit tests. Deployed on Vercel.
 
----
-
-## Architectuur
-
-```
-Inbound call
-   ↓
-Twilio Voice number (+3197010252755)
-   ↓
-Twilio Function: identify-and-queue
-   ↓
-Klantwaarde lookup (hardcoded JSON)
-   ↓
-Prioriteitsbepaling (HVC ≥ 90 → 1000, overige → 0)
-   ↓
-TaskRouter task aangemaakt met priority + attributes
-   ↓
-Beller hoort welkomstboodschap + wachtmuziek (pause)
-   ↓
-Dashboard pollt /api/queue elke 10 seconden
-   ↓
-Agent ziet wachtrij live, gesorteerd op prioriteit
-```
-
----
-
-## Twilio-componenten
-
-| Component | Gebruik |
-|---|---|
-| Twilio Voice | Inkomende calls afhandelen |
-| Twilio Functions | Klantwaarde lookup + task aanmaken |
-| Twilio TaskRouter | Prioriteitswachtrij beheren |
-| Twilio Flex workspace | Bestaande workspace hergebruikt |
-
-### Workspace
-- **Naam:** Flex Task Assignment
-- **SID:** WS8921519e182aa5f5bcc858245adf35bd
-
-### Twilio Function: `identify-and-queue`
-- Herkent beller op telefoonnummer
-- Bepaalt klantwaarde en segment
-- Maakt TaskRouter task aan met `priority` en `attributes`
-- Speelt welkomstboodschap en houdt beller in de lijn via `twiml.pause`
-
----
-
-## Prioriteitslogica
+## Layout
 
 ```
-customerValueScore >= 90  →  priority = 1000  (High Value Customer, altijd voor)
-customerValueScore < 90   →  priority = 0     (normale wachtrij, op wachttijd)
+src/
+├── app/
+│   ├── layout.tsx              Root: <html>/<body>, fonts, globals.css
+│   ├── globals.css             Tailwind entry — imports all design-system tokens
+│   ├── (site)/                 The main BudgetThuis.Design site (Nav + Footer)
+│   │   ├── layout.tsx          Site chrome. Do NOT special-case experiments here.
+│   │   ├── skills/             Public skills gallery (reads src/data/skills.ts)
+│   │   └── …                   docs, case-studies, presentations, login, etc.
+│   ├── (lab)/                  "The Lab" — experiments, separate route group
+│   │   └── experiments/
+│   │       ├── layout.tsx      Minimal chrome (no site Footer)
+│   │       ├── page.tsx        Experiments index — list new experiments here
+│   │       └── <slug>/         One self-contained experiment per folder
+│   └── api/
+│       ├── …                   Site/shared API routes
+│       └── experiments/<slug>/ Experiment-scoped API routes
+├── design-system/              SHARED + STABLE: the Helix Design System
+│   ├── tokens/                 primitives.css, semantics.css, components.css
+│   ├── components/ patterns/ sections/
+│   ├── data/ lib/
+└── data/                       Datasets (customers, etc.)
+content/skills.registry.json    CMS: which skills are public + their metadata
+scripts/                        Build/codegen + experiment-scoped subfolders
 ```
 
-De `update-priorities` function (nog in te stellen als cron) verhoogt de prioriteit van normale klanten met hun wachttijd in seconden, zodat ze nooit permanent achteraan staan. Max prioriteit voor normale klanten: 999, zodat HVC altijd boven blijft.
+## Conventions
 
-### Dummy klantenset
+### Design tokens (Tailwind v4)
+- Tokens are defined with `@theme` in `design-system/tokens/*.css` and imported
+  through `app/globals.css` (the Tailwind entry). The site uses **helix-named**
+  tokens — e.g. `bg-screen`, `font-helix-display`, `font-helix-body`.
+- Don't hardcode hex/px values in components; use tokens. New shared tokens go in
+  `design-system/tokens/`, never inside a route or experiment.
 
-| Nummer | Naam | Segment | Score | Tag |
-|---|---|---|---|---|
-| +31610487300 | Jairo | Premium | 95 | High Value Customer |
-| +31625505989 | Roel | Zakelijk | 80 | |
-| +31610794453 | Safira | Standaard | 45 | |
-| +31610000004 | Daan | Nieuw | 25 | |
-| +31610000005 | Emma | Risico op churn | 70 | |
+### Experiments ("The Lab")
+- Experiments live in `app/(lab)/experiments/<slug>/` and are **not part of the
+  main site**. They inherit no site chrome and render their own navigation.
+- Keep each experiment **self-contained**: its page, components, CSS, and any API
+  routes (`app/api/experiments/<slug>/`) and scripts (`scripts/experiments/<slug>/`)
+  stay together. Experiment-only CSS must NOT go in `design-system/tokens/`.
+  - `hackathon26` is the reference example. Its Tailwind `@theme` lives at
+    `app/(lab)/experiments/hackathon26/hackathon26.css` and is imported via
+    `globals.css` because `@theme` only compiles through the Tailwind entry; its
+    M3-shaped tokens are namespaced apart from the site's helix tokens.
+- To add an experiment: create the folder, build the page, add an entry to
+  `app/(lab)/experiments/page.tsx`. Add a `/<slug>` → `/experiments/<slug>`
+  redirect in `next.config.ts` only if you need a short public URL.
 
----
+### Skills gallery
+- The source of truth for skill **content** is the **bt-mainframe** repo
+  (`../bt-mainframe/.claude/skills/`). This site publishes a curated subset.
+- The **`public/skills/` folder is the published set**: each `<slug>.zip` is the
+  downloadable artifact and each `<slug>.json` holds its website metadata
+  (title, description, roles, expertise, optional featureGraphic). A skill that
+  isn't zipped here stays private (Claude-only).
+- Two scripts, run in order:
+  - `npm run export-skills` — interactive packaging. Walks bt-mainframe and asks
+    per skill whether to zip it into `public/skills/` (`y/N`, or `a` = all
+    remaining). Already-exported skills prompt **Update?**; new ones get a
+    metadata `.json` stub to flesh out. Re-zipping never overwrites an existing
+    `.json`. Override the mainframe path with `BT_MAINFRAME_DIR`; `--list` prints
+    status without prompting.
+  - `npm run sync-skills` — rebuilds `src/data/skills.ts` from `public/skills/`.
+    **Never edit skills.ts by hand.**
+- Skills that don't live in bt-mainframe (e.g. `prompt-optimizer`) are just a
+  hand-placed `zip` + `json` in `public/skills/`; `export-skills` leaves them
+  alone and `sync-skills` picks them up like any other.
 
-## Dashboard (Next.js op Vercel)
-
-### Tech stack
-- **Framework:** Next.js 16 (App Router, TypeScript, Tailwind)
-- **Hosting:** Vercel
-- **Domein:** budgetthuis.design
-- **Repo:** github.com/Git-jairo/bt-design
-
-### Pagina: `/hackathon26`
-- Linkerkolom: live wachtrij gesorteerd op prioriteit
-  - Klantwaardescore in cirkel (kleurgecodeerd)
-  - Segment + telefoonnummer als caption
-  - Wachttijd tikt elke seconde op in de browser
-  - HVC-badge voor klanten met score ≥ 90
-- Rechterkolom: klantdetailpanel bij selectie
-  - Segment, prioriteit, wachttijd, telefoonnummer
-  - Aanbevolen aanpak per segment
-  - Knop om gesprek te cancellen
-
-### API routes
-
-| Route | Methode | Functie |
-|---|---|---|
-| `/api/queue` | GET | Haalt pending tasks op uit TaskRouter |
-| `/api/queue/[sid]` | DELETE | Cancelt een specifieke task |
-
-### Polling strategie
-- Elke 10 seconden haalt de pagina verse data op via `/api/queue`
-- Wachttijdtimers tikken lokaal elke seconde zonder API-call
-- Zolang Twilio geen data geeft, toont het dashboard demodata
-
-### Environment variables (Vercel + .env.local)
-```
-TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-TWILIO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-TWILIO_WORKSPACE_SID=WS8921519e182aa5f5bcc858245adf35bd
-```
-
----
-
-## Openstaande punten
-
-1. **Task creation bug:** de `tasks.create()` aanroep in de Function faalt soms zonder zichtbare error. Function logs nog te controleren via Twilio Console > Functions > Logs.
-2. **update-priorities cron:** de wachttijdbonus voor normale klanten wordt nog niet automatisch herberekend. Cron-trigger via cron-job.org of Vercel Cron instellen op de `/update-priorities` Function URL.
-3. **Wachtmuziek:** `twiml.pause` vervangen door `twiml.play` met een mp3 uit de `/public` map op Vercel.
-4. **Gesprek accepteren:** de "Accepteer gesprek" knop is nog niet gekoppeld aan de Twilio Voice SDK. Hiervoor is een Access Token nodig met Voice + TaskRouter grants.
-
----
-
-## Lokaal draaien
+## Commands
 
 ```bash
-cd bt-design
-npm run dev
-# → http://localhost:3000/hackathon26
+npm run dev                 # http://localhost:3000
+npm run build               # production build (run before pushing)
+npm run lint
+npm run sync-skills         # rebuild the skills gallery from the registry
+npm run sync-skills:curate  # interactively add/remove public skills
+npm run storybook
 ```
 
-Wijzigingen zijn direct zichtbaar zonder te pushen. Env vars worden geladen vanuit `.env.local`.
+## Deploy
 
-## Deployen
-
-Push naar `main` branch, Vercel deployt automatisch.
-
-```bash
-git add .
-git commit -m "beschrijving"
-git push
-```
+Push to `main`; Vercel deploys automatically. Secrets (Twilio, etc.) live in
+`.env.local` locally and Vercel project env vars in production.

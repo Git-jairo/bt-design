@@ -1,10 +1,15 @@
-customer_id,voorletters,voornaam,tussenvoegsel,naam,geslacht,geboortedatum,telefoon,email,nuts_home_customer_nr
-CID-JURY001,,Maarten,,Boom,M,,31620250568,maarten.boom@jury.nl,9999001
-CID-JURY002,,Floris,de,Haes,M,,31643909291,floris.dehaes@jury.nl,9999002
-CID-JURY003,,Ella,,Tupan,V,,31640087321,ella.tupan@jury.nl,9999003
-CID-JURY004,,Sven,,Pronk,M,,31641609244,sven.pronk@jury.nl,9999004
-CID-JURY005,,Sjef,,Peeraer,M,,31651197847,sjef.peeraer@jury.nl,9999005
-CID-JURY006,,Ralph,,Thoen,M,,31620091818,ralph.thoen@jury.nl,9999006
-CID-JURY007,,Mark,,Zaal,M,,31624809069,mark.zaal@jury.nl,9999007
-CID-JURY008,,James,,Chowen,M,,31657804251,james.chowen@jury.nl,9999008
-CID-JURY009,,Jairo,in der,Beeck,M,,31610487300,jairo@inderbeeck.com,9999009
+customer_id;voorletters;voornaam;tussenvoegsel;naam;geslacht;geboortedatum;telefoon;email;nuts_home_customer_nr
+CID-AA00001;M.E.B.;Iris;;Verhelst;V;;738603028;maarten.boom@budgetthuis.nl;620250568
+CID-AA00002;A.C.L.M.;Kevin;;Linschoten;M;;31848638266;floris.dehaes@budgetthuis.nl;643909291
+CID-AA00003;H.;Rob;;Kraa;M;;31755526198;ella.tupan@budgetthuis.nl;6863033
+CID-AA00004;R.W.;Patrick;;Aalders;M;;31922028647;sven.pronk@budgetthuis.nl;6863040
+CID-AA00005;J.;Vincent;van;Pelt;M;;31835289394;sjef.peeraer@budgetthuis.nl;6863078
+CID-AA00006;H.G.R.;Joran;;Maas;M;;31807287273;ciy3eqgzy66@aol.com;6863084
+CID-AA00007;H.C.;Lars;;Loudon;M;;31993879649;p674vuat6j@aol.com;6863104
+CID-AA00008;J.W.;Pieter;;Erdman;M;;31985092548;sylvain.newman@gmail.com;6863128
+CID-AA00009;A.H.;Maarten;van;Dam;M;;31670385500;yq1e7lwylku@hotmail.com;6863131
+CID-AA00010;P.W.S.M.;Kees;;Klein Hofmeijer;M;;31994316809;hubert.garcia@msn.com;6863144
+CID-AA00011;J.P.A.;Marcel;;Schavemaker;M;;31850758611;yl7z7hivl1r3sof4p1@googlemail.com;6863210
+CID-AA00012;W.;Stefan;;Broer;M;;31901938813;cc5zulehoni2qi5x@rediffmail.com;6863226
+CID-AA00013;H.;Rik;;Haange;M;;31780204481;calean.head@yahoo.com;6863238
+CID-AA00014;C.A.;Sophie;;Stephan;V;;31894665829;xy6lmb1r42uk2hgshdo@msn.com;6863254

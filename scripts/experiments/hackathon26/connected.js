@@ -1,7 +1,7 @@
 // connected — Twilio Function
 // Plak deze code in de Twilio Console onder Functions > Services (zelfde service
 // als identify-and-queue). Stel de visibility in op "Public" zodat de
-// calls.update() redirect uit /api/queue/[sid]/accept hem kan bereiken.
+// calls.update() redirect uit /api/experiments/hackathon26/queue/[sid]/accept hem kan bereiken.
 //
 // Deze Function vervangt de wachtmuziek: de beller hoort kort "je wordt nu
 // doorverbonden" en daarna stilte (geen muziek meer) — alsof de agent opneemt.

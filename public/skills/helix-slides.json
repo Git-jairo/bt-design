@@ -1,0 +1,8 @@
+{
+  "title": "Helix Slides",
+  "description": "Auto-generate on-brand Budget Thuis slide decks directly from a prompt — no Figma, no manual formatting.",
+  "longDescription": "Helix Slides is a Claude Code skill that produces fully self-contained HTML presentation files styled to the Budget Thuis brand. Give it a topic and a handful of bullet points and it returns a polished deck with cover slide, section dividers, two-column layouts, stat cards and smooth CSS animations — all in a single file that opens anywhere without a build step.\n\nBuilt on the Helix Design System tokens: brand colours, Budget Greet Narrow for headings, Inter for body text. Every output is pixel-consistent with the visual identity.",
+  "roles": ["Designer", "Product Manager", "Marketer", "Leadership"],
+  "expertise": ["Branding", "Automation", "Presentations"],
+  "featureGraphic": "/images/cover-helix-slides.webp"
+}
