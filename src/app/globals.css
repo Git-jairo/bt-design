@@ -9,6 +9,12 @@
    and are consumed only by the hackathon26 dashboard. */
 @import "./(lab)/experiments/hackathon26/hackathon26.css";
 
+/* Helix AI sub-theme. Static @theme utilities (--color-ai-*, --shadow-ai-*) and
+   animation keyframes used by the /experiments/ai accelerator showcase.
+   Dynamic theme vars (--ai-*) live on .ai-root / .ai-root[data-theme="dark"].
+   Folder src/helix-ai/ has zero app-specific imports — portable as an npm package. */
+@import "../helix-ai/tokens.css";
+
 /* ── Dark mode toggle ─────────────────────────────────────────────────────
    Only the two raw bg/fg vars are toggled; all semantic tokens are light-mode
    only for now. Extend semantics.css when dark mode support is added.       */

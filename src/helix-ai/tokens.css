@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HELIX AI — Sub-theme Token Layer
+   An energy layer on top of the Helix Design System for the AI Accelerator.
+   All tokens are namespaced --ai-* to coexist with site tokens and hackathon26.
+
+   Portability: this folder (src/helix-ai/) has zero app-specific imports and
+   can be extracted as an npm package unchanged.
+
+   Two layers:
+     1. @theme block  — static Tailwind utilities (--color-ai-*, --shadow-ai-*)
+     2. .ai-root / .ai-root[data-theme="dark"]  — dynamic CSS vars for dark mode
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Static brand palette ──────────────────────────────────────────────── */
+  --color-ai-mint:          #00D780;
+  --color-ai-mint-dim:      #03BA70;
+  --color-ai-mint-glow:     rgba(0, 215, 128, 0.18);
+  --color-ai-teal:          #029B77;
+  --color-ai-teal-deep:     #006B50;
+  --color-ai-ink:           #141515;
+  --color-ai-screen:        #F9FBF8;
+  --color-ai-brand-muted:   #EBF2E8;
+
+  /* ── AI elevated shadows ───────────────────────────────────────────────── */
+  --shadow-ai-card:         0 4px 24px rgba(2, 155, 119, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-ai-card-raised:  0 8px 48px rgba(2, 155, 119, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-ai-glow:         0 0 40px rgba(0, 215, 128, 0.28);
+  --shadow-ai-inner-glow:   inset 0 0 24px rgba(0, 215, 128, 0.10);
+
+  /* ── Animation timing ──────────────────────────────────────────────────── */
+  --duration-ai-fast:   120ms;
+  --duration-ai-base:   240ms;
+  --duration-ai-slow:   480ms;
+  --duration-ai-crawl: 6000ms;
+}
+
+/* ── Dynamic theme layer — light (default) ─────────────────────────────── */
+.ai-root {
+  --ai-bg:               #F9FBF8;
+  --ai-bg-alt:           #EBF2E8;
+  --ai-surface:          #FFFFFF;
+  --ai-surface-raised:   #FFFFFF;
+  --ai-surface-muted:    #F4F7F3;
+  --ai-surface-inverted: #141515;
+
+  --ai-fg:               #141515;
+  --ai-fg-2:             rgba(20, 21, 21, 0.55);
+  --ai-fg-3:             rgba(20, 21, 21, 0.35);
+  --ai-fg-inverse:       #F9FBF8;
+
+  --ai-accent:           #00D780;
+  --ai-accent-dim:       #029B77;
+  --ai-accent-bg:        rgba(0, 215, 128, 0.10);
+  --ai-accent-border:    rgba(0, 215, 128, 0.30);
+
+  --ai-border:           rgba(20, 21, 21, 0.07);
+  --ai-border-medium:    rgba(20, 21, 21, 0.14);
+
+  --ai-card-shadow:      0 4px 24px rgba(2, 155, 119, 0.08), 0 1px 4px rgba(0, 0, 0, 0.05);
+  --ai-card-hover:       0 8px 40px rgba(2, 155, 119, 0.14), 0 2px 6px rgba(0, 0, 0, 0.07);
+
+  --ai-blob-1:           rgba(0, 215, 128, 0.22);
+  --ai-blob-2:           rgba(2, 155, 119, 0.16);
+  --ai-blob-3:           rgba(235, 242, 232, 0.80);
+
+  --ai-metric-bg:        #F0FBF5;
+  --ai-metric-border:    rgba(0, 215, 128, 0.20);
+}
+
+/* ── Dynamic theme layer — dark ────────────────────────────────────────── */
+.ai-root[data-theme="dark"] {
+  --ai-bg:               #080D0B;
+  --ai-bg-alt:           #0D1410;
+  --ai-surface:          #121A16;
+  --ai-surface-raised:   #1A2420;
+  --ai-surface-muted:    #0F1612;
+  --ai-surface-inverted: #F9FBF8;
+
+  --ai-fg:               #EEF5F0;
+  --ai-fg-2:             rgba(238, 245, 240, 0.60);
+  --ai-fg-3:             rgba(238, 245, 240, 0.35);
+  --ai-fg-inverse:       #141515;
+
+  --ai-accent:           #00D780;
+  --ai-accent-dim:       #2FE19C;
+  --ai-accent-bg:        rgba(0, 215, 128, 0.12);
+  --ai-accent-border:    rgba(0, 215, 128, 0.24);
+
+  --ai-border:           rgba(238, 245, 240, 0.08);
+  --ai-border-medium:    rgba(238, 245, 240, 0.16);
+
+  --ai-card-shadow:      0 4px 32px rgba(0, 0, 0, 0.40), 0 1px 4px rgba(0, 0, 0, 0.30);
+  --ai-card-hover:       0 8px 48px rgba(0, 215, 128, 0.20), 0 2px 8px rgba(0, 0, 0, 0.40);
+
+  --ai-blob-1:           rgba(0, 215, 128, 0.12);
+  --ai-blob-2:           rgba(2, 155, 119, 0.10);
+  --ai-blob-3:           rgba(18, 26, 22, 0.90);
+
+  --ai-metric-bg:        rgba(0, 215, 128, 0.08);
+  --ai-metric-border:    rgba(0, 215, 128, 0.16);
+}
+
+/* ── Gradient blob animation ──────────────────────────────────────────── */
+@keyframes ai-blob-drift {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  25%       { transform: translate(20px, -25px) scale(1.04); }
+  50%       { transform: translate(-15px, 15px) scale(0.97); }
+  75%       { transform: translate(10px, -10px) scale(1.02); }
+}
+
+@keyframes ai-blob-drift-b {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(-25px, 20px) scale(1.06); }
+  66%       { transform: translate(20px, -15px) scale(0.95); }
+}
+
+/* ── Entry animations ─────────────────────────────────────────────────── */
+@keyframes ai-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ai-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Shimmer / skeleton ───────────────────────────────────────────────── */
+@keyframes ai-shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+/* ── Metric number reveal ─────────────────────────────────────────────── */
+@keyframes ai-metric-pop {
+  0%   { opacity: 0; transform: scale(0.88) translateY(6px); }
+  70%  { opacity: 1; transform: scale(1.04) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* ── Spinning gradient ring ───────────────────────────────────────────── */
+@keyframes ai-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Pulse glow ───────────────────────────────────────────────────────── */
+@keyframes ai-glow-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.08); }
+}
+
+/* ── Accessibility: keyboard focus ring within the AI Accelerator ─────── */
+.ai-root :is(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--ai-accent-dim);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

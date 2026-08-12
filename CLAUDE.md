@@ -101,3 +101,44 @@ npm run storybook
 
 Push to `main`; Vercel deploys automatically. Secrets (Twilio, etc.) live in
 `.env.local` locally and Vercel project env vars in production.
+
+
+## BudgetThuis.AI -> POC
+
+**CONTEXT:**
+- Stack: React, next.js, Tailwind CSS v4 (@theme block mapping to CSS variables, no hardcoded hex in components). Matches the existing budgetthuis.design stack.
+- Helix base tokens to extend: mint / teal / ink / screen palette; Greet Narrow headings; Inter body; flat fills; card-on-canvas. Brand anchor #EBF2E8 at gray-100; grayscale ramp 0=white to 1000=black.
+- Helix AI = a sub-theme on top of Helix: animated gradients, dynamic type scale, elevated card-on-canvas. Same tokens, more energy.
+
+**DATA MODEL (resolve the contradiction):**
+- Two sample CSVs bundled in /public/data: skills.csv, cases.csv.
+- One loader module exposing loadSkills() and loadCases(): fetch + parse CSV at runtime. Default source = local /data/*.csv, swappable to a remote endpoint via a single BASE_URL constant. This satisfies "runs immediately" and "real source later".
+- Skills schema: id, title, description, category, claudeEnterpriseLink, feedbackUrl.
+- Cases schema: id, title, author, date, introduction, problem, hypothesis, approach, conclusion, datasection, imageUrl, templateVariant.
+- datasection = JSON string per cell, e.g. {"hoursSaved":120,"processesAutomated":4,"impact":"..."}. Parse safely. Hide the metric block if empty or invalid.
+- imageUrl may be empty or dead: render a deterministic gradient placeholder keyed to the case id.
+
+**FEATURES:**
+- Skills Registry: card grid from skills.csv, hover states, feedback button (feedbackUrl), card links to claudeEnterpriseLink.
+- Case Study Showcase: render each case through rotating visual templates (3 to 4 variants), identical narrative order (intro, problem, hypothesis, approach, conclusion, metrics). Use templateVariant when set, else assign by index modulo N. Conditionally hide any empty section (e.g. skip hypothesis if absent).
+- Metric callouts: animated reveal of datasection values (hours saved, processes automated, impact), 3 to 4 callout template variants.
+- News Hub: simple feed section for AI org updates (sample data inline).
+- Governance page, guidelines, usage crits and things. Official docs, how to use, shortcut to training etc.
+- Dark mode: light/dark toggle, persist in localStorage, respect prefers-color-scheme on first load, switch a data-theme attribute that flips CSS variables.
+- Analytics: read VITE_GA_ID from env; if unset, all tracking noops (no console errors). Track page_view, skill_click, case_view, case_expand.
+
+**CONSTRAINTS:**
+- Portability boundary: all Helix AI tokens in src/helix-ai/tokens.css as CSS custom properties under :root and [data-theme="dark"]. All Helix AI components in src/helix-ai/ with zero app-specific imports, so the folder lifts into an npm package unchanged. App code imports only from src/helix-ai.
+- No hardcoded colors in components, CSS variables only.
+- Responsive, mobile first.
+
+**BUILD ORDER (single session, ship each before starting the next):**
+1. next.js + React + Tailwind v4 scaffold, Helix AI tokens, light/dark toggle.
+2. CSV loaders + sample skills.csv and cases.csv. I provided an existing cases file, enrich and add 10 examples of AI usecases as placeholder. But do make them creative, relevant and sparking.
+3. Homepage, overview, hyper modern animated landingspage.
+3. Skills Registry page.
+4. Case Study Showcase: conditional sections, template rotation, animated metric callouts.
+5. News Hub.
+6. Analytics wiring with noop fallback.
+7. README.
+If session budget runs short, stop at the last fully working step and list what is stubbed.

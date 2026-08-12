@@ -5,6 +5,36 @@ export const metadata = { title: "Experiments — BudgetThuis.Design" };
 
 const EXPERIMENTS = [
   {
+    slug: "bespaarmelder",
+    label: "Bespaarmelder",
+    subtitle: "Klantdataplatform",
+    description:
+      "One central customer-data platform across every touchpoint: capture → store → activate. Play a live scenario (agent chat, Bespaarmelder mail, app signal) and watch data populate the profile, scores recompute, and the right action fire — cross-sell, renewal or win-back.",
+    tags: ["Concept", "Customer Data", "Cross-sell", "Retention"],
+    status: "live" as const,
+    date: "June 2026",
+  },
+  {
+    slug: "ai",
+    label: "AI Accelerator",
+    subtitle: "AI CoE",
+    description:
+      "The internal hub for AI at Budget Thuis: skills registry, case study showcase, news feed, and governance guide — all in one hyper-modern interface with light/dark mode.",
+    tags: ["Claude", "Skills", "Case Studies", "Governance"],
+    status: "live" as const,
+    date: "June 2026",
+  },
+  {
+    slug: "contract-renewal",
+    label: "Mijn Omgeving Renewal",
+    subtitle: "Contract flow prototype",
+    description:
+      "A guided contract renewal flow for Mijn Omgeving: pick a term, keep or upgrade speed, add TV or Bellen, see the price update live. Exported as a self-contained prototype.",
+    tags: ["Prototype", "Mijn Omgeving", "Retention"],
+    status: "live" as const,
+    date: "August 2026",
+  },
+  {
     slug: "hackathon26",
     label: "One Stop Shop",
     subtitle: "Hackathon 2026",
