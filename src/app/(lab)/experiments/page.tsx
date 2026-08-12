@@ -25,12 +25,22 @@ const EXPERIMENTS = [
     date: "June 2026",
   },
   {
-    slug: "contract-renewal",
-    label: "Mijn Omgeving Renewal",
+    slug: "internet-contract-renewal/a",
+    label: "Internet Renewal — A",
     subtitle: "Contract flow prototype",
     description:
-      "A guided contract renewal flow for Mijn Omgeving: pick a term, keep or upgrade speed, add TV or Bellen, see the price update live. Exported as a self-contained prototype.",
-    tags: ["Prototype", "Mijn Omgeving", "Retention"],
+      "Variant A of the guided internet contract renewal flow for Mijn Omgeving. Exported as a self-contained prototype and tested against variant B in Maze.",
+    tags: ["Prototype", "Mijn Omgeving", "A/B", "Retention"],
+    status: "live" as const,
+    date: "August 2026",
+  },
+  {
+    slug: "internet-contract-renewal/b",
+    label: "Internet Renewal — B",
+    subtitle: "Contract flow prototype",
+    description:
+      "Variant B of the guided internet contract renewal flow for Mijn Omgeving. Exported as a self-contained prototype and tested against variant A in Maze.",
+    tags: ["Prototype", "Mijn Omgeving", "A/B", "Retention"],
     status: "live" as const,
     date: "August 2026",
   },
