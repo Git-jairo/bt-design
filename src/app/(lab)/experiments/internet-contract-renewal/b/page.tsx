@@ -1,5 +1,3 @@
-import { MazeSnippet } from "@/components/MazeSnippet";
-
 export const metadata = {
   title: "Internet Contract Renewal — Variant B",
 };
@@ -18,7 +16,6 @@ export default function ContractRenewalVariantBPage() {
         title="Internet Contract Renewal — Variant B"
         className="h-full w-full border-0"
       />
-      <MazeSnippet />
     </div>
   );
 }

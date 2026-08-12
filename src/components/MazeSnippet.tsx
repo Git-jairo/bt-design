@@ -1,30 +1,25 @@
-"use client";
-
-import Script from "next/script";
-
 /**
- * Maze universal snippet.
+ * Maze universal snippet — loaded site-wide from the root layout's `<head>`.
  *
- * Drop `<MazeSnippet />` into any page that should be reachable by a Maze
- * study. It's a client component so it can be used from server pages too.
+ * Three things to know before you move this:
  *
- * Two things to know:
- *
- *  1. Maze targets studies against the URL of the **top-level window** it's
- *     loaded in. Never put this inside an iframed static prototype — from
- *     there the URL is the asset path (e.g.
- *     `/experiments/foo/index.html`) and no `/experiments/foo` targeting
- *     rule will ever match. Mount it on the real Next.js route instead.
- *  2. It must be mounted per-page rather than once in the root layout,
- *     because Maze reads the URL at load time; keeping it explicit makes it
- *     obvious which routes are instrumented.
+ *  1. It renders a plain `<script>` inside the root layout's `<head>`, NOT
+ *     `next/script`. Maze's installation check fetches the raw HTML and
+ *     looks for the snippet in the head. `next/script` can't satisfy that:
+ *     `afterInteractive` injects the tag client-side after hydration, and
+ *     even `beforeInteractive` — which does land in the server HTML — emits
+ *     at the top of `<body>`, so the check still reports it missing.
+ *  2. Maze targets studies against the URL of the **top-level window**.
+ *     Never inline this into an iframed static prototype: from in there the
+ *     URL is the asset path (e.g. `/experiments/foo/a.html`), which no
+ *     `/experiments/foo/a` targeting rule will ever match. Loading it on
+ *     the real Next route lets Maze see the real app route.
+ *  3. Because it lives in the root layout it covers every page — site and
+ *     Lab alike. No page should render `<MazeSnippet />` itself.
  */
 const MAZE_API_KEY = "10378d98-15ab-41cf-aac4-32036fea7bef";
 
-export function MazeSnippet() {
-  return (
-    <Script id="maze-universal-snippet" strategy="afterInteractive">
-      {`(function (m, a, z, e) {
+const MAZE_SNIPPET = `(function (m, a, z, e) {
   var s, t, u, v;
   try {
     t = m.sessionStorage.getItem('maze-us');
@@ -49,7 +44,8 @@ export function MazeSnippet() {
   if (v) s.setAttribute('nonce', v);
   a.getElementsByTagName('head')[0].appendChild(s);
   m.mazeUniversalSnippetApiKey = e;
-})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '${MAZE_API_KEY}');`}
-    </Script>
-  );
+})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '${MAZE_API_KEY}');`;
+
+export function MazeSnippet() {
+  return <script dangerouslySetInnerHTML={{ __html: MAZE_SNIPPET }} />;
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MazeSnippet }   from "@/components/MazeSnippet";
 import { Nav }           from "@/design-system/components/Nav";
 import { Hero }          from "@/design-system/sections/Hero";
 import { AssetGrid }     from "@/design-system/sections/AssetGrid";
@@ -62,7 +61,6 @@ export default function HomePage() {
       <DocsBlock />
       <CaseStudies />
       <GrowthSection />
-      <MazeSnippet />
     </div>
   );
 }

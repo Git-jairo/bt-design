@@ -1,5 +1,3 @@
-import { MazeSnippet } from "@/components/MazeSnippet";
-
 export const metadata = {
   title: "Internet Contract Renewal — Variant A",
 };
@@ -13,8 +11,8 @@ export const metadata = {
  * with Next's hydration. If a variant wins, rebuild it as real components
  * against the Helix Design System.
  *
- * The Maze snippet is mounted here, on the real route, not inside the
- * iframe — see the note in `MazeSnippet`.
+ * The Maze snippet is NOT inlined here — it loads site-wide from the root
+ * layout, on the real route rather than inside the iframe. See `MazeSnippet`.
  */
 export default function ContractRenewalVariantAPage() {
   return (
@@ -24,7 +22,6 @@ export default function ContractRenewalVariantAPage() {
         title="Internet Contract Renewal — Variant A"
         className="h-full w-full border-0"
       />
-      <MazeSnippet />
     </div>
   );
 }
