@@ -15,12 +15,6 @@ import Link from "next/link";
 export default function ContractRenewalPage() {
   return (
     <div className="fixed inset-0 bg-white">
-      <Link
-        href="/experiments"
-        className="fixed top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white backdrop-blur-sm transition-colors hover:bg-black/80"
-      >
-        ← Lab
-      </Link>
       <iframe
         src="/experiments/contract-renewal/index.html"
         title="Mijn Omgeving — Contract Renewal"
