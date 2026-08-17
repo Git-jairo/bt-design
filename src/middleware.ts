@@ -27,7 +27,10 @@ export function middleware(req: NextRequest) {
   const session = req.cookies.get("site_session");
   if (!session) {
     const loginUrl = req.nextUrl.clone();
+    const from = loginUrl.pathname + loginUrl.search;
     loginUrl.pathname = "/login";
+    loginUrl.search = "";
+    loginUrl.searchParams.set("from", from);
     return NextResponse.redirect(loginUrl);
   }
 
