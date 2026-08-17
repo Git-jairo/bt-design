@@ -13,6 +13,8 @@ export default function LoginPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (loading || password.length === 0) return;
+
     setLoading(true);
     setError(false);
 
@@ -60,8 +62,9 @@ export default function LoginPage() {
           />
           <button
             type="submit"
-            disabled={loading || password.length === 0}
-            className="h-12 w-12 rounded-xl bg-gray-950 text-gray-0 flex items-center justify-center disabled:opacity-30 hover:bg-gray-950/80 transition-colors"
+            aria-disabled={loading || password.length === 0}
+            className={`h-12 w-12 rounded-xl bg-gray-950 text-gray-0 flex items-center justify-center transition-colors
+              ${loading || password.length === 0 ? "opacity-30" : "hover:bg-gray-950/80"}`}
             aria-label="Submit"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
