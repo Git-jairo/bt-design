@@ -1,0 +1,1507 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   DASHBOARD — Mijn Omgeving overview (experiment-scoped styles)
+
+   The custom properties on .root mirror the Figma variables of the Mijn
+   Omgeving file 1:1 (names kept close to the Figma paths so the two can be
+   diffed by eye). Values were resolved with get_variable_defs — NOT the stale
+   fallbacks baked into Figma's generated code.
+
+   Nothing here belongs in design-system/tokens/: this is the Mijn Omgeving
+   (VI26) product theme, which is a different token set from the helix tokens
+   the BudgetThuis.Design site itself runs on.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.root {
+  /* ── Surfaces ─────────────────────────────────────────────────────────── */
+  --surface-default: #ffffff;
+  --surface-brand: #00d780;
+  --surface-secondary: #efefef;
+  --surface-tertiary: #fafafa;
+  --surface-promotion: #ffde00;
+  --nav-surface-inverted: #3c3c3c;
+  --nav-surface-inverted-darker: #1a1a1a;
+
+  /* ── Fills & text ─────────────────────────────────────────────────────── */
+  --fill-default: #000000;
+  --fill-disabled: #9f9f9f;
+  --text-default: #3c3c3c;
+  --text-inactive: #6e6e6e;
+  --text-inverted: #ffffff;
+  --border-success: #267423;
+
+  /* ── Components ───────────────────────────────────────────────────────── */
+  --btn-primary-surface: #000000;
+  --btn-primary-content: #ffffff;
+  --btn-cta-surface: #00d780;
+  --btn-cta-content: #000000;
+
+  /* ── Geometry ─────────────────────────────────────────────────────────── */
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --wrapper-max: 1152px;
+  --breakpoint-margin: 16px;
+  --shadow-default: 0 4px 8px rgba(60, 60, 60, 0.05);
+
+  /* ── Type ─────────────────────────────────────────────────────────────── */
+  /* Budget Greet Narrow is the VI26 display face and is already self-hosted
+     by the design system (primitives.css). Open Sans arrives via next/font
+     in this experiment's layout; Inter is self-hosted too.                  */
+  --font-display: var(--font-helix-display), sans-serif;
+  --font-body: var(--font-open-sans), sans-serif;
+  --font-content: "Inter", sans-serif;
+
+  /* Mobile mode of the Figma type scale; the desktop mode is applied below. */
+  --type-hero-size: 32px;
+  --type-hero-height: 32px;
+  --type-section-size: 24px;
+  --type-section-height: 24px;
+
+  background: var(--surface-default);
+  color: var(--text-default);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .root {
+    /* Desktop mode of the same Figma variables. */
+    --type-hero-size: 64px;
+    --type-hero-height: 64px;
+    --type-section-size: 32px;
+    --type-section-height: 32px;
+  }
+}
+
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+/* ── Icons ────────────────────────────────────────────────────────────────
+   The box size comes from the inline style (Figma's icon container); the
+   artwork keeps its own dimensions centred inside it, so no glyph is ever
+   stretched to fill its container.                                          */
+.icon {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.icon img {
+  display: block;
+}
+
+/* Every section centres a 1152px wrapper inside a full-bleed band. */
+.wrapper {
+  width: 100%;
+  max-width: var(--wrapper-max);
+  margin-inline: auto;
+  padding-inline: var(--breakpoint-margin);
+}
+
+/* ═══ Top nav ═════════════════════════════════════════════════════════════ */
+
+.topnav {
+  background: var(--surface-default);
+  box-shadow: var(--shadow-default);
+  position: relative;
+  z-index: 2;
+}
+
+.topnavInner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  left: var(--breakpoint-margin);
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm);
+}
+
+.logo img {
+  height: 64px;
+  width: 92px;
+  display: block;
+}
+
+.menuItems {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.menuItem {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-inactive);
+  white-space: nowrap;
+}
+
+.menuItem img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.profile {
+  position: absolute;
+  right: var(--breakpoint-margin);
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--fill-default);
+}
+
+.profile img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+/* Below the nav's natural width the labels drop away and the logo shrinks, so
+   the centred menu clears the absolutely-positioned logo and profile. */
+@media (max-width: 640px) {
+  .logo img {
+    height: 44px;
+    width: 63px;
+  }
+  .menuItem {
+    width: 56px;
+  }
+  .menuItem span,
+  .profile span {
+    display: none;
+  }
+  .profile {
+    padding-inline: var(--space-sm);
+  }
+}
+
+/* ═══ Hero (green band + product cards) ═══════════════════════════════════ */
+
+.hero {
+  background: var(--surface-brand);
+  box-shadow: var(--shadow-default);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding-block: var(--space-xl);
+}
+
+/* Variant A stacks the cards further from the title than variant B does. */
+.heroInner[data-variant="a"] {
+  gap: var(--space-xl);
+  align-items: flex-start;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-hero-size);
+  line-height: var(--type-hero-height);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--fill-default);
+  width: 100%;
+  margin: 0;
+}
+
+.heroTitle span {
+  display: block;
+}
+
+.heroTitle span + span {
+  margin-top: var(--space-sm);
+}
+
+.cardsRow {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Variant A is a grid, not a flex row: a cross-sell column is a card *plus* a
+   reminder link, and only the cards must share a height. Row 1 holds every
+   card, row 2 only the links — so a card next to a linkless one still ends at
+   the same y. Row 2 is implicit and never created when nothing is in it. */
+.cardsRow[data-variant="a"] {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-lg);
+  align-items: stretch;
+}
+
+.cardsRow[data-variant="b"] {
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .cardsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ── Shared card chrome ───────────────────────────────────────────────── */
+
+.card {
+  background: var(--surface-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-default);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardsRow[data-variant="a"] .card {
+  padding: var(--space-md);
+  gap: var(--space-md);
+  align-items: center;
+  min-width: 0;
+  grid-row: 1;
+}
+
+/* The wrapper dissolves so its card and link become grid items in their own
+   right — the card can then share row 1 with the plain cards. */
+.cardAOffer {
+  display: contents;
+}
+
+.cardAOffer > .reminderLink {
+  grid-row: 2;
+  align-self: start;
+}
+
+/* Variant B: fixed 352px columns. */
+.cardsRow[data-variant="b"] .card {
+  width: 352px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  .cardsRow[data-variant="b"] .card {
+    width: 100%;
+  }
+
+  /* One column: back to flex, and the wrapper re-forms so each card keeps its
+     reminder link directly beneath it. */
+  .cardsRow[data-variant="a"] {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cardAOffer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .cardsRow[data-variant="a"] .photo {
+    flex: 0 0 auto;
+    height: 128px;
+  }
+}
+
+/* ── Photo + overlay ──────────────────────────────────────────────────── */
+
+.photo {
+  position: relative;
+  height: 128px;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+/* Variant A: cards in a row are equal height and the photo takes the slack, so
+   a short card (one button) and a tall one (USP list) line up without the
+   content below the photo stretching. 128px stays the floor. */
+.cardsRow[data-variant="a"] .photo {
+  height: auto;
+  min-height: 128px;
+  flex: 1 1 auto;
+}
+
+.cardBottomA {
+  flex: 0 0 auto;
+}
+
+.photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Products the customer doesn't hold are dimmed behind the cross-sell. */
+.photo[data-muted="true"] > img {
+  opacity: 0.6;
+  object-position: bottom;
+}
+
+.photoOverlay {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-height: 0;
+  width: 100%;
+}
+
+.photoGradient {
+  flex: 1 0 0;
+  min-height: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.47) 0%,
+    rgba(0, 0, 0, 0) 56.25%
+  );
+}
+
+.photoTextBg {
+  background: rgba(0, 0, 0, 0.47);
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+  width: 100%;
+}
+
+/* Variant A: plain title. */
+.photoTitleA {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-section-size);
+  line-height: var(--type-section-height);
+  text-transform: uppercase;
+  color: var(--text-inverted);
+  margin: 0;
+}
+
+/* Variant B: icon + title on the left, status/promotion chip on the right. */
+.photoHeaderB {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.photoIconTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.photoIconTitle img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.photoTitleB {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--text-inverted);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.chip {
+  background: var(--surface-tertiary);
+  color: var(--text-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chip[data-tone="promotion"] {
+  background: var(--surface-promotion);
+  color: var(--fill-default);
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-sm) 12px;
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-default);
+  cursor: pointer;
+  font-family: var(--font-content);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+  background: var(--btn-primary-surface);
+  color: var(--btn-primary-content);
+  font-weight: 500;
+}
+
+.btn[data-tone="cta"] {
+  background: var(--btn-cta-surface);
+  color: var(--btn-cta-content);
+  font-weight: 700;
+}
+
+.btnLeading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.btnLeading img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.btnLabels {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.btnLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Second CTA line — Inter Medium 12/16 (Figma 17:5966). */
+.btnSublabel {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btnTrailing {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Borderless disclosure ("Meer info"). */
+.btnBorderless {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  padding: var(--space-sm) var(--space-xs);
+  background: none;
+  border: 0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-content);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--fill-default);
+}
+
+/* No rotate-on-expand here: the design ships distinct ChevronDown/ChevronUp
+   assets and the component swaps between them. */
+
+/* ── Variant A body ───────────────────────────────────────────────────── */
+
+/* One button per contract — the design's Bottom Container is a gap-8 column. */
+.cardBottomA {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+/* The cross-sell card and its reminder link are one column (Figma 17:5954). */
+/* Layout for `.cardAOffer` lives with the cards row — `display: contents` on
+   the grid, `flex` again in the single-column media query. Nothing here. */
+
+.reminderLink {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--fill-default);
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ── Variant B body ───────────────────────────────────────────────────── */
+
+/* `1 0 auto`, not `1 0 0`: the card has no fixed height, so a zero basis would
+   collapse the body away entirely. */
+.cardBodyB {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* Every B card pins its trailing block — the button on an active card, the
+   "Meer info" + CTA pair on a cross-sell — to the foot, so the buttons line up
+   across the row whatever the content above them does. `margin-top: auto` on
+   the last child rather than `space-between`, which would also spread the
+   blocks above it apart. */
+.cardBodyB > :last-child {
+  margin-top: auto;
+}
+
+/* Photo + contract rows travel together above that gap. */
+.cardTopB {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.detailRows {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.detailRow {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--space-sm);
+}
+
+.detailRow > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.detailLabel {
+  font-family: var(--font-content);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+}
+
+.detailValue {
+  font-family: var(--font-content);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+  white-space: nowrap;
+}
+
+.detailHint {
+  font-family: var(--font-content);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-default);
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: var(--fill-disabled);
+  flex-shrink: 0;
+}
+
+.offer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.offerIntro {
+  font-family: var(--font-content);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-default);
+  margin: 0;
+}
+
+.pricingBox {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.pricingEyebrow {
+  font-family: var(--font-content);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: var(--text-default);
+  margin: 0;
+}
+
+.pricingAmount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--fill-default);
+  margin: 0;
+}
+
+.pricingSub {
+  font-family: var(--font-content);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-default);
+  margin: 0;
+}
+
+/* Checkmark USP list — always on in variant A, behind "Meer info" in B. */
+.indicatorList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.indicator {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+}
+
+.cardActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+/* ═══ Bespaarmelder ═══════════════════════════════════════════════════════ */
+
+.bespaarmelder {
+  background: var(--surface-default);
+  padding-block: var(--space-lg);
+}
+
+.bespaarCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  background: var(--surface-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-default);
+  padding: var(--space-lg);
+}
+
+@media (max-width: 720px) {
+  .bespaarCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+}
+
+.bespaarBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.bespaarHeading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-section-size);
+  line-height: var(--type-section-height);
+  text-transform: uppercase;
+  color: var(--fill-default);
+  margin: 0;
+}
+
+.bespaarText {
+  font-family: var(--font-content);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+  margin: 0;
+  max-width: 62ch;
+}
+
+.bespaarAction {
+  flex-shrink: 0;
+  width: 280px;
+  max-width: 100%;
+}
+
+/* ═══ Qarry — the Huisvoordeel cross-sell (Figma 4:1770) ═════════════════ */
+
+.qarry {
+  background: var(--surface-tertiary);
+  padding-block: var(--space-lg);
+}
+
+.qarryInner {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .qarryInner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ── Left: the bus, hanging over the voordeel card ─────────────────────── */
+
+.qarryShop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  min-width: 0;
+  /* The bus sits above the card; keep that local to this column. */
+  isolation: isolate;
+}
+
+/* Figma: a 590×455 box pulled 52px down over the card, at z-index 2. */
+.qarryImage {
+  position: relative;
+  width: 590px;
+  max-width: 100%;
+  height: 455px;
+  flex-shrink: 0;
+  margin-bottom: -52px;
+  z-index: 2;
+  transition: opacity 260ms ease, filter 260ms ease;
+}
+
+/* The fuller the Qarry, the more present it is. */
+.qarryImage[data-loaded="0"] {
+  opacity: 0.55;
+  filter: saturate(0.35);
+}
+
+.qarryImage[data-loaded="1"] {
+  opacity: 0.8;
+  filter: saturate(0.7);
+}
+
+@media (max-width: 900px) {
+  .qarryImage {
+    width: 100%;
+    height: 320px;
+  }
+}
+
+/* Two stacked photo layers at their own crops, clipped by the box. The shadow
+   ellipse is a sibling of that clip, so it isn't cut off. */
+.qarryClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.qarryLayerBg,
+.qarryLayerFg {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.qarryLayerBg {
+  left: -0.17%;
+  top: -21.3%;
+  width: 100%;
+  height: 121.3%;
+}
+
+.qarryLayerFg {
+  left: -32.71%;
+  top: -49.71%;
+  width: 148.31%;
+  height: 173.36%;
+}
+
+/* The asset is larger than its 130×36 box: the Gaussian blur bleeds 44px out
+   on every side, so it's inset negatively rather than stretched. */
+.qarryShadow {
+  position: absolute;
+  left: 422.5px;
+  top: 426px;
+  width: 130px;
+  height: 36px;
+  pointer-events: none;
+}
+
+.qarryShadow img {
+  position: absolute;
+  left: -33.85%;
+  top: -122.22%;
+  width: 167.7%;
+  height: 344.44%;
+}
+
+@media (max-width: 900px) {
+  .qarryShadow {
+    display: none;
+  }
+}
+
+/* ── The green voordeel readout under the bus ──────────────────────────── */
+
+.voordeelCard {
+  background: var(--surface-brand);
+  border-radius: var(--radius-md);
+  filter: drop-shadow(0 4px 4px rgba(60, 60, 60, 0.05));
+  /* Top padding clears the overlapping bus. */
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  z-index: 1;
+}
+
+.voordeelHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  text-align: center;
+  color: var(--fill-default);
+}
+
+.voordeelEyebrow {
+  font-family: var(--font-content);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.voordeelAmount {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 48px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.voordeelPer {
+  font-size: 24px;
+  line-height: 24px;
+  text-transform: none;
+}
+
+.voordeelMeter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+/* Black bar on the brand green; a full bar is the design's 100% state. */
+.meter {
+  height: 8px;
+  width: 100%;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: 8px;
+  background: var(--fill-default);
+  transition: width 300ms ease;
+}
+
+.voordeelHint {
+  font-family: var(--font-content);
+  font-size: 12px;
+  line-height: 16px;
+  color: #242424;
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Right: the service picker ─────────────────────────────────────────── */
+
+.qarryAdvies {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.qarryCard {
+  background: var(--surface-default);
+  border-radius: var(--radius-md);
+  filter: drop-shadow(0 4px 4px rgba(60, 60, 60, 0.05));
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.qarryHeading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-section-size);
+  line-height: var(--type-section-height);
+  text-transform: uppercase;
+  color: var(--fill-default);
+  margin: 0 0 var(--space-xs);
+}
+
+.qarryIntro {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+  margin: 0;
+}
+
+/* Mobiel shares its row with the subscription counter. */
+.qarryMobileRow {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.qarryMobileRow > * {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+@media (max-width: 520px) {
+  .qarryMobileRow {
+    flex-direction: column;
+  }
+}
+
+.checkCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  width: 100%;
+  background: var(--surface-default);
+  border: 2px solid var(--fill-disabled);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: border-color 140ms ease;
+}
+
+.checkCard[data-checked="true"] {
+  border-color: var(--border-success);
+}
+
+.checkCard:disabled {
+  cursor: default;
+}
+
+.checkBox {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs);
+  background: var(--surface-default);
+  border: 2px solid var(--fill-disabled);
+  border-radius: var(--radius-md);
+}
+
+.checkCard[data-checked="true"] .checkBox {
+  border-color: var(--border-success);
+}
+
+.checkBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.checkLabel {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+}
+
+.checkMeta {
+  font-family: var(--font-content);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-inactive);
+}
+
+/* ── Counter ───────────────────────────────────────────────────────────── */
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  /* Stretches to the Mobiel CheckCard beside it rather than sitting at its own
+     56px; that height stays the floor for when the row wraps to a column. */
+  align-self: stretch;
+  min-height: 56px;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-default);
+  border: 1px solid var(--fill-disabled);
+  border-radius: var(--radius-md);
+}
+
+.counter[data-disabled="true"] {
+  opacity: 0.5;
+}
+
+.counterStep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.counterStep:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.counterValue {
+  flex: 1 0 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-default);
+  font-variant-numeric: tabular-nums;
+}
+
+.qarryLegal {
+  font-family: var(--font-content);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-inactive);
+  margin: 0;
+}
+
+/* ═══ Footer ══════════════════════════════════════════════════════════════ */
+
+.footer {
+  filter: drop-shadow(0 4px 4px rgba(60, 60, 60, 0.05));
+}
+
+.footerNav {
+  background: var(--nav-surface-inverted-darker);
+}
+
+.footerColumns {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+  padding-block: var(--space-xl);
+}
+
+@media (max-width: 720px) {
+  .footerColumns {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.footerColumn h2 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-inverted);
+  margin: 0;
+}
+
+.footerColumn a {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-inverted);
+  text-decoration: underline;
+}
+
+.footerApp {
+  background: var(--nav-surface-inverted);
+}
+
+.footerAppInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footerAppTitle {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-inverted);
+}
+
+.storeStickers {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.storeSticker {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xs) var(--space-lg);
+  background: #000000;
+  border: 1px solid var(--fill-disabled);
+  border-radius: var(--radius-md);
+  color: var(--text-inverted);
+}
+
+.storeSticker img {
+  display: block;
+}
+
+.storeGlyph {
+  width: 20px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.storeCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  align-items: flex-start;
+}
+
+.storeCopySmall {
+  font-size: 9px;
+  line-height: 10px;
+  text-transform: uppercase;
+}
+
+/* Exported upside-down (Figma applies a -100% Y scale to this layer). */
+.storeWordmark {
+  width: 74px;
+  height: 15px;
+  transform: scaleY(-1);
+}
+
+.storeCopyLarge {
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: -0.47px;
+  white-space: nowrap;
+}
+
+/* ═══ Control panel ═══════════════════════════════════════════════════════
+   Prototype scaffolding, deliberately NOT Mijn Omgeving styling — it must
+   read as a tool sitting on top of the design, not part of it.             */
+
+.panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  width: 280px;
+  max-width: calc(100vw - 32px);
+  background: #141515;
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  font-family: var(--font-content);
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 12px 14px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.panelTitle {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.panelCaret {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.panelBody {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0 14px 16px;
+}
+
+.panelGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.panelLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.segment {
+  flex: 1 0 0;
+  padding: 7px 0;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.segment[aria-pressed="true"] {
+  background: var(--surface-brand);
+  color: #000000;
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #ffffff;
+  font: inherit;
+  font-size: 13px;
+}
+
+.switchRow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.switch {
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  position: relative;
+  transition: background 140ms ease;
+}
+
+.switchRow[aria-pressed="true"] .switch {
+  background: var(--surface-brand);
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 140ms ease;
+}
+
+.switchRow[aria-pressed="true"] .switch::after {
+  transform: translateX(16px);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.stepperButtons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepperButton {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.stepperButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.stepperValue {
+  min-width: 20px;
+  text-align: center;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.panelNote {
+  font-size: 11px;
+  line-height: 15px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.panelBack {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: underline;
+}

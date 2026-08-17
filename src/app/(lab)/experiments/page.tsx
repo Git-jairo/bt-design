@@ -5,6 +5,16 @@ export const metadata = { title: "Experiments — BudgetThuis.Design" };
 
 const EXPERIMENTS = [
   {
+    slug: "dashboard",
+    label: "Dashboard",
+    subtitle: "Mijn Omgeving",
+    description:
+      "The Mijn Omgeving overview, built from Figma with a control panel on top: switch card variant A/B, pick which products the customer holds, set the number of mobile contracts, and show or hide the Qarry and Bespaarmelder sections.",
+    tags: ["Prototype", "Mijn Omgeving", "A/B", "Figma"],
+    status: "live" as const,
+    date: "August 2026",
+  },
+  {
     slug: "bespaarmelder",
     label: "Bespaarmelder",
     subtitle: "Klantdataplatform",
