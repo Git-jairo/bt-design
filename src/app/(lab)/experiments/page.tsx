@@ -5,6 +5,16 @@ export const metadata = { title: "Experiments — BudgetThuis.Design" };
 
 const EXPERIMENTS = [
   {
+    slug: "anonymize",
+    label: "Anonymize",
+    subtitle: "Client-side redaction",
+    description:
+      "Drop a CSV, XLSX, DOCX, TXT, or MD file and get a redacted copy back — before you upload it anywhere else. Detection and rewriting happen entirely in the browser: must-remove data (BSN, IBAN, credentials, medical/HR records) is always stripped, advised data (names, emails, addresses) is one toggle away, and low-risk context is shown but never touched.",
+    tags: ["Privacy", "Client-side", "AI Usage Guidelines"],
+    status: "live" as const,
+    date: "August 2026",
+  },
+  {
     slug: "dashboard",
     label: "Dashboard",
     subtitle: "Mijn Omgeving",
@@ -21,16 +31,6 @@ const EXPERIMENTS = [
     description:
       "One central customer-data platform across every touchpoint: capture → store → activate. Play a live scenario (agent chat, Bespaarmelder mail, app signal) and watch data populate the profile, scores recompute, and the right action fire — cross-sell, renewal or win-back.",
     tags: ["Concept", "Customer Data", "Cross-sell", "Retention"],
-    status: "live" as const,
-    date: "June 2026",
-  },
-  {
-    slug: "ai",
-    label: "AI Accelerator",
-    subtitle: "AI CoE",
-    description:
-      "The internal hub for AI at Budget Thuis: skills registry, case study showcase, news feed, and governance guide — all in one hyper-modern interface with light/dark mode.",
-    tags: ["Claude", "Skills", "Case Studies", "Governance"],
     status: "live" as const,
     date: "June 2026",
   },
