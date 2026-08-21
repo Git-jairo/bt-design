@@ -29,7 +29,7 @@ import {
   parseFile,
   type SupportedFormat,
 } from "./lib/engine";
-import type { Finding, ParsedFile } from "./lib/types";
+import type { Category, Finding, ParsedFile } from "./lib/types";
 
 type Stage = "idle" | "analyzing" | "review" | "done";
 
@@ -54,7 +54,10 @@ export default function AnonymizePage() {
   const [format, setFormat] = useState<SupportedFormat | null>(null);
   const [parsed, setParsed] = useState<ParsedFile | null>(null);
   const [findings, setFindings] = useState<Finding[]>([]);
-  const [advisedEnabled, setAdvisedEnabled] = useState(false);
+  // Advised: off by default, one independent switch per category.
+  const [advisedSelected, setAdvisedSelected] = useState<Set<Category>>(new Set());
+  // Can have: off by default, one bulk switch for the whole tier.
+  const [canHaveBulkEnabled, setCanHaveBulkEnabled] = useState(false);
   const [downloadedName, setDownloadedName] = useState<string | null>(null);
   const downloadLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -65,8 +68,18 @@ export default function AnonymizePage() {
     setFormat(null);
     setParsed(null);
     setFindings([]);
-    setAdvisedEnabled(false);
+    setAdvisedSelected(new Set());
+    setCanHaveBulkEnabled(false);
     setDownloadedName(null);
+  }, []);
+
+  const toggleAdvisedCategory = useCallback((category: Category, next: boolean) => {
+    setAdvisedSelected((prev) => {
+      const updated = new Set(prev);
+      if (next) updated.add(category);
+      else updated.delete(category);
+      return updated;
+    });
   }, []);
 
   const handleFile = useCallback(async (incoming: File) => {
@@ -106,7 +119,7 @@ export default function AnonymizePage() {
 
   const handleAnonymize = useCallback(async () => {
     if (!parsed || !file) return;
-    const replacements = buildRedactions(parsed, findings, activeCategories(advisedEnabled));
+    const replacements = buildRedactions(parsed, findings, activeCategories(advisedSelected, canHaveBulkEnabled));
     const blob = await parsed.serialize(replacements);
     const name = outputFileName(file.name);
 
@@ -121,11 +134,12 @@ export default function AnonymizePage() {
 
     setDownloadedName(name);
     setStage("done");
-  }, [parsed, file, findings, advisedEnabled]);
+  }, [parsed, file, findings, advisedSelected, canHaveBulkEnabled]);
 
   const mustCount = findings.filter((f) => f.tier === "must").length;
-  const advisedCount = findings.filter((f) => f.tier === "advised").length;
-  const appliedCount = mustCount + (advisedEnabled ? advisedCount : 0);
+  const advisedAppliedCount = findings.filter((f) => f.tier === "advised" && advisedSelected.has(f.category)).length;
+  const canHaveAppliedCount = canHaveBulkEnabled ? findings.filter((f) => f.tier === "canhave").length : 0;
+  const appliedCount = mustCount + advisedAppliedCount + canHaveAppliedCount;
 
   return (
     <div className="font-helix-body bg-screen min-h-screen pb-32">
@@ -193,8 +207,10 @@ export default function AnonymizePage() {
           <>
             <FindingsReview
               findings={findings}
-              advisedEnabled={advisedEnabled}
-              onToggleAdvised={setAdvisedEnabled}
+              advisedSelected={advisedSelected}
+              onToggleAdvisedCategory={toggleAdvisedCategory}
+              canHaveBulkEnabled={canHaveBulkEnabled}
+              onToggleCanHaveBulk={setCanHaveBulkEnabled}
             />
 
             <div className="sticky bottom-6 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-gray-950/[0.07] bg-white/95 backdrop-blur px-6 py-5 shadow-[0_8px_40px_rgba(36,36,36,0.12)]">

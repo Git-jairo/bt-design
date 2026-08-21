@@ -3,13 +3,35 @@
 import { useState } from "react";
 import { Icon } from "@/design-system/components/Icon";
 import { CATEGORIES } from "../lib/tiers";
-import type { CategoryMeta, Finding, Tier } from "../lib/types";
+import type { Category, CategoryMeta, Finding, Tier } from "../lib/types";
 
 function groupByCategory(findings: Finding[], metas: CategoryMeta[]) {
   return metas.map((meta) => ({
     meta,
     findings: findings.filter((f) => f.category === meta.key),
   }));
+}
+
+/** A single on/off switch, reused at category level (advised) and tier level (can-have's bulk control). */
+function Switch({ enabled, onClick, label }: { enabled: boolean; onClick: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={enabled}
+      aria-label={label}
+      onClick={onClick}
+      className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+        enabled ? "bg-teal" : "bg-gray-950/15"
+      }`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+          enabled ? "translate-x-6" : "translate-x-1"
+        }`}
+      />
+    </button>
+  );
 }
 
 /**
@@ -56,96 +78,113 @@ function MustRemoveSection({ findings }: { findings: Finding[] }) {
 }
 
 /**
- * Advised tier: one grouped toggle for the whole tier (never per-item
- * checkboxes). The list below is informational and reflects what's found,
- * dimmed when the toggle is off to show it won't be touched.
+ * Advised tier: one independent switch per category (never a single
+ * tier-wide toggle). Every category defaults to off; only the ones a user
+ * explicitly flips on get redacted.
  */
 function AdvisedSection({
   findings,
-  enabled,
-  onToggle,
+  selected,
+  onToggleCategory,
 }: {
   findings: Finding[];
-  enabled: boolean;
-  onToggle: (next: boolean) => void;
+  selected: Set<Category>;
+  onToggleCategory: (category: Category, next: boolean) => void;
 }) {
   const groups = groupByCategory(findings, CATEGORIES.filter((c) => c.tier === "advised"));
   const total = findings.length;
+  const appliedCount = findings.filter((f) => selected.has(f.category)).length;
 
   return (
     <section className="bg-white border border-gray-950/[0.07] rounded-2xl p-6">
-      <div className="flex items-center justify-between gap-4 mb-1">
-        <h2 className="font-helix-display text-xl uppercase text-gray-950">Advised remove</h2>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={enabled}
-          onClick={() => onToggle(!enabled)}
-          className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors ${
-            enabled ? "bg-teal" : "bg-gray-950/15"
-          }`}
-        >
-          <span
-            className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-              enabled ? "translate-x-6" : "translate-x-1"
-            }`}
-          />
-        </button>
-      </div>
+      <h2 className="font-helix-display text-xl uppercase text-gray-950 mb-1">Advised remove</h2>
       <p className="text-gray-950/55 text-sm mb-5">
-        Off by default. One switch for the whole tier — {total} match{total === 1 ? "" : "es"} found,{" "}
-        {enabled ? "will be redacted" : "will be kept"}.
+        Off by default — switch on each category you want redacted. {total} match{total === 1 ? "" : "es"}{" "}
+        found, {appliedCount} selected for redaction.
       </p>
-      <ul className={`flex flex-col gap-3 transition-opacity ${enabled ? "opacity-100" : "opacity-40"}`}>
-        {groups.map(({ meta, findings: hits }) => (
-          <li key={meta.key} className="flex items-start gap-3">
-            <span
-              aria-hidden="true"
-              className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${enabled ? "bg-teal" : "bg-gray-950/30"}`}
-            />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-gray-950">
-                {meta.label}
-                <span className="ml-2 font-normal text-gray-950/40">
-                  {hits.length > 0 ? `${hits.length} found` : "none found in this file"}
-                </span>
-              </p>
-              <p className="text-xs text-gray-950/45">{meta.description}</p>
-            </div>
-          </li>
-        ))}
+      <ul className="flex flex-col gap-4">
+        {groups.map(({ meta, findings: hits }) => {
+          const enabled = selected.has(meta.key);
+          return (
+            <li key={meta.key} className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-gray-950">
+                  {meta.label}
+                  <span className="ml-2 font-normal text-gray-950/40">
+                    {hits.length > 0 ? `${hits.length} found` : "none found in this file"}
+                  </span>
+                </p>
+                <p className="text-xs text-gray-950/45">{meta.description}</p>
+              </div>
+              <Switch
+                enabled={enabled}
+                onClick={() => onToggleCategory(meta.key, !enabled)}
+                label={`Remove ${meta.label.toLowerCase()}`}
+              />
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
 }
 
-/** Can-have tier: read-only accordion, zero interactive controls beyond the disclosure itself. */
-function CanHaveAccordion({ findings }: { findings: Finding[] }) {
+/**
+ * Can-have tier: read-only per-category list by default — no per-item
+ * controls. The one exception is a single secondary button that removes the
+ * whole tier as one group; it's a sibling of the disclosure toggle, not
+ * nested inside it, so the two controls don't fight over the same click.
+ */
+function CanHaveAccordion({
+  findings,
+  bulkEnabled,
+  onToggleBulk,
+}: {
+  findings: Finding[];
+  bulkEnabled: boolean;
+  onToggleBulk: (next: boolean) => void;
+}) {
   const [open, setOpen] = useState(false);
   const groups = groupByCategory(findings, CATEGORIES.filter((c) => c.tier === "canhave")).filter(
     (g) => g.findings.length > 0,
   );
+  const total = findings.length;
 
   return (
     <section className="bg-gray-950/[0.02] border border-gray-950/[0.07] rounded-2xl overflow-hidden">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-        aria-expanded={open}
-      >
-        <div>
-          <h2 className="font-helix-display text-xl uppercase text-gray-950">Can have</h2>
-          <p className="text-gray-950/55 text-sm mt-1">
-            Informational only — lower-risk context, never removed.
-          </p>
-        </div>
-        <Icon
-          name="basic-navigation/ChevronDown"
-          size={20}
-          className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
-        />
-      </button>
+      <div className="flex items-center justify-between gap-4 px-6 py-5">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex min-w-0 items-center gap-3 text-left"
+          aria-expanded={open}
+        >
+          <Icon
+            name="basic-navigation/ChevronDown"
+            size={18}
+            className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          />
+          <span className="min-w-0">
+            <h2 className="font-helix-display text-xl uppercase text-gray-950">Can have</h2>
+            <p className="text-gray-950/55 text-sm mt-1">
+              Informational by default — {total} match{total === 1 ? "" : "es"} found,{" "}
+              {bulkEnabled ? "all selected for redaction" : "kept as-is"}.
+            </p>
+          </span>
+        </button>
+        <button
+          type="button"
+          aria-pressed={bulkEnabled}
+          onClick={() => onToggleBulk(!bulkEnabled)}
+          className={`shrink-0 h-10 px-4 rounded-btn text-sm font-medium transition-colors ${
+            bulkEnabled
+              ? "bg-teal text-white"
+              : "bg-transparent border border-gray-950/20 text-gray-950/70 hover:border-gray-950/35"
+          }`}
+        >
+          {bulkEnabled ? "Removing all can-have" : "Remove all can-have"}
+        </button>
+      </div>
       {open && (
         <div className="px-6 pb-6 flex flex-col gap-4 border-t border-gray-950/[0.07] pt-5">
           {groups.length === 0 && (
@@ -180,18 +219,34 @@ function CanHaveAccordion({ findings }: { findings: Finding[] }) {
 
 interface FindingsReviewProps {
   findings: Finding[];
-  advisedEnabled: boolean;
-  onToggleAdvised: (next: boolean) => void;
+  advisedSelected: Set<Category>;
+  onToggleAdvisedCategory: (category: Category, next: boolean) => void;
+  canHaveBulkEnabled: boolean;
+  onToggleCanHaveBulk: (next: boolean) => void;
 }
 
-export function FindingsReview({ findings, advisedEnabled, onToggleAdvised }: FindingsReviewProps) {
+export function FindingsReview({
+  findings,
+  advisedSelected,
+  onToggleAdvisedCategory,
+  canHaveBulkEnabled,
+  onToggleCanHaveBulk,
+}: FindingsReviewProps) {
   const byTier = (tier: Tier) => findings.filter((f) => f.tier === tier);
 
   return (
     <div className="flex flex-col gap-6">
       <MustRemoveSection findings={byTier("must")} />
-      <AdvisedSection findings={byTier("advised")} enabled={advisedEnabled} onToggle={onToggleAdvised} />
-      <CanHaveAccordion findings={byTier("canhave")} />
+      <AdvisedSection
+        findings={byTier("advised")}
+        selected={advisedSelected}
+        onToggleCategory={onToggleAdvisedCategory}
+      />
+      <CanHaveAccordion
+        findings={byTier("canhave")}
+        bulkEnabled={canHaveBulkEnabled}
+        onToggleBulk={onToggleCanHaveBulk}
+      />
     </div>
   );
 }

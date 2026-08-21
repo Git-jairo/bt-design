@@ -9,16 +9,30 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "bsn",
     tier: "must",
-    label: "BSN / tax identifiers",
-    description: "Citizen service numbers and tax IDs (BSN, BTW-nummer).",
+    label: "BSN",
+    description: "Dutch citizen service numbers.",
     token: "BSN",
+  },
+  {
+    key: "tax_id",
+    tier: "must",
+    label: "Tax identifiers",
+    description: "BTW-nummer and other tax IDs.",
+    token: "TAX_ID",
   },
   {
     key: "iban",
     tier: "must",
-    label: "IBAN / card numbers",
-    description: "Bank account numbers and credit card numbers.",
-    token: "FINANCIAL",
+    label: "IBAN",
+    description: "Bank account numbers.",
+    token: "IBAN",
+  },
+  {
+    key: "credit_card",
+    tier: "must",
+    label: "Credit card numbers",
+    description: "Credit and debit card numbers.",
+    token: "CREDIT_CARD",
   },
   {
     key: "credential",
@@ -74,15 +88,8 @@ export const CATEGORIES: CategoryMeta[] = [
     key: "address",
     tier: "advised",
     label: "Home addresses",
-    description: "Street addresses and Dutch postcodes.",
+    description: "Street addresses and Dutch postcodes (city is a separate, can-have field).",
     token: "ADDRESS",
-  },
-  {
-    key: "customer_id",
-    tier: "advised",
-    label: "Customer / employee IDs",
-    description: "Customer numbers and employee/personnel numbers.",
-    token: "ID",
   },
   // ── CAN HAVE ─────────────────────────────────────────────────────────
   {
@@ -105,6 +112,20 @@ export const CATEGORIES: CategoryMeta[] = [
     label: "Dates",
     description: "Calendar dates.",
     token: "DATE",
+  },
+  {
+    key: "customer_id",
+    tier: "canhave",
+    label: "Customer / employee IDs",
+    description: "Customer numbers and employee/personnel numbers.",
+    token: "ID",
+  },
+  {
+    key: "city",
+    tier: "canhave",
+    label: "Cities",
+    description: "City or place names — a low-confidence signal, kept separate from street addresses.",
+    token: "CITY",
   },
 ];
 

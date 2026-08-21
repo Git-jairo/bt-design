@@ -45,11 +45,14 @@ const HEADER_MAP: Record<string, Category> = {
   straatnaam: "address",
   huisnummer: "address",
   postcode: "address",
-  woonplaats: "address",
-  plaats: "address",
-  stad: "address",
-  city: "address",
   address: "address",
+
+  // City is a separate, lower-confidence can-have field — never folded into
+  // the street-address (advised) detector.
+  woonplaats: "city",
+  plaats: "city",
+  stad: "city",
+  city: "city",
 
   bsn: "bsn",
   burgerservicenummer: "bsn",
@@ -62,6 +65,25 @@ const HEADER_MAP: Record<string, Category> = {
   btwnummer: "tax_id",
   btw: "tax_id",
   vatnumber: "tax_id",
+
+  // Salary/income columns are must-remove (medical/disciplinary/salary), same
+  // as a free-text salary mention — a numeric "salary" column with no words
+  // in it otherwise has no other signal to catch it.
+  salaris: "medical_disciplinary_salary",
+  salary: "medical_disciplinary_salary",
+  loon: "medical_disciplinary_salary",
+  inkomen: "medical_disciplinary_salary",
+  income: "medical_disciplinary_salary",
+  jaarinkomen: "medical_disciplinary_salary",
+  jaarsalaris: "medical_disciplinary_salary",
+  maandsalaris: "medical_disciplinary_salary",
+  brutosalaris: "medical_disciplinary_salary",
+  nettosalaris: "medical_disciplinary_salary",
+  brutoloon: "medical_disciplinary_salary",
+  nettoloon: "medical_disciplinary_salary",
+  wage: "medical_disciplinary_salary",
+  salarisstrook: "medical_disciplinary_salary",
+  loonstrook: "medical_disciplinary_salary",
 
   wachtwoord: "credential",
   password: "credential",

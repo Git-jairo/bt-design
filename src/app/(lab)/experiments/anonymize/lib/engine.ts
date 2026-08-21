@@ -85,10 +85,20 @@ export function analyze(parsed: ParsedFile): Finding[] {
   return findings;
 }
 
-/** Must-remove categories are always on; advised categories follow the shared toggle; can-have is never redacted. */
-export function activeCategories(advisedEnabled: boolean): Set<Category> {
+/**
+ * Must-remove categories are always on and can't be turned off. Advised
+ * categories are opt-in one at a time — `advisedSelected` is whichever ones
+ * the user individually switched on (default: none). Can-have categories are
+ * only included as a single group, via the one bulk "Remove all can-have" toggle.
+ */
+export function activeCategories(advisedSelected: Set<Category>, canHaveBulkEnabled: boolean): Set<Category> {
   return new Set(
-    CATEGORIES.filter((c) => c.tier === "must" || (c.tier === "advised" && advisedEnabled)).map((c) => c.key),
+    CATEGORIES.filter(
+      (c) =>
+        c.tier === "must" ||
+        (c.tier === "advised" && advisedSelected.has(c.key)) ||
+        (c.tier === "canhave" && canHaveBulkEnabled),
+    ).map((c) => c.key),
   );
 }
 

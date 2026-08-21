@@ -21,16 +21,17 @@ export type Category =
   | "medical_disciplinary_salary"
   | "special_category"
   | "security_incident"
-  // ADVISED REMOVE — off by default, one shared toggle
+  // ADVISED REMOVE — off by default, one toggle per category
   | "name"
   | "email"
   | "phone"
   | "address"
-  | "customer_id"
-  // CAN HAVE — informational only, never removed
+  // CAN HAVE — informational by default; only removed via the single bulk toggle
   | "job_title"
   | "company"
-  | "date";
+  | "date"
+  | "customer_id"
+  | "city";
 
 export interface CategoryMeta {
   key: Category;

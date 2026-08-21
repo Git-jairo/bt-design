@@ -10,7 +10,8 @@
     "export-skills": "node scripts/export-skills.mjs",
     "sync-skills": "node scripts/sync-skills.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest run --project unit"
   },
   "dependencies": {
     "@types/three": "^0.184.1",

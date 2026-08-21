@@ -95,6 +95,137 @@ const MONTHS =
   "januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december|" +
   "January|February|March|April|May|June|July|August|September|October|November|December";
 
+function escapeRegex(literal: string): string {
+  return literal.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Health/mental-health condition terms — GDPR Art. 9 "data concerning
+ * health". Kept as a plain array (rather than one hand-tuned inline
+ * alternation) specifically so it's easy to extend: a narrow hardcoded list
+ * here is a recurring source of missed conditions, not a one-off bug.
+ */
+const MEDICAL_CONDITION_TERMS = [
+  // diagnosis / general
+  String.raw`diagnos\w*`,
+  "aandoening",
+  "ziekte(?:beeld)?",
+  String.raw`chronisch\w*`,
+  "handicap",
+  "beperking",
+  // mental health
+  "burn-?out",
+  "depressie",
+  "depression",
+  "angststoornis",
+  "anxiety disorder",
+  "anxiety",
+  "angst",
+  String.raw`\bptss\b`,
+  String.raw`\bptsd\b`,
+  "bipolair",
+  "bipolar",
+  "schizofrenie",
+  "autisme",
+  "autism",
+  String.raw`\badhd\b`,
+  "eetstoornis",
+  "eating disorder",
+  "geestelijke gezondheid",
+  "mental health",
+  String.raw`psychiatrisch\w*`,
+  "psychiatric",
+  String.raw`psycholog\w*`,
+  "psychiater",
+  String.raw`\bggz\b`,
+  "slapeloosheid",
+  "insomnia",
+  // physical conditions
+  "kanker",
+  "cancer",
+  "tumor",
+  "diabetes",
+  "epilepsie",
+  "epilepsy",
+  "migraine",
+  "allergie",
+  "allergy",
+  "hart- en vaatziekte",
+  String.raw`\bhiv\b`,
+  String.raw`\baids\b`,
+  // treatment / procedures
+  "chemotherapie",
+  "chemotherapy",
+  "huisarts",
+  "operatie",
+  "surgery",
+  "revalidatie",
+  "rehabilitation",
+  "ziekenhuisopname",
+  "hospitalization",
+  "medicatie",
+  String.raw`medicijn\w*`,
+  "medication",
+  "antidepressiva",
+  "therapie",
+  "therapy",
+  // reproductive health
+  "vruchtbaarheidsbehandeling",
+  "fertility treatment",
+  String.raw`\bivf\b`,
+  "miskraam",
+  "miscarriage",
+  "zwangerschapscomplicatie",
+  // addiction
+  "verslaving",
+  "addiction",
+  "alcoholisme",
+  "alcoholism",
+].join("|");
+
+const NL_CITIES = [
+  "Amsterdam",
+  "Rotterdam",
+  "Den Haag",
+  "'s-Gravenhage",
+  "Utrecht",
+  "Eindhoven",
+  "Tilburg",
+  "Groningen",
+  "Almere",
+  "Breda",
+  "Nijmegen",
+  "Enschede",
+  "Haarlem",
+  "Arnhem",
+  "Zaanstad",
+  "Amersfoort",
+  "Apeldoorn",
+  "Hoofddorp",
+  "Maastricht",
+  "Leiden",
+  "Dordrecht",
+  "Zoetermeer",
+  "Zwolle",
+  "Deventer",
+  "Delft",
+  "Alkmaar",
+  "Leeuwarden",
+  "Venlo",
+  "Hilversum",
+  "Gouda",
+  "Amstelveen",
+  "Ede",
+  "Emmen",
+  "Helmond",
+  "Hengelo",
+  "Purmerend",
+  "Roosendaal",
+  "Oss",
+  "Schiedam",
+  "Spijkenisse",
+];
+
 function runDetectors(text: string): Match[] {
   const out: Match[] = [];
 
@@ -123,6 +254,15 @@ function runDetectors(text: string): Match[] {
     "must",
     { groupIndex: 1, validate: (v) => isValidIban(v.replace(/\s/g, "").toUpperCase()) },
   );
+  // Bug fix: "4 groups of 4 digits, spaces" (e.g. "4111 1111 1111 1111") was
+  // being rejected outright because it was gated on a Luhn checksum — real
+  // formatting is a strong enough signal on its own, so this pattern (a
+  // consistent separator, via the \2 backreference, between all four groups)
+  // catches it regardless of whether the number is Luhn-valid.
+  collect(out, text, /\b(\d{4}([ -])\d{4}\2\d{4}\2\d{4})\b/g, "credit_card", "must");
+  // Other layouts (no separator, Amex 4-6-5, etc.) still need the Luhn check
+  // so a random 13-19 digit run — an order number, a phone number — isn't
+  // flagged as a card just because it's the right length.
   collect(out, text, /\b(\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{1,7})\b/g, "credit_card", "must", {
     groupIndex: 1,
     validate: (v) => isValidLuhn(v.replace(/[ -]/g, "")),
@@ -153,17 +293,42 @@ function runDetectors(text: string): Match[] {
     { groupIndex: 1 },
   );
 
+  // Bug fix: a labeled salary/income figure ("Salary: 72000") had nothing to
+  // match it when it wasn't part of a longer sentence — this pins just the
+  // number, so unrelated text on the same line (name, department, …) isn't
+  // dragged into the redaction.
+  collect(
+    out,
+    text,
+    /\b(?:salary|salaris\w*|income|inkomen|wage|loon|jaarinkomen|jaarsalaris|maandsalaris|compensation)\s*[:=]?\s*(?:€|\$|EUR)?\s*(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?)\b/gi,
+    "medical_disciplinary_salary",
+    "must",
+    { groupIndex: 1 },
+  );
+
+  // HR-administrative + salary/income terms. Health-condition terms used to
+  // live here too (diagnos, burn-out, medicijn, ggz, …) but those are GDPR
+  // Art. 9 health data, not HR-process records — moved to special_category
+  // below so they're both caught AND labeled correctly.
   collectByKeywordSentence(
     out,
     text,
-    /diagnos|ziekteverzuim|arbeidsongeschikt|burn-?out|medicijn|medicatie|bedrijfsarts|huisarts|\bggz\b|psycholoog|psychiater|zwangerschapsverlof|arbodienst|disciplinaire maatregel|officiële waarschuwing|schriftelijke waarschuwing|ontslag op staande voet|verbetertraject|performance improvement plan|\bsalaris|brutoloon|nettoloon|jaarinkomen|maandsalaris|loonstrook|salarisstrook/gi,
+    /ziekteverzuim|arbeidsongeschikt|bedrijfsarts|arbodienst|zwangerschapsverlof|ouderschapsverlof|disciplinaire maatregel|officiële waarschuwing|schriftelijke waarschuwing|ontslag op staande voet|verbetertraject|performance improvement plan|\bsalaris\w*|salary|brutoloon|nettoloon|\bloon\b|jaarinkomen|jaarsalaris|maandsalaris|loonstrook|salarisstrook|\bincome\b|\binkomen\b|\bwage\b|compensation|gross salary|net salary|annual salary/gi,
     "medical_disciplinary_salary",
     "must",
   );
+  // Bug fix: this list was narrow enough that "diabetes"/"burnout" only got
+  // caught incidentally (via the word "diagnosed" elsewhere in the same
+  // sentence) while "anxiety disorder", "fertility treatment", and
+  // "depression" had nothing to match at all — MEDICAL_CONDITION_TERMS
+  // above replaces that with a much broader, structured term list.
   collectByKeywordSentence(
     out,
     text,
-    /vingerafdruk|gezichtsherkenning|irisscan|biometrisch|politieke voorkeur|politieke overtuiging|lid(?:maatschap)? van (?:de )?(?:vvd|d66|pvda|cda|\bsp\b|pvv|groenlinks)|geloofsovertuiging|religieuze overtuiging|kerkelijke gezindte|\bvakbond|\bfnv\b|\bcnv\b|seksuele geaardheid/gi,
+    new RegExp(
+      `vingerafdruk|gezichtsherkenning|irisscan|biometrisch|politieke voorkeur|politieke overtuiging|lid(?:maatschap)? van (?:de )?(?:vvd|d66|pvda|cda|\\bsp\\b|pvv|groenlinks)|geloofsovertuiging|religieuze overtuiging|kerkelijke gezindte|\\bvakbond|\\bfnv\\b|\\bcnv\\b|seksuele geaardheid|${MEDICAL_CONDITION_TERMS}`,
+      "gi",
+    ),
     "special_category",
     "must",
   );
@@ -210,16 +375,29 @@ function runDetectors(text: string): Match[] {
     { groupIndex: 1 },
   );
 
+  // ── CAN HAVE (informational; only removed via the bulk can-have toggle) ──
+  // Bug fix: customer/employee IDs were being redacted under the advised
+  // tier. They're can-have — moved here, and listed only, never redacted
+  // unless the user explicitly enables the whole can-have tier.
   collect(
     out,
     text,
     /\b(?:klantnummer|klant[- ]?id|customer(?: id| number)|personeelsnummer|employee[- ]?id|werknemersnummer|medewerker[- ]?nummer|contractnummer)\s*[:#-]?\s*([A-Za-z0-9][A-Za-z0-9-]{2,19})\b/gi,
     "customer_id",
-    "advised",
+    "canhave",
     { groupIndex: 1 },
   );
-
-  // ── CAN HAVE (informational, never redacted) ─────────────────────────────
+  // Bug fix: city names were being swept into the street-address detector
+  // and redacted as [REMOVED:ADDRESS] even though a bare city name is much
+  // lower-confidence PII than a street + house number. Kept as its own
+  // can-have field via a curated city list, informational only.
+  collect(
+    out,
+    text,
+    new RegExp(`\\b(${NL_CITIES.map(escapeRegex).join("|")})\\b`, "g"),
+    "city",
+    "canhave",
+  );
   collect(
     out,
     text,
